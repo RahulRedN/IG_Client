@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./NavCardProfile.module.css";
+import MultiSelect from "../MultiSelect/MultiSelect";
 
 // eslint-disable-next-line react/prop-types
 const NavCardProfile = ({ Icons, text, link }) => {
@@ -19,9 +20,17 @@ const NavCardProfile = ({ Icons, text, link }) => {
           <h1 className="text-white text-xl tracking-wide">{text}</h1>
         </div>
       </Link>
-       
     );
   }
+
+  // if (link == "/resume") {
+  //   return <>
+  //   {/* <Link to={link} className={"w-full hover:bg-blue-400 p-4 " + styles.card}>
+       
+  //     </Link> */}
+  //     <button>Logout</button>
+  //   </>;
+  // }
 
   return (
     <a href={link} className={"w-full hover:bg-blue-400 p-4 " + styles.card}>
