@@ -6,6 +6,7 @@ import GoogleButton from "../UI/GoogleButton/GoogleButton";
 import { useAuth } from "../../Firebase/AuthContexts";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const SignInForm = ({ signIn }) => {
   const [credentials, SetCred] = useState({ email: "", password: "" });
@@ -29,6 +30,8 @@ const SignInForm = ({ signIn }) => {
     setIsLoading(true);
     try {
       const res = await signInWithGoogle();
+      // const res = axios.post("http://localhost:8080/api/auth/login")
+
       if (res.user.uid) {
         setIsLoading(false);
         toast.success("Logged in!!");
