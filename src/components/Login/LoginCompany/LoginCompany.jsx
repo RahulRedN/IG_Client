@@ -13,6 +13,8 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import ButtonS from "../../UI/Button";
 
+import axios from "axios";
+
 const LoginCompany = () => {
   const { signUp, signIn } = useAuth();
 
@@ -132,13 +134,13 @@ const LoginCompany = () => {
       register.email === "" ||
       register.password === ""
     ) {
-      setIsLoadingR(false)
+      setIsLoadingR(false);
       toast.error("Fill all the fields");
       return;
     }
 
     if (errN || errE || errP) {
-      setIsLoadingR(false)
+      setIsLoadingR(false);
       toast.error("Fill all the fields correctly");
       return;
     }
@@ -146,20 +148,28 @@ const LoginCompany = () => {
     const data = {
       email: register.email,
       name: register.name,
+      password: register.password,
       role: "company",
     };
 
     try {
-      const res = await signUp(register.email, register.password);
+
+      const res = await axios.post(
+        "http://localhost:8080/api/auth/registerCompany",
+        data
+      );
+      const token = res.headers;
+      console.log('Token:', token);
+      console.log(res);
 
       if (res) {
         const collectionRef = collection(db, "users");
         await addDoc(collectionRef, { ...data, uid: res.user.uid });
         toast.success("Registered Successfully!");
-        setIsLoadingR(false)
+        setIsLoadingR(false);
       }
     } catch (error) {
-      setIsLoadingR(false)
+      setIsLoadingR(false);
       if (error.code == "auth/email-already-in-use") {
         toast("Email is already in use", {
           icon: <IoIosWarning />,
@@ -211,7 +221,7 @@ const LoginCompany = () => {
       }
       console.error(error);
     }
-    setIsLoadingR(false)
+    setIsLoadingR(false);
   };
 
   return (
@@ -336,7 +346,10 @@ const LoginCompany = () => {
                   <a href="#">Forgot password?</a>
                 </div>
 
-                <ButtonS isLoading={isLoadingR} onClickHandler={registerHandler}>
+                <ButtonS
+                  isLoading={isLoadingR}
+                  onClickHandler={registerHandler}
+                >
                   REGISTER
                 </ButtonS>
 
