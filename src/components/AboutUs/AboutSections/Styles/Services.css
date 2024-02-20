@@ -1,0 +1,121 @@
+/* Services.css */
+
+.services-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 100px;
+  padding: 0px;
+  
+
+}
+
+.service-item {
+  flex: 1;
+  margin: 0 90px 0 0;
+
+
+}
+
+.service-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 30px; */
+  
+
+
+}
+
+.service-details {
+  text-align: center;
+
+
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+
+
+
+
+}
+
+.service-title {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #4d4d4d;
+  margin-top: -45px;
+  text-align: left;
+  margin-left: 60px;
+
+}
+
+.service-description {
+  font-size: 1em;
+  color: #555;
+  /* margin-left: 20px; */
+  font-weight: 400;
+  text-align: left;
+  margin-left: 60px;
+  line-break: strict;
+  /* margin-top: -100px; */
+}
+
+.services-overview {
+  flex: 1;
+  text-align: center;
+
+
+}
+
+.overview-heading {
+  font-size: 1.3em;
+  color: #007bff;
+  text-align: left;
+  font-weight: 600;
+}
+
+.overview-title {
+  font-size: 2.6em;
+  text-align: left;
+  color: #2c2c2c;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.overview-description {
+  font-size: 1.1em;
+  color: #555;
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-align: left;
+  padding: 4px;
+  line-height: 1.5em;
+}
+
+.view-more-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+  margin-left: -75%;
+}
+
+.view-more-btn:hover {
+
+  transform: translateY(-5px);
+}

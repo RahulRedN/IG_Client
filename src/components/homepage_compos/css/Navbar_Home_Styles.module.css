@@ -1,0 +1,119 @@
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+.logo{
+  object-fit: cover;
+  width:4rem;
+}
+
+.navbar {
+  display: flex;
+  padding: 1.3rem 15rem;
+  font-size: medium;
+  font-weight: 600;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  background: #f1f5f9;
+}
+
+.navbar.home {
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.navbar.sticky {
+  position: sticky;
+  top: 0;
+
+  box-shadow: 0 10px 15px rgba(25, 25, 25, 0.1);
+  z-index: 100;
+  -webkit-animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+  animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+  -webkit-box-shadow: 0 10px 15px rgba(25, 25, 25, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.navbar.home.sticky {
+  position: fixed;
+  top: 0;
+
+  box-shadow: 0 10px 15px rgba(25, 25, 25, 0.1);
+  z-index: 100;
+  -webkit-animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+  animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+  -webkit-box-shadow: 0 10px 15px rgba(25, 25, 25, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
+}
+
+.navbar span:nth-child(1) {
+  font-size: x-large;
+}
+
+.navbar .left {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 9rem;
+}
+
+.items {
+  display: flex;
+  gap: 2rem;
+  z-index: 3;
+}
+
+.items a {
+  position: relative;
+  text-align: center;
+  padding: 0 0.3rem;
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease-out;
+}
+
+.navbar.home .items a {
+  color: white;
+}
+
+.navbar.home.sticky .items a {
+  color: black;
+}
+
+.items a::after {
+  position: absolute;
+  content: "";
+  bottom: -6px;
+  left: 0;
+  background-color: #000dff;
+  height: 3px;
+  width: 0;
+}
+
+.items li:hover > a,
+.navbar.home.navbar.sticky .items a:hover {
+  color: #000dff;
+}
+
+.items li:hover > a::after {
+  left: 0;
+  right: 0;
+  width: 100%;
+  -webkit-transition: all 0.25s ease-out 0s;
+  -moz-transition: all 0.25s ease-out 0s;
+  -ms-transition: all 0.25s ease-out 0s;
+  -o-transition: all 0.25s ease-out 0s;
+  transition: all 0.25s ease-out 0s;
+}

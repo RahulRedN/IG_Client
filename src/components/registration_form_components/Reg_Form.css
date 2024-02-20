@@ -1,0 +1,87 @@
+body{            
+    font-family: 'Open Sans', sans-serif; 
+    background-color: black;       
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; */
+}        
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.signUpForm {            
+    max-width: 500px;        
+}        
+
+.signUpForm .form_header .stepIndicator.active 
+{            
+    font-weight: 600;        
+}        
+
+.signUpForm .form_header .stepIndicator.finish {            
+    font-weight: 600;            
+    color: rgb(29,78,216);        
+}        
+
+.signUpForm .form_header .stepIndicator::before {            
+    content: "";            
+    position: absolute;            
+    left: 50%;            
+    bottom: 0;            
+    transform: translateX(-50%);            
+    z-index: 9;            
+    width: 20px;            
+    height: 20px;            
+    background-color: #c3dafe;            
+    border-radius: 50%;            
+    border: 3px solid #ebf4ff;        
+}        
+
+.signUpForm .form_header .stepIndicator.active::before {            
+    background-color: #a3bffa;            
+    border: 3px solid #c3dafe;        
+}        
+
+.signUpForm .form_header .stepIndicator.finish::before {            
+    background-color: rgb(29,78,216);                   
+    border: 3px solid #c3dafe;        
+}        
+
+.signUpForm .form_header .stepIndicator::after {            
+    content: "";            
+    position: absolute;            
+    left: 50%;            
+    bottom: 8px;            
+    width: 100%;            
+    height: 3px;            
+    background-color: #f3f3f3;        
+}        
+
+.signUpForm .form_header .stepIndicator.active::after {            
+    background-color: #a3bffa;        
+}        
+
+.signUpForm .form_header .stepIndicator.finish::after {            
+    background-color: rgb(29,78,216);        
+       
+}        
+
+.signUpForm .form_header .stepIndicator:last-child:after {            
+    display: none;        
+}        
+
+.signUpForm input.invalid {            
+    border: 2px solid #ffaba5;        
+}        
+
+.signUpForm .step {          display: none;        }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

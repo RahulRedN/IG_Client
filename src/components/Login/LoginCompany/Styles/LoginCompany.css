@@ -1,0 +1,191 @@
+/* Global Styles */
+
+/* Login Company Container */
+.login-company {
+  height: 100vh;
+  width: 100vw;
+}
+
+.img_bac{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  background-color: black;
+  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+
+.container_full {
+  position: relative;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+}
+
+.login-form-wrapper {
+  position: absolute;
+  margin: auto;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  gap: 3rem;
+  align-items: center;
+  padding: 45px;
+  width: fit-content;
+  height: 83vh;
+  background-color: rgba(255, 255, 255, 0.8);
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width:100%;
+}
+
+.login-form label {
+  color: black;
+  margin-bottom: 5px;
+}
+
+.login-form-wrapper h1 {
+  color: black;
+  font-size: 2.2em;
+  font-weight: 900;
+}
+
+.inputs {
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid black;
+  border-radius: 4px;
+  outline: none;
+  color: black;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.inputs:focus {
+  background-color: #f7f6f6;
+}
+
+.login-form-wrapper hr {
+  width: 350px;
+  border-color: black;
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.checkbox-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-color: black;
+  font-size: 10px;
+}
+
+.checkbox-div a {
+  border-color: black;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+  font-size: 16px;
+  margin-left: 60px;
+}
+
+.checkbox-div:checked a:hover {
+  color: black;
+}
+
+.btn-login {
+  display: inline-block;
+  border-radius: 4px;
+  outline: none;
+  font-size: 1.4rem;
+  font-weight: 400;
+  background-color: rgb(31,41,55);
+  color: white;
+  cursor: pointer;
+  padding: 0.3rem;
+  transition: background-color 0.5s, color 0.5s, transform 0.5s ease-in-out;
+}
+
+.btn-login:hover {
+  background-color: black;
+  color: #f9fafb;
+}
+
+.btn-register {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 4px;
+  height: 40px;
+  width: 50%;
+  margin-left: 90px;
+  font-size: 1.5em;
+  font-weight: 400;
+  background: #413e3e;
+  color: black;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: background-color 0.5s, color 0.5s, transform 0.5s ease-in-out;
+}
+
+.btn-register:hover {
+  background-color: #237ed9;
+  color: #f9fafb;
+}
+
+
+.register {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+  font-size: 17px;
+  margin-top: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+button{
+  transition: all 0.3s ease-in-out;
+
+}
+
+.register:hover button{
+  color: #237ed9;
+  text-decoration: underline;
+}
+
+.animate123{
+  animation: animate 0.5s ease-in-out;
+}
+
+@keyframes animate{
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate321{
+  animation: animate1 0.5s;
+}
+
+@keyframes animate1{
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

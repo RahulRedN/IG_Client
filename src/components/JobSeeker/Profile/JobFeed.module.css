@@ -1,0 +1,31 @@
+.container {
+  width: 100;
+  min-height: 91vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.container h2 {
+  font-size: xx-large;
+}
+
+.table {
+  width: 70vw;
+  border-collapse: collapse;
+}
+
+.table tbody {
+  color: rgb(79, 79, 79);
+  font-size: 15px;
+}
+
+.table tbody tr:last-child {
+  border: none;
+}
+
+.table td {
+  padding: 1rem 2rem;
+}

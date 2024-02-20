@@ -1,0 +1,132 @@
+/* .testimonial-form-container {
+max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .testimonial-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .input-field,
+  .textarea-field,
+  .radio-input,
+  .file-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .submit-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Add more styles as needed 
+  */
+
+.testimonial-form-container {
+  margin-top: 5rem;
+  display: flex;
+  height: fit-content;
+  padding-bottom: 10px;
+}
+
+.testimonial-form-wrapper {
+  flex: 2;
+  height: fit-content;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.testimonial-form-content {
+  padding: 8px;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.blue-text {
+  color: #007bff;
+}
+
+.form-container {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.form-label {
+  font-weight: normal;
+  color: #888;
+}
+
+.form-textarea {
+  margin-top: 2px;
+  border: 1px solid #ccc;
+  padding: 4px;
+  height: 13rem;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+}
+
+.radio-group {
+  display: flex;
+}
+
+.radio-input {
+  margin-right: 8px;
+}
+
+.submit-button {
+  background-color: #007bff;
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 2px;
+}

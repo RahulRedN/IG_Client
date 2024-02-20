@@ -1,0 +1,31 @@
+.box:hover{
+    background: rgb(239 246 255);
+    transition: ease-out 0.2s;
+}
+
+
+.box:hover .inicon{
+    color: rgb(59 130 246);
+    transition: ease-out 0.2s;
+}
+
+.box:hover .intext{
+    color: rgb(59 130 246);
+    transition: ease-out 0.2s;
+}
+
+.boxOut:hover{
+    background: rgb(254 226 226);
+    transition: ease-out 0.2s;
+}
+
+
+.boxOut:hover .iniconOut{
+    color: rgb(239 68 68);
+    transition: ease-out 0.2s;
+}
+
+.boxOut:hover .intextOut{
+    color: rgb(239 68 68);
+    transition: ease-out 0.2s;
+}

@@ -1,0 +1,34 @@
+
+.fileinputcontainer {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .fileinput {
+    display: none;
+  }
+  
+  
+  
+  .uploadicon {
+    display: inline-block;
+    padding: 1.4rem;
+    width: 3rem;
+    background: url('/assets/Upload.gif') no-repeat center center;
+    background-size: cover;
+    animation-play-state: paused;
+  }
+
+  .uploadicon:hover{
+    cursor: pointer;
+  }
+  
+  
+  
+  /* Optionally, add some animation for the upload icon */
+  .uploadicon::after {
+    content: '';
+    display: inline-block;
+  }
+  
+  

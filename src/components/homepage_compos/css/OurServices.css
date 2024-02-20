@@ -1,0 +1,48 @@
+#our_services {
+  align-self: center;
+  width: 90%;
+  position: relative;
+}
+
+.our_services_child {
+  margin: 30px 0px;
+  padding: 20px;
+  height: 80vh;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+
+}
+
+.dn {
+  display: none;
+}
+.os_svgs {
+  width: 35vw;
+  object-fit: cover;
+  min-width: 100px;
+}
+.os_tagline {
+  margin-top: 5%;
+  width: 50%;
+  padding: 0 3rem;
+}
+
+.os_tagline h2 {
+  font-size: 55px;
+  font-weight: 100;
+}
+
+.os_tagline p {
+  margin-top: 2rem;
+  font-size: 20px;
+  color: rgb(66, 66, 66);
+}
+
+.middle_heads_dark {
+  width: fit-content;
+  margin-left: 10rem;
+  font-size: 60px;
+  padding: 3px;
+}

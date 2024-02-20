@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  right: 0;
+  left: 0;
+  height: 50%;
+}
+
+.slider {
+  position: relative;
+  background-color: #000dff;
+  padding: 3rem 1rem;
+  color: white;
+  width: 70vw;
+  min-height: 50vh;
+  border-radius: 10px;
+  margin-bottom: 50px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.slider img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  gap: 1rem;
+}
+
+.info {
+  position: relative;
+}
+
+.info img {
+  position: absolute;
+  top: -43px;
+  left: -43px;
+  z-index: -1;
+}
+
+.info p {
+  font-size: x-large;
+}
+
+.reviewer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.name span {
+  font-size: x-large;
+}

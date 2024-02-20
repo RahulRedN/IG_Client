@@ -1,0 +1,77 @@
+.container{
+    display: flex;
+    padding: 1rem 3rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 1px 10px rgb(226, 226, 226);
+    height: 9vh;
+}
+
+.search{
+    position: relative;
+}
+
+.search svg{
+    position: absolute;
+    right: 20px;
+    top: 31%;
+}
+
+.search input{
+    width: 35vw;
+    padding: 0.5rem 1.3rem;
+    border: 1px solid grey;
+    border-radius: 5px;
+    transition: width ease-in-out 0.3s;
+}
+
+.search input:focus{
+    width: 40vw;
+}
+
+.search input::placeholder{
+    color: gray;
+}
+
+
+.content{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: black;
+}
+
+.content svg{
+    cursor: pointer;
+}
+
+.content span{
+    position: relative;
+    border: 1.5px solid grey;
+    border-radius: 50%;
+    padding: 0.4rem;
+}
+
+.content p{
+    position: absolute;
+    text-align: center;
+    font-size: 10px;
+    top: -4px;
+    right: -4px;
+    color: white;
+    width: 15px;
+    height: 15px;
+    background-color: rgb(255, 59, 59);
+    border-radius: 50%;
+}
+
+.userInfo{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.userInfo h5{
+    min-width: 150px;
+}

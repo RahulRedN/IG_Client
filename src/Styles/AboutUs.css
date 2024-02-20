@@ -1,0 +1,82 @@
+.aboutus-page {
+
+    justify-content: center;
+    background-color: white;
+    scroll-behavior: smooth;
+
+}
+
+.top-container {
+    background: linear-gradient(190deg, #296de3 100%, #4077d5 50%, #3471d9 100%);
+    background-color: #2b6ee3;
+    height: 350px;
+    margin-top: 0px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10%;
+
+}
+
+.top-container h1 {
+
+    color: white;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1.2em;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+}
+
+.top-container p {
+    color: white;
+    text-align: center;
+    font-size: medium;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin-top: 2%;
+
+}
+
+.top-p-link {
+
+    color: #e7edf5;
+
+}
+
+.top-p-link:hover {
+    color: rgb(255, 255, 255);
+}
+
+
+
+
+
+.top2-top3 {
+
+    background-color: #F8FBFF;
+    padding: 5%;
+}
+
+.top-container-btn {}
+
+.aboutus-card {}
+
+.range-vis {}
+
+.about-com {}
+
+.team-card {}
+
+.testmonials {
+
+    padding: 10%;
+
+    width: 100%;
+}
+
+
+.company-img-list {}

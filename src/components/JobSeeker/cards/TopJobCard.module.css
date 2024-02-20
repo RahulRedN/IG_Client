@@ -1,0 +1,73 @@
+.card {
+  border: 1px solid #efefef;
+  margin: 50px 15px;
+  padding: 44px 26px;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+}
+
+.card .logo {
+  padding: 1rem;
+  width: fit-content;
+  background-color: aliceblue;
+  border-radius: 50%;
+}
+
+.card:hover {
+  box-shadow: -10px 10px 76px rgba(54, 127, 255, 0.12);
+}
+
+.serviceInfo {
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.serviceInfo h1 {
+  font-size: x-large;
+  font-weight: 600;
+  color: #00044a;
+}
+
+.serviceInfo p {
+  color: #6d6e8d;
+}
+
+.serviceInfo a {
+  cursor: pointer;
+  color: #000dff;
+  width: fit-content;
+  font-size: 16px;
+  background-color: rgba(0, 13, 255, 0.06);
+  display: inline-block;
+  padding: 14px 37px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: all 0.2s ease-in;
+}
+
+.card:hover .serviceInfo a {
+  background-color: #000dff;
+  color: #fff;
+}
+
+.sticker {
+  position: absolute;
+  right: 46px;
+  top: 30px;
+
+  padding: 7px 18px;
+  background: rgba(18, 217, 223, 0.09);
+  color: #12d9df;
+  border-radius: 30px;
+  font-size: 14px;
+}
