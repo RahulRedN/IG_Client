@@ -20,12 +20,6 @@
   width: 100%;
 }
 
-/* .modal-header h2 {
-  margin: 0;
-} */
-
-.modal-body {}
-
 .modal-footer {
   padding: 10px;
   text-align: right;
@@ -34,8 +28,9 @@
 .close {
   color: #aaa;
   float: right;
+  margin-right:10px ;
   font-size: 48px;
-  font-weight: 200
+  font-weight: 200;
 }
 
 .close:hover,
@@ -49,6 +44,7 @@
   display: inline-block;
   padding: 10px 20px;
   font-size: 12px;
+  margin:10px 310px 10px 0px ;
   font-weight: bold;
   width: 100px;
   text-align: center;
@@ -65,21 +61,11 @@
   transform: translateY(-2px);
 }
 
-.multi-select-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-}
-
 .heading {
   font-size: 1.9em;
   color: #007bff;
   font-weight: 700;
-
   justify-content: center;
-
   margin: 30px 0 10px 45px;
 }
 
@@ -88,45 +74,16 @@
   color: #555;
   font-weight: bold;
   margin-bottom: 5px;
-  margin-left: -600px
+  /* margin-left: -600px; */
 }
 
-.search-input {
-  /* width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px; */
-}
-
-.suggestions-list {
-  max-height: 200px;
-  overflow-y: auto;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  z-index: 1;
-}
-
-.suggestions-list li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.suggestions-list li:hover {
-  background-color: #d0fffd;
-
-}
 
 .selected-skills {
   display: flex;
   flex-wrap: wrap;
-  /* Allow the pills to wrap */
   gap: 8px;
   margin-top: 10px;
   width: 100%;
-  /* Ensure pills stay within the input div */
 }
 
 .user-pill {
@@ -139,18 +96,16 @@
   cursor: pointer;
   font-size: 1em;
   font-weight: 400;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 5px;
 }
 
 .user-pill:hover {
   background-color: #a8e0e0;
 }
-
-
-
-
-
-
-
 
 .skill-search-container {
   display: flex;
@@ -167,54 +122,17 @@
   max-height: 300px;
 }
 
-/* .heading {
-  font-size: 1.9em;
-  color: rgb(63, 63, 64);
-  font-weight: 500;
-  justify-content: center;
-  margin-bottom: 9px;
-} */
-
-/* .sub-heading {
-  margin: 0 0 5px 15px;
-  font-size: 1em;
-  font-weight: 700;
-  color: #2d2c2c;
-} */
-
-.multi-submit-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 12px;
-  font-weight: bold;
-  width: 100px;
-  text-align: center;
-  text-decoration: none;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s ease-in-out;
-  height: 40px;
-  margin: 0 0 50px 300px;
-}
-
-.multi-submit-btn:hover {
-  transform: translateY(-2px);
-}
-
 .skill-search-input {
   width: 100%;
   display: flex;
-  margin: 0 15px 20px 15px;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   outline-color: #007bff;
+  position: relative;
 }
 
 .skill-search-input input {
@@ -228,75 +146,17 @@
   outline: none;
 }
 
-/* 
-.suggestions-list {
-  max-height: 400px;
-  overflow-y: scroll;
-  width: 350px;
-  list-style: none;
-  padding: 10px;
-  /* margin: 0; */
-/* position: absolute;
-  background-color: #fff; */
-/* border: 1px solid #ccc; */
-
-/* }
-
-.suggestions-list li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #ccc;
-}  */
-
-.suggestions-list li:last-child {
-  border-bottom: none;
-}
-
-.suggestions-list li:hover {
-  background-color: #d0fffd;
-}
-
-.user-pill {
-  height: 25px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background-color: #d0fffd;
-  color: #272727;
-  padding: 5px 10px;
-  border-radius: 16px;
-  cursor: pointer;
-  font-size: 1em;
-  font-weight: 400;
-}
-
-
-/* .user-pill {
-  display: inline-flex;
-  align-items: center;
-  background-color: #d0fffd;
-  color: #272727;
-  padding: 5px 10px;
-  border-radius: 16px;
-  cursor: pointer;
-  font-size: 1em;
-  font-weight: 400;
-} */
-
-
 .skill-search-input .suggestions-list {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 10px);
   left: 0;
   width: 90%;
   max-height: 300px;
   overflow-y: auto;
   list-style-type: none;
   padding: 0;
-  margin-left: 45px;
+  margin-left: 0;
+ 
   border: 1px solid #ccc;
   border-top: none;
   border-radius: 0 0 5px 5px;
@@ -309,6 +169,31 @@
   cursor: pointer;
 }
 
-.skill-search-input .suggestions-list li.active {
-  background-color: #979090;
+
+
+.suggestions-list {
+  max-height: 200px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+  border: 1px solid #ccc;
+  
+  border-radius: 5px;
+  
+}
+
+.suggestions-list li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.suggestions-list li:hover {
+  background-color: #d0fffd;
+}
+
+.suggestions-list li.active {
+  background-color: #e0e0e0;
 }

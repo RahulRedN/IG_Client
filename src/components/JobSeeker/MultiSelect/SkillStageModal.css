@@ -11,7 +11,6 @@
   z-index: 9999;
 }
 
-
 .modal-content-skill {
   background-color: #fff;
   padding: 20px;
@@ -26,17 +25,14 @@
   margin-bottom: 20px;
 }
 
-
 .modal-content-skill ul {
   list-style-type: none;
   padding: 0;
 }
 
-
 .modal-content-skill li {
   margin-bottom: 10px;
-}-skill
-
+}
 
 .modal-content-skill label {
   font-size: 1rem;
@@ -45,33 +41,27 @@
   cursor: pointer;
 }
 
-
-.modal-content input[type="radio"] {
+.modal-content-skill input[type="radio"] {
   margin-right: 10px;
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
 
-
 .modal-content-skill input[type="radio"]:hover {
   transform: scale(1.1);
 }
-
 
 .modal-content-skill button {
   background-color: #007bff;
   color: #fff;
   border: none;
-
   padding: 10px 20px;
   border-radius: 7px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-
 .modal-content-skill button:hover {
   background-color: #0056b3;
 }
-
