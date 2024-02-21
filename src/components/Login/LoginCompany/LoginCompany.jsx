@@ -1,5 +1,5 @@
 import logincompany from "./Resources/logincompany.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../LoginCompany/Styles/LoginCompany.css";
 import { Checkbox } from "@chakra-ui/react";
 import { motion } from "framer-motion";
@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import ButtonS from "../../UI/Button";
 
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const LoginCompany = () => {
   const { signUp, signIn } = useAuth();
@@ -127,7 +128,6 @@ const LoginCompany = () => {
   const registerHandler = async (e) => {
     e.preventDefault();
     setIsLoadingR(true);
-    console.log(register);
 
     if (
       register.name === "" ||
@@ -153,21 +153,17 @@ const LoginCompany = () => {
     };
 
     try {
+      const api = axios.create({
+        baseURL: "http://localhost:8080/api/auth",
+        withCredentials: true,
+      });
 
-      const res = await axios.post(
-        "http://localhost:8080/api/auth/registerCompany",
-        data
-      );
-      const token = res.headers;
-      console.log('Token:', token);
-      console.log(res);
-
+      const res = await api.post("/registerCompany", data);
       if (res) {
-        const collectionRef = collection(db, "users");
-        await addDoc(collectionRef, { ...data, uid: res.user.uid });
-        toast.success("Registered Successfully!");
-        setIsLoadingR(false);
+        const token = Cookies.get("token");
+        console.log(token);
       }
+      console.log(res);
     } catch (error) {
       setIsLoadingR(false);
       if (error.code == "auth/email-already-in-use") {
@@ -223,6 +219,17 @@ const LoginCompany = () => {
     }
     setIsLoadingR(false);
   };
+
+  useEffect(() => {
+    const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
+    const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
+
+    if (tokenCookie) {
+      const token = tokenCookie.split("=")[1];
+      console.log("Token:", token);
+      // Now you can use the token as needed.
+    }
+  }, []);
 
   return (
     <div className="login-company">
