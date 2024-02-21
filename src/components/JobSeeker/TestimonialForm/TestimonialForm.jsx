@@ -58,7 +58,7 @@ const TestimonialForm = ({ closeModal }) => {
         <div className="mb-4">
           <label className="font-normal text-gray-500">Full Name</label>
           <div className="relative flex items-center">
-            <FaUser className="absolute left-2 top-[1.2rem] fill-gray-700 text-white" />
+            <FaUser className="absolute left-3 top-5 fill-gray-700 text-white"  style={{ fontSize: "24px" }}/>
             <input
               type="text"
               id="fullname"
@@ -74,7 +74,7 @@ const TestimonialForm = ({ closeModal }) => {
         <div className="mb-4">
           <label className="font-normal text-gray-500">Email</label>
           <div className="relative flex items-center">
-            <FaEnvelope className="absolute left-2 top-[1.2rem] fill-gray-700 text-white" />
+            <FaEnvelope className="absolute left-3 top-5 fill-gray-700 text-white"  style={{ fontSize: "24px" }} />
             <input
               type="text"
               id="email"
@@ -90,7 +90,7 @@ const TestimonialForm = ({ closeModal }) => {
         <div className="mb-4">
           <label className="font-normal text-gray-500">PHONE</label>
           <div className="relative flex items-center">
-            <FaPhoneAlt className="absolute left-2 top-[1.2rem] fill-gray-700 text-white" />
+            <FaPhoneAlt className="absolute left-3 top-5 fill-gray-700 text-white"  style={{ fontSize: "24px" }}/>
             <input
               type="text"
               name="phone"
@@ -107,7 +107,7 @@ const TestimonialForm = ({ closeModal }) => {
             Upload Photo (JPEG or PNG)
           </label>
           <div className="relative flex items-center">
-            <FaFileImage className="absolute left-2 top-[1.2rem] fill-gray-700 text-white" />
+            <FaFileImage className="absolute left-3 top-5 fill-gray-700 text-white"  style={{ fontSize: "24px" }}/>
             <input
               type="file"
               id="photo"

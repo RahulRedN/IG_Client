@@ -1,3 +1,157 @@
+.modal-multi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.modal-content-multi {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  width: 100%;
+}
+
+/* .modal-header h2 {
+  margin: 0;
+} */
+
+.modal-body {}
+
+.modal-footer {
+  padding: 10px;
+  text-align: right;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 48px;
+  font-weight: 200
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.submit-multi-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s ease-in-out;
+}
+
+.submit-multi-btn:hover {
+  transform: translateY(-2px);
+}
+
+.multi-select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+}
+
+.heading {
+  font-size: 1.9em;
+  color: #007bff;
+  font-weight: 700;
+
+  justify-content: center;
+
+  margin: 30px 0 10px 45px;
+}
+
+.sub-heading {
+  font-size: 1em;
+  color: #555;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-left: -600px
+}
+
+.search-input {
+  /* width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px; */
+}
+
+.suggestions-list {
+  max-height: 200px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+}
+
+.suggestions-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #d0fffd;
+
+}
+
+.selected-skills {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allow the pills to wrap */
+  gap: 8px;
+  margin-top: 10px;
+  width: 100%;
+  /* Ensure pills stay within the input div */
+}
+
+.user-pill {
+  display: inline-flex;
+  align-items: center;
+  background-color: #d0fffd;
+  color: #272727;
+  padding: 5px 10px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.user-pill:hover {
+  background-color: #a8e0e0;
+}
+
+
+
+
+
+
+
+
 .skill-search-container {
   display: flex;
   justify-content: center;
@@ -13,20 +167,20 @@
   max-height: 300px;
 }
 
-.heading {
+/* .heading {
   font-size: 1.9em;
   color: rgb(63, 63, 64);
   font-weight: 500;
   justify-content: center;
   margin-bottom: 9px;
-}
+} */
 
-.sub-heading {
+/* .sub-heading {
   margin: 0 0 5px 15px;
   font-size: 1em;
   font-weight: 700;
   color: #2d2c2c;
-}
+} */
 
 .multi-submit-btn {
   display: inline-block;
@@ -74,17 +228,19 @@
   outline: none;
 }
 
+/* 
 .suggestions-list {
   max-height: 400px;
   overflow-y: scroll;
   width: 350px;
   list-style: none;
   padding: 10px;
-  margin: 0;
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #ccc;
-}
+  /* margin: 0; */
+/* position: absolute;
+  background-color: #fff; */
+/* border: 1px solid #ccc; */
+
+/* }
 
 .suggestions-list li {
   display: flex;
@@ -93,7 +249,7 @@
   padding: 8px 10px;
   cursor: pointer;
   border-bottom: 1px solid #ccc;
-}
+}  */
 
 .suggestions-list li:last-child {
   border-bottom: none;
@@ -117,6 +273,20 @@
   font-weight: 400;
 }
 
+
+/* .user-pill {
+  display: inline-flex;
+  align-items: center;
+  background-color: #d0fffd;
+  color: #272727;
+  padding: 5px 10px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 400;
+} */
+
+
 .skill-search-input .suggestions-list {
   position: absolute;
   top: 100%;
@@ -130,7 +300,7 @@
   border: 1px solid #ccc;
   border-top: none;
   border-radius: 0 0 5px 5px;
-  background-color: #fff;
+  background-color: #ede7e7;
   z-index: 1;
 }
 
@@ -140,5 +310,5 @@
 }
 
 .skill-search-input .suggestions-list li.active {
-  background-color: #f0f0f0;
+  background-color: #979090;
 }
