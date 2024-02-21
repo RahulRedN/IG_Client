@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import classes from "../AboutSections/Styles/AboutUsTop2.module.css";
 
 const AboutUsTop2Cards = () => {
   const [ref, inView] = useInView({
@@ -12,12 +13,14 @@ const AboutUsTop2Cards = () => {
     },
     {
       title: "Job Placement",
-      content: "Discover your perfect career fit with our personalized placement services.",
+      content:
+        "Discover your perfect career fit with our personalized placement services.",
     },
 
     {
       title: "Job Counselling",
-      content: "Providing expert advice and support tailored to your unique journey.",
+      content:
+        "Providing expert advice and support tailored to your unique journey.",
     },
     {
       title: "Test & Interview",
@@ -26,17 +29,16 @@ const AboutUsTop2Cards = () => {
   ];
 
   return (
-    <div className="AboutUsTop2Cards">
+    <div className={classes.AboutUsTop2Cards}>
       {dummyData.map((data, index) => (
-
         <motion.div
-        ref={ref}
-        initial={{ x: 100, y: 0,  opacity: 0 }}
-        animate={inView ? { x: 0, y: 0,  opacity: 1 } : "hidden"}
-        transition={{ ease: "easeInOut", delay: index * 0.3, duration: 0.5}}
-        className="AboutUsTop2Card"
-        key={index}
-      >
+          ref={ref}
+          initial={{ x: 100, y: 0, opacity: 0 }}
+          animate={inView ? { x: 0, y: 0, opacity: 1 } : "hidden"}
+          transition={{ ease: "easeInOut", delay: index * 0.3, duration: 0.5 }}
+          className={classes.AboutUsTop2Card}
+          key={index}
+        >
           <h3>{data.title}</h3>
           <p>{data.content}</p>
         </motion.div>

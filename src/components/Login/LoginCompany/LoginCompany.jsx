@@ -1,6 +1,6 @@
 import logincompany from "./Resources/logincompany.jpg";
 import { useState } from "react";
-import "../LoginCompany/Styles/LoginCompany.css";
+import classes from "../LoginCompany/Styles/LoginCompany.module.css";
 import { Checkbox } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { IoIosWarning, IoMdArrowBack } from "react-icons/io";
@@ -132,13 +132,13 @@ const LoginCompany = () => {
       register.email === "" ||
       register.password === ""
     ) {
-      setIsLoadingR(false)
+      setIsLoadingR(false);
       toast.error("Fill all the fields");
       return;
     }
 
     if (errN || errE || errP) {
-      setIsLoadingR(false)
+      setIsLoadingR(false);
       toast.error("Fill all the fields correctly");
       return;
     }
@@ -156,10 +156,10 @@ const LoginCompany = () => {
         const collectionRef = collection(db, "users");
         await addDoc(collectionRef, { ...data, uid: res.user.uid });
         toast.success("Registered Successfully!");
-        setIsLoadingR(false)
+        setIsLoadingR(false);
       }
     } catch (error) {
-      setIsLoadingR(false)
+      setIsLoadingR(false);
       if (error.code == "auth/email-already-in-use") {
         toast("Email is already in use", {
           icon: <IoIosWarning />,
@@ -211,27 +211,29 @@ const LoginCompany = () => {
       }
       console.error(error);
     }
-    setIsLoadingR(false)
+    setIsLoadingR(false);
   };
 
   return (
-    <div className="login-company">
+    <div className={classes.login_company}>
       <Link to="/" className="left-3 top-3 absolute z-[100] flex items-center">
         <IoMdArrowBack className="text-3xl text-white" />
         <p className="text-white">Home</p>
       </Link>
-      <div className="container_full">
-        <img src={logincompany} className="img_bac" />
-        <div className="login-form-wrapper">
+      <div className={classes.container_full}>
+        <img src={logincompany} className={classes.img_bac} />
+        <div className={classes.login_form_wrapper}>
           {isClicked ? (
             <motion.div key={1} className="flex flex-col gap-10 animate123">
               <h1 className="text-center tracking-wider"> Login</h1>
-              <form className="login-form w-full">
+              <form className={classes.login_form + "  w-full"}>
                 <label htmlFor="email">Email address</label>
                 <input
-                  className={`inputs ${
-                    errEL ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errEL ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="email"
                   onChange={emailHandlerLogin}
                   id="email"
@@ -242,9 +244,11 @@ const LoginCompany = () => {
 
                 <label htmlFor="password"> Password</label>
                 <input
-                  className={`inputs ${
-                    errPL ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errPL ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="password"
                   onChange={passwordHandlerLogin}
                   id="password"
@@ -253,7 +257,7 @@ const LoginCompany = () => {
                   required
                 />
 
-                <div className="checkbox-div">
+                <div className={classes.checkbox_div}>
                   <Checkbox
                     className="text-black"
                     color={"blackAlpha.800"}
@@ -271,7 +275,7 @@ const LoginCompany = () => {
 
                 <hr />
 
-                <div className="register">
+                <div className={classes.register}>
                   <p>
                     Dont have an account?{" "}
                     <button
@@ -286,14 +290,16 @@ const LoginCompany = () => {
               </form>
             </motion.div>
           ) : (
-            <motion.div key={2} className="animate321">
-              <h1 className="text-center"> Register</h1>
-              <form className="login-form w-full">
+            <motion.div key={2} className={classes.animate321}>
+              <h1 className={classes.text_center}> Register</h1>
+              <form className={classes.login_form + " w-full"}>
                 <label htmlFor="name">Name</label>
                 <input
-                  className={`inputs ${
-                    errN ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errN ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="text"
                   id="email"
                   name="email"
@@ -302,9 +308,11 @@ const LoginCompany = () => {
                 />
                 <label htmlFor="email">Email address</label>
                 <input
-                  className={`inputs ${
-                    errE ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errE ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="email"
                   id="email"
                   name="email"
@@ -314,9 +322,11 @@ const LoginCompany = () => {
 
                 <label htmlFor="password"> Password</label>
                 <input
-                  className={`inputs ${
-                    errP ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errE ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="password"
                   id="password"
                   name="password"
@@ -324,7 +334,7 @@ const LoginCompany = () => {
                   placeholder=" Enter Your password"
                 />
 
-                <div className="checkbox-div">
+                <div className={classes.checkbox_div}>
                   <Checkbox
                     className="text-black"
                     color={"blackAlpha.800"}
@@ -336,13 +346,16 @@ const LoginCompany = () => {
                   <a href="#">Forgot password?</a>
                 </div>
 
-                <ButtonS isLoading={isLoadingR} onClickHandler={registerHandler}>
+                <ButtonS
+                  isLoading={isLoadingR}
+                  onClickHandler={registerHandler}
+                >
                   REGISTER
                 </ButtonS>
 
                 <hr />
 
-                <div className="register">
+                <div className={classes.register}>
                   <p>
                     {" "}
                     Already a user?{" "}

@@ -5,7 +5,7 @@ import { Stack } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { FaTeamspeak } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-
+import classes from '../../Styles/Faqs.module.css'
 
 const FaqSpeak = () => {
     const [ref, inView] = useInView({
@@ -19,7 +19,7 @@ const FaqSpeak = () => {
         initial={{ x: 100, opacity: 0 }} 
         animate={inView ? { x: 0, opacity: 1 } : "hidden"} 
         transition={{ ease: "easeInOut", duration: 0.9, delay: 0.3 }} 
-        className="speak-container"
+        className={classes.speak_container}
       >
         
           <h1>Haven’t found what youre looking for?</h1>

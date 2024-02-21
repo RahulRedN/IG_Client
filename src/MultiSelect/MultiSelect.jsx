@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "../MultiSelect/MultiSelect.css";
+import classes from "../MultiSelect/MultiSelect.module.css";
 import Pill from "../components/pill/Pill";
 import SkillStageModal from "./SkillStageModal";
 
@@ -157,10 +157,10 @@ function MultiSelect() {
   };
 
   return (
-    <div className="skill-search-container">
-      <h1 className="heading">Skills</h1>
-      <p className="sub-heading">Add Skills</p>
-      <div className="skill-search-input">
+    <div className={classes.skill_search_container}>
+      <h1 className={classes.heading}>Skills</h1>
+      <p className={classes.sub_heading}>Add Skills</p>
+      <div className={classes.skill_search_input}>
         {selectedSkills.map((skill) => {
           return (
             <Pill
@@ -174,13 +174,13 @@ function MultiSelect() {
           <input
             ref={inputRef}
             type="text"
-            className="search-input"
+            className={classes.search_input}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="e.g. React Js"
             onKeyDown={handleKeyDown}
           />
-          <ul className="suggestions-list">
+          <ul className={classes.suggestions_list}>
             {suggestions.map((skill, index) => (
               <li
                 className={index === activeSuggestion ? "active" : ""}
@@ -200,7 +200,7 @@ function MultiSelect() {
           onClose={() => setShowModal(false)}
         />
       )}
-      <button className="multi-submit-btn" onClick={handleSubmit}>Submit</button>
+      <button className={classes.multi_submit_btn} onClick={handleSubmit}>Submit</button>
     </div>
   );
 }

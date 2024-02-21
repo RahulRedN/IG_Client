@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 
-import "./SkillStageModal.css"
+import classes from "./SkillStageModal.module.css"
 
 function SkillStageModal({  onSelectStage, onClose }) {
 
@@ -9,8 +10,8 @@ function SkillStageModal({  onSelectStage, onClose }) {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className={classes.modal}>
+      <div className={classes.modal_content}>
         <h2>How would you rate yourself on this skill?</h2>
         <ul>
           <li>

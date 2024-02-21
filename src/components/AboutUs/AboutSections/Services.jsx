@@ -1,4 +1,4 @@
-import "../AboutSections/Styles/Services.css";
+import classes from "../AboutSections/Styles/Services.module.css";
 import note from "../AboutSections/Resources/note.png";
 import hr from "../AboutSections/Resources/Hr.png";
 import expert from "../AboutSections/Resources/expert.png";
@@ -12,7 +12,7 @@ const Services = () => {
   });
 
   return (
-    <div className="services-container">
+    <div className={classes.services_container}>
       <motion.div
         ref={ref}
         initial={{ x: -50, opacity: 0 }}
@@ -20,24 +20,24 @@ const Services = () => {
         transition={{ ease: "easeInOut", duration: 0.9, delay: 0.0 }} // Add delay of 0.3 seconds
         // key={index}
 
-        className="service-top"
+        className={classes.service_top}
       >
-        <div className="service-item">
-          <img src={note} alt="" className="service-icon" />
-          <div className="service-details">
-            <h5 className="service-title">Recruitment</h5>
-            <p className="service-description">
+        <div className={classes.service_item}>
+          <img src={note} alt="" className={classes.service_icon} />
+          <div className={classes.service_details}>
+            <h5 className={classes.service_title}>Recruitment</h5>
+            <p className={classes.service_description}>
               Elevate your team with <br />
               strategic talent  <br />acquisition.
             </p>
           </div>
         </div>
 
-        <div className="service-item">
-          <img src={hr} alt="" className="service-icon" />
-          <div className="service-details">
-            <h5 className="service-title">HR Outsourcing</h5>
-            <p className="service-description">
+        <div className={classes.service_item}>
+          <img src={hr} alt="" className={classes.service_icon} />
+          <div className={classes.service_details}>
+            <h5 className={classes.service_title}>HR Outsourcing</h5>
+            <p className={classes.service_description}>
               Unlock efficiency with our
               <br />
               comprehensive.
@@ -45,32 +45,32 @@ const Services = () => {
           </div>
         </div>
 
-        <div className="service-item">
-          <img src={expert} alt="" className="service-icon" />
-          <div className="service-details">
-            <h5 className="service-title">Expatriate Services</h5>
-            <p className="service-description">
+        <div className={classes.service_item}>
+          <img src={expert} alt="" className={classes.service_icon} />
+          <div className={classes.service_details}>
+            <h5 className={classes.service_title}>Expatriate Services</h5>
+            <p className={classes.service_description}>
               Empower your global <br /> endeavors.
             </p>
           </div>
         </div>
 
-        <div className="service-item">
-          <img src={exective} alt="" className="service-icon" />
-          <div className="service-details">
-            <h5 className="service-title">Executive Search</h5>
+        <div className={classes.service_item}>
+          <img src={exective} alt="" className={classes.service_icon} />
+          <div className={classes.service_details}>
+            <h5 className={classes.service_title}>Executive Search</h5>
 
-            <p className="service-description">
+            <p className={classes.service_description}>
               Executive Search Navigate  <br />the path  to leadership<br />  excellence.
             </p>
           </div>
         </div>
       </motion.div>
 
-      <div className="services-overview">
-        <h3 className="overview-heading">Our Services</h3>
-        <h1 className="overview-title">Our Rigorous Process Is Proven</h1>
-        <p className="overview-description">
+      <div className={classes.services_overview}>
+        <h3 className={classes.overview_heading}>Our Services</h3>
+        <h1 className={classes.overview_title}>Our Rigorous Process Is Proven</h1>
+        <p className={classes.overview_description}>
           Embrace a transformative journey with our comprehensive offerings.
           From personalized career guidance to skill development, we prioritize
           your success. Collaborate with us for a fulfilling and rewarding
@@ -78,7 +78,7 @@ const Services = () => {
           navigate the path to your aspirations together. Your success story
           begins here.
         </p>
-        <button className="view-more-btn"> View More</button>
+        <button className={classes.view_more_btn}> View More</button>
       </div>
     </div>
   );

@@ -1,24 +1,20 @@
 .feedback-heading {
-
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
-
 }
 
 .feedback-logo {
-
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-weight: 900;
   font-size: 2.5rem;
   color: #2b71e8;
 }
 
-
 .feedback-name {
-
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-weight: 900;
   font-size: 2.5rem;
   color: #2b71e8;
@@ -31,17 +27,13 @@
   margin: 20px auto;
 }
 
-
 .feedback-form {
   margin: 50px 100px 0 130px;
   justify-content: center;
   align-items: center;
-
-
 }
 
 .category {
-
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -69,16 +61,11 @@
   border-color: #2f7df1;
 }
 
-
-
-
 form h1 {
   font-size: 1.2rem;
   text-align: center;
   margin-bottom: 5%;
   color: #656262;
-
-
 }
 
 /* .rating {
@@ -88,7 +75,6 @@ form h1 {
   margin-bottom: 8%;
   gap: 15px;
 } */
-
 
 .feedback-form label {
   display: block;
@@ -116,10 +102,7 @@ form h1 {
   border-color: #558ef1;
 }
 
-
-
 .submit-btn {
-
   display: inline-block;
   padding: 10px 20px;
   font-size: 19px;
@@ -137,7 +120,5 @@ form h1 {
 }
 
 .submit-btn:hover {
-
   transform: translateY(-5px);
-
 }
