@@ -1,8 +1,13 @@
+import { faqsData, faqsDataOne, faqsDataTwo } from "../faqsData.js";
 
-import {faqsData, faqsDataOne, faqsDataTwo} from "../faqsData.js";
-
-
-import { Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -38,7 +43,12 @@ const FaqQuestions = () => {
             <AccordionItem key={faq.id} className="faq-item">
               <h2>
                 <AccordionButton className="accordion-button">
-                  <Box as="span" flex="1" textAlign="left" className="faq-question">
+                  <Box
+                    as="span"
+                    flex="1"
+                    textAlign="left"
+                    className="faq-question"
+                  >
                     {faq.Faq_Que}
                   </Box>
                   <AccordionIcon />
@@ -69,7 +79,12 @@ const FaqQuestions = () => {
             <AccordionItem key={faq.id} className="faq-item">
               <h2>
                 <AccordionButton className="accordion-button">
-                  <Box as="span" flex="1" textAlign="left" className="faq-question">
+                  <Box
+                    as="span"
+                    flex="1"
+                    textAlign="left"
+                    className="faq-question"
+                  >
                     {faq.Faq_Que}
                   </Box>
                   <AccordionIcon />
@@ -100,7 +115,12 @@ const FaqQuestions = () => {
             <AccordionItem key={faq.id} className="faq-item">
               <h2>
                 <AccordionButton className="accordion-button">
-                  <Box as="span" flex="1" textAlign="left" className="faq-question">
+                  <Box
+                    as="span"
+                    flex="1"
+                    textAlign="left"
+                    className="faq-question"
+                  >
                     {faq.Faq_Que}
                   </Box>
                   <AccordionIcon />

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const FaqSpeak = () => {
     const [ref, inView] = useInView({
         triggerOnce: true,
-      });
+      });                 
     return ( 
         
         

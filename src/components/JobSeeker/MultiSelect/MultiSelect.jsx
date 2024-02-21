@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "../MultiSelect/MultiSelect.css";
-import Pill from "../components/pill/Pill";
+import Pill from "../pill/Pill"
 import SkillStageModal from "./SkillStageModal";
 
 function MultiSelect() {
