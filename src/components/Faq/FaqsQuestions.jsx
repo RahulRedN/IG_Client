@@ -32,7 +32,7 @@ const FaqQuestions = () => {
           initial={{ y: 100, opacity: 0 }}
           animate={inViewApplyForJob ? { y: 0, opacity: 1 } : "hidden"}
           transition={{ ease: "easeInOut", duration: 0.9, delay: 0.5 }}
-          className="heading"
+          className="faq-heading"
         >
           <div className="color-heading"> </div>
           <h1> Apply For a Job</h1>
@@ -68,7 +68,7 @@ const FaqQuestions = () => {
           initial={{ y: 100, opacity: 0 }}
           animate={inViewTechnicalSupport ? { y: 0, opacity: 1 } : "hidden"}
           transition={{ ease: "easeInOut", duration: 0.9, delay: 0.3 }}
-          className="heading"
+          className="faq-heading"
         >
           <div className="color-heading"> </div>
           <h1> Technical Support</h1>
@@ -104,7 +104,7 @@ const FaqQuestions = () => {
           initial={{ y: 100, opacity: 0 }}
           animate={inViewCareerServices ? { y: 0, opacity: 1 } : "hidden"}
           transition={{ ease: "easeInOut", duration: 0.9, delay: 0.3 }}
-          className="heading"
+          className="faq-heading"
         >
           <div className="color-heading"> </div>
           <h1> Career Services</h1>
