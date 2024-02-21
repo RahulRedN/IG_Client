@@ -10,7 +10,7 @@ import classes from '../../Styles/Faqs.module.css'
 const FaqSpeak = () => {
     const [ref, inView] = useInView({
         triggerOnce: true,
-      });
+      });                 
     return ( 
         
         

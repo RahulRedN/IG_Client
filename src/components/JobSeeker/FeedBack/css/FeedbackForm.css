@@ -102,7 +102,14 @@ form h1 {
   border-color: #558ef1;
 }
 
+<<<<<<< HEAD:src/components/FeedBack/css/FeedbackForm.css
 .submit-btn {
+=======
+
+
+.submit-feed-btn {
+
+>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/FeedBack/css/FeedbackForm.css
   display: inline-block;
   padding: 10px 20px;
   font-size: 19px;
@@ -119,6 +126,11 @@ form h1 {
   margin-left: 170px;
 }
 
+<<<<<<< HEAD:src/components/FeedBack/css/FeedbackForm.css
 .submit-btn:hover {
+=======
+.submit-feed-btn:hover {
+
+>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/FeedBack/css/FeedbackForm.css
   transform: translateY(-5px);
 }

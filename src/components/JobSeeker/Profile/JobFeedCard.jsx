@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoCloseCircle } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
 import RoleCard from "../FindJob/RoleCard";
-import FeedbackForm from "../../FeedBack/FeedBackForm";
+import FeedbackForm from "../FeedBack/FeedbackForm";
 
 const JobFeedCard = ({ job, date, idx, status, feed }) => {
   const [modalIsOpen, setIsOpen] = useState(false);

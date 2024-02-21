@@ -2,16 +2,21 @@
 
 import classes from "./SkillStageModal.module.css"
 
-function SkillStageModal({  onSelectStage, onClose }) {
+function SkillStageModal({  onSelectStage, onCloseModal }) {
 
   const handleStageSelection = (stage) => {
     onSelectStage(stage);
-    onClose();
+    onCloseModal();
   };
 
   return (
+<<<<<<< HEAD:src/MultiSelect/SkillStageModal.jsx
     <div className={classes.modal}>
       <div className={classes.modal_content}>
+=======
+    <div className="modal-skill">
+      <div className="modal-content-skill">
+>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.jsx
         <h2>How would you rate yourself on this skill?</h2>
         <ul>
           <li>
@@ -49,7 +54,7 @@ function SkillStageModal({  onSelectStage, onClose }) {
             </label>
           </li>
         </ul>
-        <button onClick={onClose}>Close</button>
+        <button onClick={onCloseModal}>Close</button>
       </div>
     </div>
   );
