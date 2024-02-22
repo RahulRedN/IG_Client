@@ -20,6 +20,7 @@ const PostJob = () => {
     salary: "",
     skills: "",
     benefits: "",
+    location:"",
     totalPositions: "",
     jobDesc: "",
     responsibilities: "",
@@ -97,7 +98,7 @@ const PostJob = () => {
       });
       return;
     }
-
+    // console.log(Data)
     try {
       const collectionRef = collection(db, "jobs");
       const currDate = new Date();
@@ -157,6 +158,19 @@ const PostJob = () => {
                 className="border rounded-md  w-full p-2"
                 onChange={(event) =>
                   SetData({ ...Data, joiningDate: event.target.value })
+                }
+              />
+            </div>
+            <div className="flex flex-col gap-1 w-[50%] items-stretch">
+              <label className="ml-1 text-base text-black">
+                Location
+              </label>
+              <input
+                type="text"
+                className="border rounded-md  w-full p-2"
+                placeholder="Eg: Banglore"
+                onChange={(event) =>
+                  SetData({ ...Data, location: event.target.value })
                 }
               />
             </div>

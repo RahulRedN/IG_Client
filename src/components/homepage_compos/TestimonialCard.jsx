@@ -1,7 +1,7 @@
-// TestimonialCard.js
+/* eslint-disable react/prop-types */
 
 import { useState, useEffect } from "react";
-import "../AboutUs/Testimonial/Styles/Testimonialstyles.css";
+import classes from "../AboutUs/Testimonial/Styles/Testimonialstyles.module.css";
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -17,12 +17,16 @@ const TestCard = ({ heading, quote, imageSrc, altText, name }) => {
           ? { opacity: 1, transition: { ease: "easeInOut", duration: 0.6 } }
           : "hidden"
       }
-      className="testimonial-card visible"
+      className={classes.testimonial_card + " " + classes.visible}
     >
-      <img src={heading} className="testimonial-card-heading-img" />
-      <p className="testimonial-card-quote">{quote}</p>
-      <img className="testimonial-card-image" src={imageSrc} alt={altText} />
-      <p className="testimonial-card-name">{name}</p>
+      <img src={heading} className={classes.testimonial_card_heading_img} />
+      <p className={classes.testimonial_card_quote}>{quote}</p>
+      <img
+        className={classes.testimonial_card_image}
+        src={imageSrc}
+        alt={altText}
+      />
+      <p className={classes.testimonial_card_name}>{name}</p>
     </motion.div>
   );
 };
@@ -32,8 +36,8 @@ const TestimonialCard = ({ testimonials }) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      handleNext(); 
-    },5000); 
+      handleNext();
+    }, 5000);
     return () => clearInterval(intervalId);
   }, [testimonials, currentIndex]);
 
@@ -44,13 +48,15 @@ const TestimonialCard = ({ testimonials }) => {
   };
 
   return (
-    <div className="testimonial-slider">
+    <div className={classes.testimonial_slider}>
       {testimonials.map((testimonial, index) => (
         <div
           key={index}
-          className={`testimonial-card ${
-            index === currentIndex ? "visible" : "hidden"
-          }`}
+          className={
+            classes.testimonial_card +
+            " " +
+            (index === currentIndex ? classes.visible : classes.hidden)
+          }
         >
           <TestCard
             heading={testimonial.heading}
@@ -66,4 +72,3 @@ const TestimonialCard = ({ testimonials }) => {
 };
 
 export default TestimonialCard;
-

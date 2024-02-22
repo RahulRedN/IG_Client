@@ -1,12 +1,12 @@
 /* Global Styles */
 
 /* Login Company Container */
-.login-company {
+.login_company {
   height: 100vh;
   width: 100vw;
 }
 
-.img_bac{
+.img_bac {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -22,7 +22,7 @@
   width: 100%;
 }
 
-.login-form-wrapper {
+.login_form_wrapper {
   position: absolute;
   margin: auto;
   inset: 0;
@@ -40,18 +40,18 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
-.login-form {
+.login_form {
   display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
 }
 
-.login-form label {
+.login_form label {
   color: black;
   margin-bottom: 5px;
 }
 
-.login-form-wrapper h1 {
+.login_form_wrapper h1 {
   color: black;
   font-size: 2.2em;
   font-weight: 900;
@@ -71,14 +71,14 @@
   background-color: #f7f6f6;
 }
 
-.login-form-wrapper hr {
+.login_form_wrapper hr {
   width: 350px;
   border-color: black;
   margin-top: 30px;
   margin-left: 10px;
 }
 
-.checkbox-div {
+.checkbox_div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -88,7 +88,7 @@
   font-size: 10px;
 }
 
-.checkbox-div a {
+.checkbox_div a {
   border-color: black;
   text-decoration: none;
   transition: color 0.3s ease-in-out;
@@ -96,29 +96,29 @@
   margin-left: 60px;
 }
 
-.checkbox-div:checked a:hover {
+.checkbox_div:checked a:hover {
   color: black;
 }
 
-.btn-login {
+.btn_login {
   display: inline-block;
   border-radius: 4px;
   outline: none;
   font-size: 1.4rem;
   font-weight: 400;
-  background-color: rgb(31,41,55);
+  background-color: rgb(31, 41, 55);
   color: white;
   cursor: pointer;
   padding: 0.3rem;
   transition: background-color 0.5s, color 0.5s, transform 0.5s ease-in-out;
 }
 
-.btn-login:hover {
+.btn_login:hover {
   background-color: black;
   color: #f9fafb;
 }
 
-.btn-register {
+.btn_register {
   display: inline-block;
   border: 1px solid black;
   border-radius: 4px;
@@ -134,11 +134,10 @@
   transition: background-color 0.5s, color 0.5s, transform 0.5s ease-in-out;
 }
 
-.btn-register:hover {
+.btn_register:hover {
   background-color: #237ed9;
   color: #f9fafb;
 }
-
 
 .register {
   color: black;
@@ -150,21 +149,20 @@
   cursor: pointer;
 }
 
-button{
+button {
   transition: all 0.3s ease-in-out;
-
 }
 
-.register:hover button{
+.register:hover button {
   color: #237ed9;
   text-decoration: underline;
 }
 
-.animate123{
+.animate123 {
   animation: animate 0.5s ease-in-out;
 }
 
-@keyframes animate{
+@keyframes animate {
   from {
     transform: translateX(-30px);
     opacity: 0;
@@ -175,11 +173,11 @@ button{
   }
 }
 
-.animate321{
+.animate321 {
   animation: animate1 0.5s;
 }
 
-@keyframes animate1{
+@keyframes animate1 {
   from {
     transform: translateX(30px);
     opacity: 0;

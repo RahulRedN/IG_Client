@@ -5,9 +5,8 @@
   align-items: center;
   padding: 4px;
   background-color: #ffffff;
-  
-  margin: 120px 0 180px 0px;
 
+  margin: 120px 0 180px 0px;
 }
 
 .AboutUsTop img {
@@ -16,15 +15,13 @@
   border-radius: 0 65px 0 0;
 }
 
-.extra-bg-div {
-  background-color:#2b71e8;
+.extra_bg_div {
+  background-color: #2b71e8;
   height: 130px;
   width: 150px;
   border-radius: 0 50px 0 50px;
   position: absolute;
-  margin:350px 71rem 0 10px;
-
-
+  margin: 350px 71rem 0 10px;
 }
 
 .AboutUsTopContent {
@@ -32,7 +29,6 @@
   text-align: left;
   color: #333;
   margin-left: 70px;
-
 }
 
 .AboutUsTopContent h3 {
@@ -43,11 +39,9 @@
 
 .AboutUsTopContent h1 {
   font-size: 3.6em;
-  margin: 15px  0 25px 0; 
+  margin: 15px 0 25px 0;
   font-weight: 600;
-  line-height: 1.0;
-  
-  
+  line-height: 1;
 }
 
 .AboutUsTopContent p {
@@ -76,7 +70,5 @@
 }
 
 .AboutUsTopContent button:hover {
-
   transform: translateY(-6px);
-
 }

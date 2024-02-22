@@ -104,7 +104,7 @@ const ReviewPage = () => {
     },
   ];
   return (
-    <div className="max-h-full w-auto absolute right-0 overflow-auto ml-10">
+    <div className="max-h-full w-[82.5vw] absolute right-0 overflow-auto" id="PendingList">
       <div className={classes.container}>
         <h2>Reviews</h2>
         <div className="flex items-baseline w-[100%]">

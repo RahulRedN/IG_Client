@@ -1,4 +1,4 @@
-import "../../Styles/Faqs.css";
+import classes from "../../Styles/Faqs.module.css";
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -10,14 +10,14 @@ const Faqs = () => {
     triggerOnce: true,
   });
   return (
-    <div className="faq-page">
-      <div className="faq-top">
+    <div className={classes.faq_page}>
+      <div className={classes.faq_top}>
         <motion.div
           ref={ref}
           initial={{ y: 100, opacity: 0 }} // Change y to 100 to start from the bottom
           animate={inView ? { y: 0, opacity: 1 } : "hidden"} // Change y to 0 to move up
           transition={{ ease: "easeInOut", duration: 0.9, delay: 0.3 }} // Add delay of 0.3 seconds
-          className="formotion"
+          className={classes.formotion}
           // key={index}
         >
           <h1>Frequently asked questions</h1>

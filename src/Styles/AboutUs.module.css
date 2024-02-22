@@ -1,4 +1,4 @@
-.aboutus-page {
+.aboutus_page {
 
     justify-content: center;
     background-color: white;
@@ -6,7 +6,7 @@
 
 }
 
-.top-container {
+.top_container {
     background: linear-gradient(190deg, #296de3 100%, #4077d5 50%, #3471d9 100%);
     background-color: #2b6ee3;
     height: 350px;
@@ -19,7 +19,7 @@
 
 }
 
-.top-container h1 {
+.top_container h1 {
 
     color: white;
     text-align: center;
@@ -30,7 +30,7 @@
 
 }
 
-.top-container p {
+.top_container p {
     color: white;
     text-align: center;
     font-size: medium;
@@ -41,13 +41,13 @@
 
 }
 
-.top-p-link {
+.top_p_link {
 
     color: #e7edf5;
 
 }
 
-.top-p-link:hover {
+.top_p_link:hover {
     color: rgb(255, 255, 255);
 }
 
@@ -55,21 +55,21 @@
 
 
 
-.top2-top3 {
+.top2_top3 {
 
     background-color: #F8FBFF;
     padding: 5%;
 }
 
-.top-container-btn {}
+.top_container_btn {}
 
-.aboutus-card {}
+.aboutus_card {}
 
-.range-vis {}
+.range_vis {}
 
-.about-com {}
+.about_com {}
 
-.team-card {}
+.team_card {}
 
 .testmonials {
 
@@ -79,4 +79,4 @@
 }
 
 
-.company-img-list {}
+.company_img_list {}
