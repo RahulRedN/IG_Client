@@ -407,11 +407,43 @@ export const mockBarData = [
   },
   {
     country: "December",
-    "Accepted": 231,
+    Accepted: 231,
     AcceptedColor: "hsl(229, 70%, 50%)",
     Rejected: 45,
     RejectedColor: "hsl(296, 70%, 50%)",
   },
+];
+
+export const mockTopJobBarData = [
+  {
+    Applicants: 123,
+    position: "SDE",
+  },
+  {
+    position: "ML eng",
+    Applicants: 12,
+  }, 
+  {
+    position: "DAnalyst",
+    Applicants: 23,
+  }, 
+  {
+    position: "WebDev",
+    Applicants: 13,
+  }, 
+  {
+    position: "DevOps",
+    Applicants: 167,
+  }, 
+  {
+    position: "Mentor",
+    Applicants: 1,
+  }, 
+  {
+    position: "SDET",
+    Applicants: 13,
+  },
+ ,
 ];
 
 

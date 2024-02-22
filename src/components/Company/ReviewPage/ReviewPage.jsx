@@ -3,6 +3,7 @@ import classes from "../PendingList/PendingList.module.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { MdOutlineStar } from "react-icons/md";
 import { IoMdStarOutline } from "react-icons/io";
+import { Box } from "@mui/material";
 const ReviewPage = () => {
   const [filterType, setFilterType] = useState("All"); // State for filter type
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
@@ -46,12 +47,43 @@ const ReviewPage = () => {
       type: "Suggestion",
       role: "ML Enginner",
     },
+    {
+      feedback:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ullam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ullam.Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      rating: 1,
+      userName: "um Doe",
+      type: "Suggestion",
+      role: "ML Enginner",
+    },
+    {
+      feedback: "Simple and so much helpful",
+      rating: 1,
+      userName: "um Doe",
+      type: "Suggestion",
+      role: "ML Enginner",
+    },
+    {
+      feedback:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ullam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ullam.Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      rating: 1,
+      userName: "um Doe",
+      type: "Suggestion",
+      role: "ML Enginner",
+    },
+    {
+      feedback: "Simple and so much helpful",
+      rating: 1,
+      userName: "um Doe",
+      type: "Suggestion",
+      role: "ML Enginner",
+    },
   ];
   return (
-    <div className="max-h-full w-auto absolute right-0" id="PendingList">
+    <div className="max-h-full w-auto absolute right-0 overflow-auto ml-10" >
       <div className={classes.container}>
         <h2>Reviews</h2>
         <div className="flex items-baseline w-[100%]">
+          
           {/* type-based filter */}
           <div className="filter-section">
             <select

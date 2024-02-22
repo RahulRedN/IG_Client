@@ -106,7 +106,7 @@ const Contacts = () => {
   ];
 
   return (
-    <Box m="20px" className="w-[78.5vw] absolute right-0">
+    <Box m="20px" className="">
       <Header title="Employees" subtitle="List of Employees who got selected" />
       <Box
         m="0 0 0 0"
@@ -118,6 +118,7 @@ const Contacts = () => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
+            padding : "1rem",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[200],

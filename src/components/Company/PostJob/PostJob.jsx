@@ -124,17 +124,16 @@ const PostJob = () => {
   };
 
   return (
-    <div className={"min-h-screen p-6 bg-indigo-100"}>
-      <div className="border-none h-[calc(100vh-5rem)] p-10">
-        <h1 className="text-4xl mt-[-1rem] font-semibold text-center">
+    <div className={"min-h-screen p-6 overflow-hidden bg-gray-100"}>
+      <div className=" p-10">
+        <h1 className="text-4xl mt-[-1rem] mb-4 mr-12 font-semibold text-center">
           POST JOB
         </h1>
-      <div className="flex  justify-center items-center  bg-white">
-        <div></div>
-        <form className={"mt-10 w-full"}>
-          <div className="flex gap-4 w-full">
-            <div className="flex flex-col gap-1 w-[25%]">
-              <label className="ml-1 rounded-lg text-base font-semibold">
+      <div className="w-[70%] m-auto flex  justify-center items-center  bg-white shadow-xl border-0 rounded-lg">
+        <form className={" flex flex-col w-full p-8"}>
+          <div className="flex w-full gap-[5%]">
+            <div className="flex flex-col gap-1 w-[60%]">
+              <label className="ml-1 rounded-lg text-base text-black">
                 Job Position
               </label>
               <input
@@ -144,18 +143,18 @@ const PostJob = () => {
                   SetData({ ...Data, position: event.target.value })
                 }
                 className={
-                  "border border-none rounded-md bg-white w-full p-2 outline-none "
+                  "border  rounded-md bg-white w-full p-2  "
                 }
                 placeholder="Ex: Software Developer"
               />
             </div>
-            <div className="flex flex-col gap-1 w-[24%] items-stretch">
-              <label className="ml-1 text-base font-semibold">
+            <div className="flex flex-col gap-1 w-[50%] items-stretch">
+              <label className="ml-1 text-base text-black">
                 Joining Date
               </label>
               <input
                 type="date"
-                className="p-2 rounded-md"
+                className="border rounded-md  w-full p-2"
                 onChange={(event) =>
                   SetData({ ...Data, joiningDate: event.target.value })
                 }
@@ -164,10 +163,10 @@ const PostJob = () => {
            
           </div>
 
-        <div className="flex gap-4 w-[50%] mt-8">
+        <div className="flex gap-4 w-[100%] mt-8">
           <div className="w-[30%] flex gap-4 flex-[1]">
-              <div className="flex flex-col gap-1 w-[30%] flex-[1]">
-                <label className="ml-1 text-base font-semibold">
+              <div className="flex flex-col  w-[30%] flex-[1]">
+                <label className="ml-1 text-base font-semibold text-black">
                   Experience
                 </label>
                 <input
@@ -176,12 +175,12 @@ const PostJob = () => {
                   onChange={(event) =>
                     SetData({ ...Data, experience: event.target.value })
                   }
-                  className="border border-none rounded-md bg-white w-full p-2 outline-none"
+                  className="border rounded-md  w-full p-2"
                   placeholder="Eg: 10 years"
                 />
               </div>
-              <div className="flex flex-col gap-1 flex-[1]">
-                <label className="ml-1 text-base font-semibold">
+              <div className="flex flex-col w-[30%]">
+                <label className="ml-1 text-base text-black">
                   Salary
                 </label>
                 <input
@@ -190,17 +189,17 @@ const PostJob = () => {
                   onChange={(event) =>
                     SetData({ ...Data, salary: event.target.value })
                   }
-                  className="border border-none rounded-md bg-white w-full p-2 outline-none"
+                  className="border  rounded-md bg-white w-full p-2 "
                   placeholder="Eg: 1000(in Rs.)"
                 />
               </div>
-              <div className="flex flex-col gap-1 flex-[1]">
-              <label className="ml-1 text-base font-semibold">
+              <div className="flex flex-col w-[30%]">
+              <label className="ml-1 text-base font-semibold text-black">
                 Total Positions
               </label>
               <input
-                type="number"
-                className="border border-none rounded-md bg-white w-full p-2 outline-none"
+                type="text"
+                className="border  rounded-md bg-white w-full p-2 "
                 id="tpos"
                 onChange={(event) =>
                   SetData({ ...Data, totalPositions: event.target.value })
@@ -214,10 +213,10 @@ const PostJob = () => {
             </div>
           </div>
 
-          <div className="flex w-[50%] gap-4 mt-8">
+          <div className="flex w-[100%] gap-4 mt-8">
             <div className="w-full flex gap-4 flex-[6]">
               <div className="flex flex-col gap-1 w-full flex-[1]">
-                <label className="ml-1 text-base font-semibold">
+                <label className="ml-1 text-base font-semibold text-black">
                   Required Skills
                 </label>
                 <input
@@ -226,17 +225,17 @@ const PostJob = () => {
                   onChange={(event) =>
                     SetData({ ...Data, skills: event.target.value })
                   }
-                  className="border border-none rounded-md bg-white w-full p-2 outline-none"
+                  className="border  rounded-md bg-white w-full p-2 "
                   placeholder="Ex: C++, Java, Python"
                 />
               </div>
               <div className="flex flex-col gap-1 w-full flex-[1]">
-                <label className="ml-1 text-base font-semibold">
+                <label className="ml-1 text-base font-semibold text-black">
                   Benefits
                   </label>
                 <input
                   type="text"
-                  className="border border-none rounded-md bg-white w-full p-2 outline-none"
+                  className="border  rounded-md bg-white w-full p-2 "
                   id="benifits"
                   onChange={(event) =>
                     SetData({ ...Data, benefits: event.target.value })
@@ -250,27 +249,27 @@ const PostJob = () => {
           </div>
 
           <div className="flex flex-col mt-8 gap-6">
-            <div className="gap-1 flex flex-col w-[50%]">
-              <label className="ml-1 text-base font-semibold">
+            <div className="gap-1 flex flex-col">
+              <label className="ml-1 text-base font-semibold text-black">
                 Job Description
               </label>
               <textarea
-                className="h-[4rem] rounded-lg p-3 placeholder:text-md outline-none"
+                className="h-[5rem]  border rounded-lg p-3 placeholder:text-md "
                 id="descr"
                 placeholder="Eg: The job specifies that the employee should.."
-                rows={3} // Set the number of rows
+                rows={5} // Set the number of rows
                 cols={10} // Set the number of columns
                 onChange={(event) =>
                   SetData({ ...Data, jobDesc: event.target.value })
                 }
               ></textarea>
             </div>
-            <div className="gap-1 flex flex-col w-[50%]">
-              <label className="ml-1 text-base font-semibold">
+            <div className="gap-1 flex flex-col">
+              <label className="ml-1 text-base font-semibold text-black">
                 Job Responsibilities
               </label>
               <textarea
-                className="h-[4rem] rounded-lg p-3 placeholder:text-md outline-none"
+                className="h-[5rem] border rounded-lg p-3 placeholder:text-md "
                 placeholder="Eg: Should work for 5 hours;Report work daily. "
                 rows={4}
                 cols={10} // Set the number of columns
@@ -285,7 +284,7 @@ const PostJob = () => {
           <button
             type="button"
             onClick={SubmitEventHandler}
-            className="px-4 py-3 bg-gray-400 hover:bg-gray-500 hover:text-gray-50 rounded text-base mt-6"
+            className="w-[20%] mx-[16rem] px-4 py-3 bg-gray-400 hover:bg-blue-500 hover:text-gray-50 rounded text-base mt-6"
           >
             POST
           </button>
