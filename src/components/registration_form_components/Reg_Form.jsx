@@ -130,7 +130,7 @@ const Reg_Form = ({ className }) => {
 
     try {
       const api = axios.create({
-        baseURL: "http://localhost:8080/api/auth",
+        baseURL: import.meta.env.VITE_SERVER + "/api/auth",
         withCredentials: true,
       });
 

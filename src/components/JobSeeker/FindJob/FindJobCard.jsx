@@ -57,7 +57,8 @@ const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
     try {
       if (!isfav) {
         const res = await axios.post(
-          "http://localhost:8080/api/jobseeker/addFav?uid=" +
+          import.meta.env.VITE_SERVER +
+            "/api/jobseeker/addFav?uid=" +
             uid +
             "&jid=" +
             job._id
@@ -70,7 +71,8 @@ const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
         }
       } else {
         const res = await axios.post(
-          "http://localhost:8080/api/jobseeker/removeFav?uid=" +
+          import.meta.env.VITE_SERVER +
+            "/api/jobseeker/removeFav?uid=" +
             uid +
             "&jid=" +
             job._id
@@ -275,50 +277,52 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
   const dispatch = useDispatch();
 
   const applyHandler = async () => {
-    const data = { ...job.status };
-
-    if (data[user.id] == undefined) {
+    if (!isDisabled) {
       try {
-        data[user.id] = {
-          applied: null,
-          date: Date().toLocaleString(),
-          fname: user.fname,
-        };
-        const docRef = doc(collection(db, "jobs"), job.id);
-        await updateDoc(docRef, { status: data });
-        dispatch(setApplied({ data: data, id: job.id }));
-        toast.success("Job Applied!");
-
-        nav("/jobseeker/profile");
+        const res = await axios.post(
+          import.meta.env.VITE_SERVER + "/api/jobseeker/applyJob",
+          { uid: user.uid, jid: job._id }
+        );
+        if (res.status == 200) {
+          dispatch(
+            setApplied({
+              jobId: job._id,
+              uid: user.uid,
+              status: "pending",
+              createdAt: new Date(),
+            })
+          );
+          toast.success("Job Applied!");
+          nav("/jobseeker/profile");
+        }
       } catch (error) {
         console.error(error);
-        toast.error("An error Occured!", { className: "text-red-500" });
+        toast.error("An error Occured : " + error.response?.data?.msg, {
+          className: "text-red-500",
+        });
       }
     } else {
       toast("Already applied to the Job!");
     }
   };
 
-  const isDisabled = job.status[user.id];
+  const isDisabled = user?.applications?.some(
+    (application) => application.jobId === job._id
+  );
 
   const color = (status) => {
-    if (status === "Rejected") {
+    if (status === "rejected") {
       return "bg-red-200 text-red-600 ";
-    } else if (status === "Accepted") {
+    } else if (status === "accepted") {
       return "bg-green-200 text-green-600";
     } else {
       return "bg-yellow-100 text-yellow-500";
     }
   };
 
-  const getStatus = (status) => {
-    if (status == null) {
-      return "Pending";
-    } else if (status) {
-      return "Accepted";
-    } else {
-      return "Rejected";
-    }
+  const getStatus = (jobId) => {
+    const application = user.applications.filter((app) => app.jobId == jobId);
+    return application[0]?.status;
   };
 
   return (
@@ -404,14 +408,14 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
       <button
         onClick={applyHandler}
         className={
-          "mt-8 text-center m-auto text-white tracking-wider py-2 px-4 rounded focus:outline-none focus:shadow-outline " +
+          "mt-8 text-center m-auto tracking-wider py-2 px-4 rounded focus:outline-none focus:shadow-outline capitalize " +
           (isDisabled
-            ? color(getStatus(isDisabled.applied))
-            : "bg-blue-600 hover:bg-blue-700")
+            ? color(getStatus(job._id))
+            : "bg-blue-600 hover:bg-blue-700 text-white")
         }
         disabled={isDisabled}
       >
-        {isDisabled ? getStatus(isDisabled.applied) : "Apply"}
+        {isDisabled ? getStatus(job._id) : "Apply"}
       </button>
     </Modal>
   );

@@ -92,7 +92,7 @@ if (sortBy !== "") {
           type="text"
           value={positionFilter}
           onChange={handlePositionFilter}
-          className="h-10  border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500"
+          className="h-10  border-2 mr-4 border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500"
           placeholder="Search by Position"
         />
       </div>

@@ -15,8 +15,14 @@ const PendingList = ({ status }) => {
   const dispatch = useDispatch();
 
   const jobs = useSelector((state) => state.company.jobs);
+  const applications = useSelector((state) => state.company.applications);
+  const users = useSelector((state) => state.company.applications);
+
   const [pending, setPending] = useState([]);
 
+  useEffect(() => {
+    
+  }, [applications]);
 
   return (
     <Box className="max-h-full" id="PendingList">
@@ -48,9 +54,12 @@ const PendingList = ({ status }) => {
                     <td>{date.toLocaleDateString("en-IN")}</td>
                     <td>
                       <div className="flex justify-start gap-3 align-baseline">
-                        {pend.skills.split(",").slice(0,3).map((skill, idx) => (
-                          <Skillbox index={idx} skill={skill} key={idx} />
-                        ))}
+                        {pend.skills
+                          .split(",")
+                          .slice(0, 3)
+                          .map((skill, idx) => (
+                            <Skillbox index={idx} skill={skill} key={idx} />
+                          ))}
                       </div>
                     </td>
 

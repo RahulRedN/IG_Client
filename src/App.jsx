@@ -29,9 +29,6 @@ import Login_SignUp from "./pages/Login_SignUp";
 import FindJobs from "./components/JobSeeker/FindJob/FindJobs";
 import Profile_Job from "./components/JobSeeker/Profile/Profile_Job";
 import Dashboard from "./components/Company/Dashboard/Dashboard";
-// import Navbar from "./components/company_components/Navbar";
-// import { Dashboard } from "@mui/icons-material";
-// import Sidebar from "./components/company_components/Sidebar";
 
 import Employees from "./components/Company/Employees/Employees";
 import PendingList from "./components/Company/PendingList/PendingList";
@@ -44,7 +41,7 @@ import QuesCards from "./components/homepage_compos/News/QuesCards";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import ReviewPage from "./components/Company/ReviewPage/ReviewPage";
 import TestimonialForm from "./components/JobSeeker/TestimonialForm/TestimonialForm";
-import MultiSelect from "./components/JobSeeker/MultiSelect/MultiSelect";
+import MultiSelect from "./components/JobSeeker/Profile/MultiSelect/MultiSelect";
 
 import Admin from "./pages/Admin";
 import Home_Admin from "./components/Admin/LandingPage/Home_Admin";
@@ -97,9 +94,9 @@ const Router = createBrowserRouter(
       <Route
         path="/company"
         element={
-          <PrivateRoute role="company">
+          // <PrivateRoute role="company">
             <Company />
-          </PrivateRoute>
+          // </PrivateRoute>
         }
       >
         <Route index element={<Dashboard />} />

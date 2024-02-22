@@ -7,13 +7,11 @@ import { IoIosWarning, IoMdArrowBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import { useSelector } from "react-redux";
 import ButtonS from "../../UI/Button";
 
 import axios from "axios";
 
 const LoginCompany = () => {
-
   const nav = useNavigate();
 
   const [isClicked, setIsClicked] = useState(true);
@@ -86,7 +84,6 @@ const LoginCompany = () => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    console.log(login);
     setIsLoading(true);
 
     if (login.email === "" || login.password === "") {
@@ -103,10 +100,9 @@ const LoginCompany = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/auth/loginCompany",
+        import.meta.env.VITE_SERVER + "/api/auth/loginCompany",
         login
       );
-      console.log(res);
       localStorage.setItem("token", res.data.cookie);
       if (res.status === 200) {
         toast.success("Logged in Successful");
@@ -169,7 +165,7 @@ const LoginCompany = () => {
 
     try {
       const api = axios.create({
-        baseURL: "http://localhost:8080/api/auth",
+        baseURL: import.meta.env.VITE_SERVER + "/api/auth",
         withCredentials: true,
       });
 

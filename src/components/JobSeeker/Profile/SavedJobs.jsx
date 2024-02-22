@@ -11,8 +11,6 @@ const SavedJobs = () => {
     setState({ fav: user?.data.fav, jobs: user?.jobs });
   }, [user]);
 
-  console.log(state.jobs);
-
   const scrollLeft = () => {
     var scrollContainer = document.getElementById("scrollContainer");
     scrollContainer.scrollLeft -= 400;
