@@ -15,10 +15,24 @@ export const companyReducer = createSlice({
     },
     removeJob: (state, action) => {
       const newJobs = state.jobs.filter((job) => job._id != action.payload);
-      return { ...state, jobs: newJobs };
+
+      const newApplications = state.applications.filter(
+        (app) => app.jobId != action.payload
+      );
+      return { ...state, jobs: newJobs, applications: newApplications };
     },
     addJob: (state, action) => {
       return { ...state, jobs: [...state.jobs, action.payload] };
+    },
+    updateJob: (state, action) => {
+      const newJobs = state.jobs.map((job) => {
+        if (job._id == action.payload.jobId) {
+          return { ...job, ...action.payload };
+        } else {
+          return job;
+        }
+      });
+      return { ...state, jobs: newJobs };
     },
     setStatus: (state, action) => {
       console.log(action.payload);
@@ -54,7 +68,13 @@ export const companyReducer = createSlice({
   },
 });
 
-export const { setCompanyData, addJob, removeJob, setStatus, resetCompany } =
-  companyReducer.actions;
+export const {
+  setCompanyData,
+  addJob,
+  removeJob,
+  setStatus,
+  resetCompany,
+  updateJob,
+} = companyReducer.actions;
 
 export default companyReducer.reducer;
