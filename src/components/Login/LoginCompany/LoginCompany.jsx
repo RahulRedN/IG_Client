@@ -84,7 +84,6 @@ const LoginCompany = () => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    console.log(login);
     setIsLoading(true);
 
     if (login.email === "" || login.password === "") {
@@ -104,7 +103,6 @@ const LoginCompany = () => {
         import.meta.env.VITE_SERVER + "/api/auth/loginCompany",
         login
       );
-      console.log(res);
       localStorage.setItem("token", res.data.cookie);
       if (res.status === 200) {
         toast.success("Logged in Successful");
