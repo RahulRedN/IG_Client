@@ -1,16 +1,16 @@
 
 import "./SkillStageModal.css"
 
-function SkillStageModal({  onSelectStage, onClose }) {
+function SkillStageModal({  onSelectStage, onCloseModal }) {
 
   const handleStageSelection = (stage) => {
     onSelectStage(stage);
-    onClose();
+    onCloseModal();
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className="modal-skill">
+      <div className="modal-content-skill">
         <h2>How would you rate yourself on this skill?</h2>
         <ul>
           <li>
@@ -48,7 +48,7 @@ function SkillStageModal({  onSelectStage, onClose }) {
             </label>
           </li>
         </ul>
-        <button onClick={onClose}>Close</button>
+        <button onClick={onCloseModal}>Close</button>
       </div>
     </div>
   );

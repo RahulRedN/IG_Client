@@ -58,14 +58,14 @@
 
 }
 
-.heading {
+.faq-heading {
 
    display: flex;
    flex-direction: row;
    align-items: center;
    margin-bottom: 50px;
    margin-top: 70px;
-   margin-left: -720px;
+   margin-left: -100px;
 
 }
 
@@ -76,7 +76,7 @@
    background-color: #007bff;
 }
 
-.heading h1 {
+.faq-heading h1 {
    margin-left: 20px;
    font-size: 30px;
    font-weight: 700;

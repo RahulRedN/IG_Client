@@ -2,6 +2,10 @@ import DataBoxes from "./DataBoxes";
 import LineChart from "./LineChart";
 import PieChart from "./PieChart";
 import Table_RecentUsers from "./Table_RecentUsers";
+<<<<<<< HEAD
+=======
+import TodoList from "./Todo_List/TodoList";
+>>>>>>> 59cd6b1d501ea447b8aa8474a22563a0879516e7
 
 const Home_Admin = () => {
   return (
@@ -27,8 +31,10 @@ const Home_Admin = () => {
           <Table_RecentUsers />
         </div>
         <div className="flex-[2] bg-white overflow-y-scroll scrollbar-none px-2">
-          <h1 className="pl-3 py-3 font-extrabold">Get Things Done!</h1>
-          {/* <Todo_List /> */}
+          {/* <h1 className="pl-3 py-3 font-extrabold">Get Things Done!</h1> */}
+
+          <TodoList />
+
         </div>
       </div>
       <br></br>
