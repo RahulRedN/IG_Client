@@ -17,6 +17,16 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }, []);
+
   const isLink = (path) => {
     return path === pathname;
   };
@@ -30,10 +40,10 @@ const Home = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <div className="flex min-h-screen">
-            <Sidebar isSidebar={isSidebar}/>
-            <Box className="w-full"> 
-            <Outlet/>
-            {/* <div className="text-center text-gray-800 font-[600]">© 2023 Inspiring Go</div> */}
+            <Sidebar isSidebar={isSidebar} />
+            <Box className="w-full">
+              <Outlet />
+              {/* <div className="text-center text-gray-800 font-[600]">© 2023 Inspiring Go</div> */}
             </Box>
           </div>
         </ThemeProvider>

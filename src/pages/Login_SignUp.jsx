@@ -21,13 +21,13 @@ const Login_SignUp = () => {
 
     if (exp > now) {
       localStorage.removeItem("token");
-      return <Navigate to={role == "jobseeker" ? "/login" : "/loginCompany"} />;
+    } else {
+      return decoded.role == "jobseeker" ? (
+        <Navigate to="/jobseeker" />
+      ) : (
+        <Navigate to="/company" />
+      );
     }
-    return decoded.role == "jobseeker" ? (
-      <Navigate to="/jobseeker" />
-    ) : (
-      <Navigate to="/company" />
-    );
   }
 
   const user = useSelector((state) => state.jobseeker.data);
