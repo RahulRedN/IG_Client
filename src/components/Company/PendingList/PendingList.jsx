@@ -9,6 +9,7 @@ import { doc, collection, getDoc, updateDoc } from "firebase/firestore";
 import { setStatus } from "../../../redux/companyReducer";
 
 import toast from "react-hot-toast";
+import { Box } from "@mui/material";
 
 const PendingList = ({ status }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const PendingList = ({ status }) => {
 
 
   return (
-    <div className="max-h-full w-[83vw] absolute right-0" id="PendingList">
+    <Box className="max-h-full" id="PendingList">
       <div className={classes.container}>
         <h2>My Applications</h2>
         <div className="rounded-md border-[1px] border-gray-300 w-[75vw]">
@@ -91,7 +92,7 @@ const PendingList = ({ status }) => {
           </table>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 

@@ -65,10 +65,13 @@ const Sidebar = () => {
       sx={{
         "& .pro-sidebar-inner": {
           background: `#fffcfc !important`,
-          boxShadow: "5px 20px 8px #a0a5fa",
+          boxShadow: "3px 4px 5px gray",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
+        },
+        "& .pro-icon-wrapper.active": {
+          backgroundColor: "#60a5fa !important",
         },
         "& .pro-inner-item": {
           padding: " 8px 20px !important",
@@ -76,11 +79,11 @@ const Sidebar = () => {
           color: "black",
         },
         "& .pro-inner-item:hover": {
-          color: "white !important",
-          background : "#868dfb"
+          color: "black !important",
+          background : "#6ee7b7"
         },
         "& .pro-menu-item.active": {
-          background: "#868dfb",
+          background: "#6ee7b7",
         },
       }}
     >

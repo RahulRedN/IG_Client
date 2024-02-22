@@ -12,6 +12,7 @@ import BarChart from "./BarChart";
 import StatBox from "./StatBox";
 import ProgressCircle from "./ProgressCircle";
 import PieChart from "./PieChart";
+import BarChart_TopJobs from "./BarChart_TopJobs";
 import {
   Money,
   MoneyOff,
@@ -27,6 +28,7 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
+    <div className="overflow-auto">
     <Box padding="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
@@ -128,7 +130,25 @@ const Dashboard = () => {
             <BarChart isDashboard={true} />
           </Box>
         </Box>
-        <Box //pie chart
+
+        <Box
+          gridColumn="span 6"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
+          >
+            Tob Jobs of your Company
+          </Typography>
+          <Box height="250px" mt="-20px">
+            <BarChart_TopJobs isDashboard={true} />
+          </Box>
+        </Box>
+
+        {/* <Box //pie chart
           gridColumn="span 6"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -153,7 +173,7 @@ const Dashboard = () => {
             </Typography>
             <Typography>Includes extra misc expenditures and costs</Typography>
           </Box>
-        </Box>
+        </Box> */}
 
         <Box //pie chart
           gridColumn="span 6"
@@ -168,6 +188,7 @@ const Dashboard = () => {
         </Box>
       </Box>
     </Box>
+    </div>
   );
 };
 

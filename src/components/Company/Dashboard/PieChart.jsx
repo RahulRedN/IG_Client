@@ -9,7 +9,6 @@ import { ResponsivePie } from '@nivo/pie'
 // you'll often use just a few of them.
 import { mockPieChartData as data } from '../Data/mockData';
 const PieChart = () => {
-    console.log(data)
 return (
     <ResponsivePie
         data={data}
