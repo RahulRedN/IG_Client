@@ -1,5 +1,5 @@
 import { FaUserCheck } from "react-icons/fa";
-import { HiMiniBuildingOffice } from "react-icons/hi2";
+import { HiMiniBuildingOffice, HiOutlineNewspaper } from "react-icons/hi2";
 import { RiFolderReceivedLine } from "react-icons/ri";
 
 const DataBox = ({ title, UpDown, num, No }) => {
@@ -8,10 +8,10 @@ const DataBox = ({ title, UpDown, num, No }) => {
 
   const colors = new Map([
     [
-      "It's Ok",
+      "Reviews",
       {
         color: "bg-teal-500",
-        Icon: <FaUserCheck size={34} color="white" />,
+        Icon: <HiOutlineNewspaper size={34} color="white" />,
       },
     ],
     [
@@ -37,7 +37,7 @@ const DataBox = ({ title, UpDown, num, No }) => {
     ],
   ]);
 
-  console.log(colors?.get(title),title);
+  console.log(colors?.get(title), title);
 
   if (typeof colors === "object" && colors !== null) {
     color = colors?.get(`${title}`)?.color;
