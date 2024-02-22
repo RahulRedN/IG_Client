@@ -14,19 +14,20 @@ import {
 } from "@chakra-ui/react";
 import { toast } from "react-hot-toast";
 
-const RowUser = () => {
+const RowUser = ({jobseeker,idx}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
 
   return (
     <tr className="border-b border-gray-200 h-[3.75rem]">
-      <td className="pl-3">1</td>
+      <td className="pl-3">{idx+1}</td>
 
       <td className="pl-2">
         <div className="flex items-center gap-x-2">
           <img src={img} className="h-9 w-9 rounded-full object-cover" />
+          {/* jobseeker. */}
           <div className="flex items-center justify-center gap-x-1">
-            <h1 className="text-sm font-light">Pavan Kumar</h1>
+            <h1 className="text-sm font-light">{jobseeker.fname}</h1>
             <h1 className="text-[8px] border py-[1px] px-[4px] border-green-500 text-green-500 rounded">
               NEW
             </h1>
@@ -35,23 +36,23 @@ const RowUser = () => {
       </td>
 
       <td className="pl-3">
-        <h1 className="text-sm">Female</h1>
+        <h1 className="text-sm">{jobseeker.gender}</h1>
       </td>
 
       <td className="pl-3">
-        <h1 className="text-sm">15</h1>
+        <h1 className="text-sm">{jobseeker.age}</h1>
       </td>
 
       <td className="pl-2">
-        <h1 className="text-sm">+91 73373 26976</h1>
+        <h1 className="text-sm">{jobseeker.mobile}</h1>
       </td>
 
       <td className="pl-2">
-        <h1 className="text-sm">jppavan2003@gmail.com</h1>
+        <h1 className="text-sm">{jobseeker.email}</h1>
       </td>
 
       <td className="pl-2">
-        <h1 className="text-sm">25th March,2018</h1>
+        <h1 className="text-sm">{jobseeker.joinedDate}</h1>
       </td>
 
       <td>

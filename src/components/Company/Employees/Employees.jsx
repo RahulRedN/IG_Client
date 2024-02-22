@@ -16,9 +16,47 @@ import {doc, collection, getDoc} from "firebase/firestore"
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  
   const jobs = useSelector((state) => state.company.jobs);
   const [employee, setEmployee] = useState([]);
+  
+  const columns = [
+    { field: "id", headerName: "ID", flex: 0.5 },
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "age",
+      headerName: "Age",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
+      fontSize: "20px  ",
+    },
+    {
+      field: "position",
+      headerName: "Position",
+      flex: 1,
+    },
+    {
+      field: "phone",
+      headerName: "Phone Number",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "joindate",
+      headerName: "Joined On",
+      flex: 1,
+    },
+  ];
 
   useEffect(() => {
     const fetch = () => {
@@ -66,48 +104,74 @@ const Contacts = () => {
       joindate: date.toDateString("en-IN"),
     };
   });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortByJoinedDate, setSortByJoinedDate] = useState("descending");
 
-  const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 1,
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-      fontSize: "20px  ",
-    },
-    {
-      field: "position",
-      headerName: "Position",
-      flex: 1,
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1,
-    },
-    {
-      field: "joindate",
-      headerName: "Joined On",
-      flex: 1,
-    },
-  ];
+  // Handle changes in the search query input field
+  const handleSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Handle changes in the sort option select box
+  const handleSortByJoinedDateChange = (e) => {
+    setSortByJoinedDate(e.target.value);
+  };
+
+  // Filter and sort the data based on search and sort criteria
+  const filteredData = mockData.filter((item) => {
+    return (
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.phone.includes(searchQuery)
+    );
+  }).sort((a, b) => {
+    const dateA = new Date(a.joindate);
+    const dateB = new Date(b.joindate);
+
+    if (sortByJoinedDate === "descending") {
+      return dateB - dateA;
+    } else {
+      return dateA - dateB;
+    }
+  });
+
+
 
   return (
     <Box m="20px" className="">
+      <div className="flex justify-between items-center">
       <Header title="Employees" subtitle="List of Employees who got selected" />
+      <div className="flex">
+          <div>
+            <label className="mr-2 text-black text-base">Filter By</label>
+            <input
+              type="text"
+              placeholder="Search by Name, Mobile, or Email"
+              value={searchQuery}
+              className="border-2 border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 h-10 w-[18rem] mr-2"
+              onChange={handleSearchQueryChange}
+            />
+          </div>
+
+          {/* Select Box for Sorting */}
+          <div>
+          <label className="mr-2 text-black text-base">Sort by Joining Date</label>
+          <select
+            value={sortByJoinedDate}
+            onChange={handleSortByJoinedDateChange}
+            className="border-2 border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 h-10 w-30 mr-2"
+          >
+            <option value="ascending" className="text-base">
+              Ascending
+            </option>
+            <option value="descending" className="text-base">
+              Descending
+            </option>
+          </select>
+          </div>
+        </div>
+        </div>
       <Box
         m="0 0 0 0"
         height="80vh"
@@ -118,7 +182,6 @@ const Contacts = () => {
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
-            padding : "1rem",
           },
           "& .name-column--cell": {
             color: colors.greenAccent[200],
@@ -139,7 +202,7 @@ const Contacts = () => {
         }}
       >
         <DataGrid
-          rows={mockData}
+          rows={filteredData}
           columns={columns}
           initialState={{
             pagination: {
