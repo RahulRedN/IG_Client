@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import logincompany from "./Resources/logincompany.jpg";
+import classes from "../LoginCompany/Styles/LoginCompany.module.css";
 import { useEffect, useState } from "react";
-import "../LoginCompany/Styles/LoginCompany.css";
 import { Checkbox } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { IoIosWarning, IoMdArrowBack } from "react-icons/io";
@@ -84,7 +85,6 @@ const LoginCompany = () => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    console.log(login);
     setIsLoading(true);
 
     if (login.email === "" || login.password === "") {
@@ -104,7 +104,6 @@ const LoginCompany = () => {
         import.meta.env.VITE_SERVER + "/api/auth/loginCompany",
         login
       );
-      console.log(res);
       localStorage.setItem("token", res.data.cookie);
       if (res.status === 200) {
         toast.success("Logged in Successful");
@@ -197,23 +196,25 @@ const LoginCompany = () => {
   };
 
   return (
-    <div className="login-company">
+    <div className={classes.login_company}>
       <Link to="/" className="left-3 top-3 absolute z-[100] flex items-center">
         <IoMdArrowBack className="text-3xl text-white" />
         <p className="text-white">Home</p>
       </Link>
-      <div className="container_full">
-        <img src={logincompany} className="img_bac" />
-        <div className="login-form-wrapper">
+      <div className={classes.container_full}>
+        <img src={logincompany} className={classes.img_bac} />
+        <div className={classes.login_form_wrapper}>
           {isClicked ? (
             <motion.div key={1} className="flex flex-col gap-10 animate123">
               <h1 className="text-center tracking-wider"> Login</h1>
-              <form className="login-form w-full">
+              <form className={classes.login_form + "  w-full"}>
                 <label htmlFor="email">Email address</label>
                 <input
-                  className={`inputs ${
-                    errEL ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errEL ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="email"
                   onChange={emailHandlerLogin}
                   id="email"
@@ -224,9 +225,11 @@ const LoginCompany = () => {
 
                 <label htmlFor="password"> Password</label>
                 <input
-                  className={`inputs ${
-                    errPL ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errPL ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="password"
                   onChange={passwordHandlerLogin}
                   id="password"
@@ -235,7 +238,7 @@ const LoginCompany = () => {
                   required
                 />
 
-                <div className="checkbox-div">
+                <div className={classes.checkbox_div}>
                   <Checkbox
                     className="text-black"
                     color={"blackAlpha.800"}
@@ -253,7 +256,7 @@ const LoginCompany = () => {
 
                 <hr />
 
-                <div className="register">
+                <div className={classes.register}>
                   <p>
                     Dont have an account?{" "}
                     <button
@@ -268,14 +271,16 @@ const LoginCompany = () => {
               </form>
             </motion.div>
           ) : (
-            <motion.div key={2} className="animate321">
-              <h1 className="text-center"> Register</h1>
-              <form className="login-form w-full">
+            <motion.div key={2} className={classes.animate321}>
+              <h1 className={classes.text_center}> Register</h1>
+              <form className={classes.login_form + " w-full"}>
                 <label htmlFor="name">Name</label>
                 <input
-                  className={`inputs ${
-                    errN ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errN ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="text"
                   id="email"
                   name="email"
@@ -284,9 +289,11 @@ const LoginCompany = () => {
                 />
                 <label htmlFor="email">Email address</label>
                 <input
-                  className={`inputs ${
-                    errE ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errE ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="email"
                   id="email"
                   name="email"
@@ -296,9 +303,11 @@ const LoginCompany = () => {
 
                 <label htmlFor="password"> Password</label>
                 <input
-                  className={`inputs ${
-                    errP ? "focus:bg-red-200 bg-red-200" : ""
-                  }`}
+                  className={
+                    classes.inputs +
+                    " " +
+                    (errE ? "focus:bg-red-200 bg-red-200" : "")
+                  }
                   type="password"
                   id="password"
                   name="password"
@@ -306,7 +315,7 @@ const LoginCompany = () => {
                   placeholder=" Enter Your password"
                 />
 
-                <div className="checkbox-div">
+                <div className={classes.checkbox_div}>
                   <Checkbox
                     className="text-black"
                     color={"blackAlpha.800"}
@@ -327,7 +336,7 @@ const LoginCompany = () => {
 
                 <hr />
 
-                <div className="register">
+                <div className={classes.register}>
                   <p>
                     {" "}
                     Already a user?{" "}

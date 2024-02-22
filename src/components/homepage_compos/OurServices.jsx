@@ -1,4 +1,4 @@
-import "./css/OurServices.css";
+import classes from "./css/OurServices.module.css";
 
 import Slider from "react-slick";
 
@@ -39,16 +39,16 @@ const OurServices = () => {
   ];
   return (
     <section className="flex flex-col justify-center bg-gray-50 min-h-[95vh]">
-      <h2 className="middle_heads_dark">Our Services</h2>
+      <h2 className={classes.middle_heads_dark}>Our Services</h2>
       <div id="our_services">
-        <Slider {...settings} className="our_services_container">
+        <Slider {...settings} className={classes.our_services_container}>
           {content.map((service, idx) => (
             <div className="pl-[1rem] pr-[1rem]" key={idx}>
-              <div className="our_services_child">
-                <div className="os_svgs">
+              <div className={classes.our_services_child}>
+                <div className={classes.os_svgs}>
                   <img src={service.img} />
                 </div>
-                <div className="os_tagline">
+                <div className={classes.os_tagline}>
                   <h2>{service.title}</h2>
                   <p>{service.content}</p>
                 </div>

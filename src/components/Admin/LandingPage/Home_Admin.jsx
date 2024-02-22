@@ -28,7 +28,6 @@ const Home_Admin = () => {
           <Table_RecentUsers />
         </div>
         <div className="flex-[2] bg-white overflow-y-scroll scrollbar-none px-2">
-          {/* <h1 className="pl-3 py-3 font-extrabold">Get Things Done!</h1> */}
 
           <TodoList />
 

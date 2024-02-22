@@ -1,0 +1,125 @@
+.feedback_heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  .feedback_logo {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: #2b71e8;
+  }
+  
+  .feedback_name {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: #2b71e8;
+  }
+  
+  .hr_feed {
+    width: 100%;
+    height: 0.9px;
+    background-color: #b1a5a5;
+    margin: 20px auto;
+  }
+  
+  .feedback_form {
+    margin: 50px 100px 0 130px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .category {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+    margin-right: 380px;
+  }
+  
+  /* .feedback-buttons {
+    height: 80px;
+    width: 150px;
+    background-color: #fff;
+    border: 2px solid #61a5e5;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 20px;
+    color: #656262;
+  
+  } */
+  
+  .feedback_buttons:hover {
+    background-color: #f0f5ff;
+    border-color: #2f7df1;
+  }
+  
+  form h1 {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 5%;
+    color: #656262;
+  }
+  
+  /* .rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 8%;
+    gap: 15px;
+  } */
+  
+  .feedback_form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .feedback_form input[type="radio"] {
+    margin-right: 5px;
+  }
+  
+  .textarea_feedback {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+  
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .textarea_feedback:focus {
+    outline: none;
+    border-color: #558ef1;
+  }
+  
+  .submit_btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 19px;
+    font-weight: 300;
+    text-align: center;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s ease-in-out;
+    height: 50px;
+    margin-left: 170px;
+  }
+  
+  .submit_btn:hover {
+    transform: translateY(-5px);
+  }
+  

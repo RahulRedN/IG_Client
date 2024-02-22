@@ -374,9 +374,9 @@ const Reg_Form = ({ className }) => {
           type="file"
           name="image"
           id="image"
-          onChange={(event) =>
-            SetData({ ...Data, image: event.target.files[0] })
-          }
+          onChange={(event) => {
+            SetData({ ...Data, image: event.target.files[0] });
+          }}
           className="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
         />
       </div>

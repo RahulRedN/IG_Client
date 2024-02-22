@@ -1,0 +1,33 @@
+.about_us_img_container {
+  position: relative;
+  height: 500px;
+
+  background-image: url("../Resources/aboutusimg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.9;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.text_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 500px;
+  width: 100%;
+}
+
+.text_container p {
+  margin-top: 7%;
+  font-size: 3rem;
+  font-family: monospace;
+  text-align: center;
+}

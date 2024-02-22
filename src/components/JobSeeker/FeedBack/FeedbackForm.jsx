@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import classes from "../FeedBack/css/FeedbackForm.module.css";
+import { useState } from "react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import Radios from "./radios";
-import "../FeedBack/css/FeedbackForm.css"
+
 import StarRating from "./StarRating/StarRating";
 
 const FeedbackForm = ({ closeModal }) => {
@@ -42,6 +43,7 @@ const FeedbackForm = ({ closeModal }) => {
         userFeedback
     );
   };
+  
 
   return (
     <div>
@@ -51,29 +53,29 @@ const FeedbackForm = ({ closeModal }) => {
         _hover={{ cursor: "pointer", color: "#2b71e8" }}
       />
 
-      <div className="feedback-heading">
-        <h1 className="feedback-name"> Your Feedback </h1>
+      <div className={classes.feedback_heading}>
+        <h1 className={classes.feedback_name}> Your Feedback </h1>
       </div>
 
-      <hr className="hr-feed" />
+      <hr className={classes.hr_feed} />
 
-      <form onSubmit={handleSubmit} action="" className="feedback-form">
-        <h1>What is your opinion of this page?</h1>
-        <div className="rating">
+      <form onSubmit={handleSubmit} action="" className={classes.feedback_form}>
+        <h1>What is your opinion of this page ?</h1>
+        <div className={classes.rating}>
           <StarRating onRate={handleRatingChange} />
         </div>
         <br /> <br /> <br />
         <div>
           <h1>Please select your feedback category below</h1>
 
-          <div className="category">
+          <div className={classes.category}>
             <Radios onSelectCategory={handleCategoryChange} />
           </div>
         </div>
         <div>
           <h1>Please leave your feedback below</h1>
           <textarea
-            className="textarea-feedback"
+            className={classes.textarea_feedback}
             value={userFeedback}
             onChange={handleFeedbackChange}
             placeholder="Write your feedback here"
@@ -81,7 +83,7 @@ const FeedbackForm = ({ closeModal }) => {
             cols={50}
           />
         </div>
-        <button className="submit-feed-btn">Submit Feedback</button>
+        <button className={classes.submit_btn}>Submit Feedback</button>
       </form>
     </div>
   );

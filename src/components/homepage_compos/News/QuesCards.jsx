@@ -1,10 +1,10 @@
 import Cards from "./Cards";
-import "./Styles/Ques.css";
+import classes from "./Styles/Ques.module.css";
 
 const QuesCards = () => {
   return (
-    <div className="whole-cont">
-      <div className="top-cont">
+    <div className={classes.whole_cont}>
+      <div className={classes.top_cont}>
         <h3> Our news </h3>
         <h1>
           Our Latest News <br /> That Can Help You
@@ -15,7 +15,7 @@ const QuesCards = () => {
           keep you informed about the latest happenings.
         </p>
       </div>
-      <div className="bottom-cont">
+      <div className={classes.bottom_cont}>
         <Cards />
       </div>
     </div>

@@ -21,7 +21,6 @@ const ContactUs_Home = () => {
   const SubmitHandler = (e) => {
     e.preventDefault();
     console.log("Submitted", contact);
-    
   };
 
   const handleChange = (e) => {
@@ -30,6 +29,20 @@ const ContactUs_Home = () => {
       ...prevContact,
       [name]: value,
     }));
+  };
+
+  const getColor = () => {
+    const count = contact.message.length;
+
+    if (count >= 0 && count <= 100) {
+      return "#22c55e"; 
+    } else if (count >= 101 && count <= 200) {
+      return "#f59e0b"; 
+    } else if (count >= 201 && count <= 299) {
+      return "#f97316";
+    } else {
+      return "#dc2626";
+    }
   };
 
   return (
@@ -54,7 +67,10 @@ const ContactUs_Home = () => {
               <h3 className="mt-5 text2xl text-gray-500">
                 Active & Ready to use Contact Form!
               </h3>
-              <form onSubmit={SubmitHandler} className="mt-5 flex flex-col gap-2 w-full">
+              <form
+                onSubmit={SubmitHandler}
+                className="mt-5 flex flex-col gap-2 w-full"
+              >
                 <div className="flex flex-wrap gap-6 items-center">
                   <div className="flex-[1] min-w-[15vw] max-w-[20vw]">
                     <label className="font-normal text-gray-500">NAME</label>
@@ -137,7 +153,9 @@ const ContactUs_Home = () => {
                     onChange={handleChange}
                     placeholder="Enter Message...."
                     className="mt-2 w-full border border-zinc-400 p-4 h-[13rem] rounded-md outline-none placeholder:text-zinc-500 placeholder:tracking-widest"
+                    maxLength={300}
                   ></textarea>
+                  <p className="text-black-500 text-sm italic"><span style={{color: getColor()}}>{contact.message.length}</span> / 300 characters</p>
                 </div>
 
                 <motion.button

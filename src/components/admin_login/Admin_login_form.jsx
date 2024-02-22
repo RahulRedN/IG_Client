@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import "./admin_login.css";
+import classes from "./admin_login.module.css";
 import { useState } from "react";
 
 function Admin_login_form() {
@@ -8,35 +8,35 @@ function Admin_login_form() {
   const [password, setPassword] = useState("");
 
   const submitHandler = async () => {
-    var email = document.getElementById('email');
-    var pass = document.getElementById('password');
+    var email = document.getElementById("email");
+    var pass = document.getElementById("password");
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
     if (email.value === "" || !emailRegex.test(email) || pass.value === "") {
-        email.style = "border: 2px solid red"
-        pass.style = "border: 2px solid red"
+      email.style = "border: 2px solid red";
+      pass.style = "border: 2px solid red";
     } else {
-        email.style = "border: 2px solid lightgray"
-        pass.style = "border: 2px solid lightgray"
+      email.style = "border: 2px solid lightgray";
+      pass.style = "border: 2px solid lightgray";
     }
-    // 
-  }
+  };
 
   return (
-    <form className="admin-login-form">
-      <div className="input-field">
-        <label>EMAIL</label>
+    <form className={classes.admin_login_form}>
+      <div className={classes.input_field}>
+        <label className={classes.label}>EMAIL</label>
         <input
           placeholder="Enter your email"
           type="email"
-          name="email"id="email"
+          name="email"
+          id="email"
           onChange={(e) => {
             setUsername(e.target.value);
           }}
         />
       </div>
-      <div className="input-field">
-        <label>PASSWORD</label>
+      <div className={classes.input_field}>
+        <label className={classes.label}>PASSWORD</label>
         <input
           placeholder="Enter your password"
           id="password"
@@ -47,8 +47,10 @@ function Admin_login_form() {
           }}
         />
       </div>
-      <div className="form-submit">
-        <button type="button" onClick={submitHandler}>Sign in</button>
+      <div className={classes.form_submit}>
+        <button type="button" onClick={submitHandler}>
+          Sign in
+        </button>
       </div>
     </form>
   );

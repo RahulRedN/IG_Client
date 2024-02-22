@@ -1,12 +1,12 @@
 import AboutUsTop2Cards from "./AboutUsTop2Cards";
-import "../AboutSections/Styles/AboutUsTop2.css";
+import classes from "../AboutSections/Styles/AboutUsTop2.module.css";
 
 const AboutUsTop2 = () => {
   
   return (
     
-    <div className="AboutUsTop2">
-      <div className="WhatWeServe">
+    <div className={classes.AboutUsTop2}>
+      <div className={classes.WhatWeServe}>
         <h3>What We Serve</h3>
         <h2>
           We help You To Find <br />
@@ -17,7 +17,7 @@ const AboutUsTop2 = () => {
         </p>
       </div>
 
-      <div className="AboutUsTop2CardsContainer">
+      <div className={classes.AboutUsTop2CardsContainer}>
         <AboutUsTop2Cards />
       </div>
     </div>

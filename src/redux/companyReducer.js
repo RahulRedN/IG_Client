@@ -6,15 +6,15 @@ export const companyReducer = createSlice({
   initialState: {
     data: {},
     jobs: [],
+    applications: [],
+    users: [],
   },
   reducers: {
     setCompanyData: (state, action) => {
       return { ...state, ...action.payload };
     },
     removeJob: (state, action) => {
-      const newJobs = state.jobs.filter(
-        (job) => job.id != action.payload
-      );
+      const newJobs = state.jobs.filter((job) => job.id != action.payload);
       return { ...state, jobs: newJobs };
     },
     addJob: (state, action) => {

@@ -47,14 +47,14 @@ max-width: 500px;
   /* Add more styles as needed 
   */
 
-.testimonial-form-container {
+.testimonial_form_container {
   margin-top: 5rem;
   display: flex;
   height: fit-content;
   padding-bottom: 10px;
 }
 
-.testimonial-form-wrapper {
+.testimonial_form_wrapper {
   flex: 2;
   height: fit-content;
   border: 1px solid #ccc;
@@ -62,20 +62,20 @@ max-width: 500px;
   padding: 8px;
 }
 
-.testimonial-form-content {
+.testimonial_form_content {
   padding: 8px;
 }
 
-.form-title {
+.form_title {
   font-size: 24px;
   font-weight: 600;
 }
 
-.blue-text {
+.blue_text {
   color: #007bff;
 }
 
-.form-container {
+.form_container {
   margin-top: 5px;
   display: flex;
   flex-direction: column;
@@ -83,19 +83,19 @@ max-width: 500px;
   width: 100%;
 }
 
-.form-group {
+.form_group {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   align-items: center;
 }
 
-.form-label {
+.form_label {
   font-weight: normal;
   color: #888;
 }
 
-.form-textarea {
+.form_textarea {
   margin-top: 2px;
   border: 1px solid #ccc;
   padding: 4px;
@@ -105,15 +105,15 @@ max-width: 500px;
   font-size: 14px;
 }
 
-.radio-group {
+.radio_group {
   display: flex;
 }
 
-.radio-input {
+.radio_input {
   margin-right: 8px;
 }
 
-.submit-button {
+.submit_button {
   background-color: #007bff;
   padding: 4px;
   border: none;
