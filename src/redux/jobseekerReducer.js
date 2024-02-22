@@ -6,6 +6,7 @@ export const jobseekerReducer = createSlice({
   initialState: {
     data: {},
     jobs: [],
+    applied: []
   },
   reducers: {
     setData: (state, action) => {

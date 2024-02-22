@@ -43,8 +43,8 @@ import QuesCards from "./components/homepage_compos/News/QuesCards";
 
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import ReviewPage from "./components/Company/ReviewPage/ReviewPage";
-import TestimonialForm from "./components/TestimonialForm/TestimonialForm";
-import MultiSelect from "./MultiSelect/multiselect";
+import TestimonialForm from "./components/JobSeeker/TestimonialForm/TestimonialForm";
+import MultiSelect from "./components/JobSeeker/MultiSelect/MultiSelect";
 
 import Admin from "./pages/Admin";
 import Home_Admin from "./components/Admin/LandingPage/Home_Admin";
@@ -66,8 +66,7 @@ const Router = createBrowserRouter(
         <Route path="faqs" element={<Faqs />} />
         <Route path="aboutus" element={<AboutUs />} />
         <Route path="contactus" element={<ContactUs_Home />} />
-        <Route path="testimonialform" element={<TestimonialForm />} />
-        <Route path="testimonialform" element={<TestimonialForm/>} />
+
         <Route path="multiselect" element={<MultiSelect />} />
 
         <Route path="news" element={<QuesCards />} />
@@ -79,7 +78,7 @@ const Router = createBrowserRouter(
       <Route
         path="/jobseeker"
         element={
-          <PrivateRoute role={"jobseeker"}>
+          <PrivateRoute role="jobseeker">
             <JobSeeker />
           </PrivateRoute>
         }
@@ -88,8 +87,8 @@ const Router = createBrowserRouter(
         <Route path="findjobs" element={<FindJobs />} />
 
         <Route path="profile" element={<Profile_Job />} />
-        
 
+        <Route path="testimonialform" element={<TestimonialForm />} />
         <Route path="contactus" element={<ContactUs />} />
       </Route>
       {/* 
@@ -98,7 +97,7 @@ const Router = createBrowserRouter(
       <Route
         path="/company"
         element={
-          <PrivateRoute role={"company"}>
+          <PrivateRoute role="company">
             <Company />
           </PrivateRoute>
         }
@@ -108,7 +107,7 @@ const Router = createBrowserRouter(
         <Route path="pendinglist" element={<PendingList />} />
         <Route path="postjob" element={<PostJob />} />
         <Route path="postedjobs" element={<PostedJobs />} />
-        <Route path="reviews" element={<ReviewPage/>} />
+        <Route path="reviews" element={<ReviewPage />} />
       </Route>
 
       <Route path="/admin" element={<Admin />}>

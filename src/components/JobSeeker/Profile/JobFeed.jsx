@@ -2,11 +2,10 @@ import ProfileNavbar from "./ProfileNavbar";
 import classes from "./JobFeed.module.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { useAuth } from "../../../Firebase/AuthContexts";
 import JobFeedCard from "./JobFeedCard";
 
 
-const JobFeed = ({ status }) => {
+const JobFeed = () => {
   
   const user = useSelector((state) => state.jobseeker.data);
   const jobs = useSelector((state) => state.jobseeker.jobs)

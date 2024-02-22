@@ -2,11 +2,13 @@ import NavCardProfile from "./NavCardProfile";
 import { ShoppingBag, Bookmark } from "lucide-react";
 import { IoMdPerson } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
+import { GiSkills } from "react-icons/gi";
 
 const data = [
   { icon: ShoppingBag, text: "My Job Feed", link: "#jobFeed" },
   { icon: Bookmark, text: "Saved Jobs", link: "#saved" },
   { icon: IoMdPerson, text: "Profile", link: "#update" },
+  { icon: GiSkills, text: "Resume", link: "/resume" },
   { icon: IoExitOutline, text: "Back to Home", link: "/jobseeker" },
 ];
 
