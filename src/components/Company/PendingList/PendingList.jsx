@@ -16,19 +16,32 @@ const PendingList = ({ status }) => {
 
   const jobs = useSelector((state) => state.company.jobs);
   const applications = useSelector((state) => state.company.applications);
-  const users = useSelector((state) => state.company.applications);
+  const users = useSelector((state) => state.company.users);
 
   const [pending, setPending] = useState([]);
 
   useEffect(() => {
-    
+    const pendingApplications = applications
+      ?.filter((app) => app.status === "pending")
+      .map((app) => {
+        const jobDetails = jobs.find((job) => job._id === app.jobId);
+        const userDetails = users.find((user) => user._id === app.userId);
+
+        return {
+          ...app,
+          jobDetails: jobDetails || null,
+          userDetails: userDetails || null,
+        };
+      });
+
+    setPending(pendingApplications);
   }, [applications]);
 
   return (
     <Box className="max-h-full" id="PendingList">
       <div className={classes.container}>
         <h2>My Applications</h2>
-        <div className="rounded-md border-[1px] border-gray-300 w-[75vw]">
+        <div className="rounded-md border-[1px] border-gray-300 w-fit">
           <table className={classes.table}>
             <thead className="bg-gray-400 h-16 text-center">
               <tr>
@@ -41,25 +54,31 @@ const PendingList = ({ status }) => {
             </thead>
             <tbody>
               {pending?.map((pend, idx) => {
-                const date = new Date(pend.status[pend.id].date);
+                const date = new Date(pend.createdAt);
                 return (
                   <tr
                     className="border-gray-200 hover:bg-gray-100 text-center text-[2rem]"
                     key={idx}
                   >
-                    <td>{pend.fname}</td>
+                    <td>{pend.userDetails.fname}</td>
                     <td className="border-gray-200 hover:bg-gray-100">
-                      <h1>{pend.position}</h1>
+                      <h1>{pend.jobDetails.position}</h1>
                     </td>
                     <td>{date.toLocaleDateString("en-IN")}</td>
                     <td>
                       <div className="flex justify-start gap-3 align-baseline">
-                        {pend.skills
-                          .split(",")
+                        {pend.userDetails.skills
                           .slice(0, 3)
-                          .map((skill, idx) => (
-                            <Skillbox index={idx} skill={skill} key={idx} />
-                          ))}
+                          .map((skill, idx) => {
+                            const [id, name, stage] = skill.split(";");
+                            return (
+                              <Skillbox
+                                index={idx}
+                                skill={name + "(" + stage + ")"}
+                                key={idx}
+                              />
+                            );
+                          })}
                       </div>
                     </td>
 
@@ -90,7 +109,7 @@ const PendingList = ({ status }) => {
                   </tr>
                 );
               })}
-              {pending.length == 0 && (
+              {pending?.length == 0 && (
                 <tr>
                   <td colSpan={5} className="text-center">
                     No pending applications!

@@ -11,15 +11,34 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { db } from "../../../Firebase/config";
-import {doc, collection, getDoc} from "firebase/firestore"
+import { doc, collection, getDoc } from "firebase/firestore";
 
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  
+
   const jobs = useSelector((state) => state.company.jobs);
+  const applications = useSelector((state) => state.company.applications);
+  const users = useSelector((state) => state.company.users);
   const [employee, setEmployee] = useState([]);
-  
+
+  useEffect(() => {
+    const accepted = applications
+      ?.filter((app) => app.status === "accepted")
+      .map((app) => {
+        const jobDetails = jobs.find((job) => job._id === app.jobId);
+        const userDetails = users.find((user) => user._id === app.userId);
+
+        return {
+          ...app,
+          jobDetails: jobDetails || null,
+          userDetails: userDetails || null,
+        };
+      });
+
+    setEmployee(accepted);
+  }, [applications]);
+
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
     {
@@ -58,49 +77,17 @@ const Contacts = () => {
     },
   ];
 
-  useEffect(() => {
-    const fetch = () => {
-      setEmployee([]);
-      try {
-        jobs.forEach((job) => {
-          Object.keys(job.status).forEach(async (user) => {
-            if (job.status[user].applied) {
-              const docRef = doc(collection(db, "users"), user);
-              const res = await getDoc(docRef);
-
-              if (res) {
-                setEmployee((state) => [
-                  ...state,
-                  {
-                    ...res.data(),
-                    id: res.id,
-                    position: job.position,
-                    status: { ...job.status[user] },
-                    jobId: job.id,
-                  },
-                ]);
-              }
-            }
-          });
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetch();
-  }, [jobs]);
-
-  const mockData = employee.map((emp, idx) => {
+  const mockData = employee?.map((emp, idx) => {
     const currDate = new Date();
-    const dob = new Date(emp.dob);
-    const date = new Date(emp.status.date);
+    const dob = new Date(emp.userDetails.dob);
+    const date = new Date(emp.createdAt);
     return {
       id: idx + 1,
-      name: emp.fname,
-      email: emp.email,
+      name: emp.userDetails.fname,
+      email: emp.userDetails.email,
       age: Math.floor(currDate.getFullYear() - dob.getFullYear()),
-      phone: emp.mobile,
-      position: emp.position,
+      phone: emp.userDetails.mobile,
+      position: emp.jobDetails.position,
       joindate: date.toDateString("en-IN"),
     };
   });
@@ -118,31 +105,34 @@ const Contacts = () => {
   };
 
   // Filter and sort the data based on search and sort criteria
-  const filteredData = mockData.filter((item) => {
-    return (
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.phone.includes(searchQuery)
-    );
-  }).sort((a, b) => {
-    const dateA = new Date(a.joindate);
-    const dateB = new Date(b.joindate);
+  const filteredData = mockData
+    ?.filter((item) => {
+      return (
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.phone.includes(searchQuery)
+      );
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.joindate);
+      const dateB = new Date(b.joindate);
 
-    if (sortByJoinedDate === "descending") {
-      return dateB - dateA;
-    } else {
-      return dateA - dateB;
-    }
-  });
-
-
+      if (sortByJoinedDate === "descending") {
+        return dateB - dateA;
+      } else {
+        return dateA - dateB;
+      }
+    });
 
   return (
     <Box m="20px" className="">
       <div className="flex justify-between items-center">
-      <Header title="Employees" subtitle="List of Employees who got selected" />
-      <div className="flex">
+        <Header
+          title="Employees"
+          subtitle="List of Employees who got selected"
+        />
+        <div className="flex">
           <div>
             <label className="mr-2 text-black text-base">Filter By</label>
             <input
@@ -156,22 +146,24 @@ const Contacts = () => {
 
           {/* Select Box for Sorting */}
           <div>
-          <label className="mr-2 text-black text-base">Sort by Joining Date</label>
-          <select
-            value={sortByJoinedDate}
-            onChange={handleSortByJoinedDateChange}
-            className="border-2 border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 h-10 w-30 mr-2"
-          >
-            <option value="ascending" className="text-base">
-              Ascending
-            </option>
-            <option value="descending" className="text-base">
-              Descending
-            </option>
-          </select>
+            <label className="mr-2 text-black text-base">
+              Sort by Joining Date
+            </label>
+            <select
+              value={sortByJoinedDate}
+              onChange={handleSortByJoinedDateChange}
+              className="border-2 border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 h-10 w-30 mr-2"
+            >
+              <option value="ascending" className="text-base">
+                Ascending
+              </option>
+              <option value="descending" className="text-base">
+                Descending
+              </option>
+            </select>
           </div>
         </div>
-        </div>
+      </div>
       <Box
         m="0 0 0 0"
         height="80vh"

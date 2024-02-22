@@ -67,7 +67,7 @@ const Dashboard = () => {
             justifyContent="center"
           >
             <StatBox
-              title={state.applications.length}
+              title={state?.applications?.length}
               subtitle="Total Applications recieved"
               progress="0.80"
               icon={
@@ -86,7 +86,7 @@ const Dashboard = () => {
           >
             <StatBox
               title={
-                state.applications.filter((job) => job.status == "accepted")
+                state?.applications?.filter((job) => job.status == "accepted")
                   .length
               }
               subtitle="Applications Accepted"
@@ -107,7 +107,7 @@ const Dashboard = () => {
           >
             <StatBox
               title={
-                state.applications.filter((job) => job.status == "rejected")
+                state?.applications?.filter((job) => job.status == "rejected")
                   .length
               }
               subtitle="Applications Rejected"
@@ -192,16 +192,16 @@ const Dashboard = () => {
             </Typography>
             <PieChart
               accept={
-                state.applications.filter((job) => job.status == "accepted")
+                state?.applications?.filter((job) => job.status == "accepted")
                   .length
               }
               reject={
-                state.applications.filter((job) => job.status == "rejected")
+                state?.applications?.filter((job) => job.status == "rejected")
                   .length
               }
               pending={
-                state.applications.filter((job) => job.status == "pending")
-                  .length
+                state?.applications?.filter((job) => job.status == "pending")
+                  ?.length
               }
             />
           </Box>
