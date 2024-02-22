@@ -2,10 +2,7 @@ import DataBoxes from "./DataBoxes";
 import LineChart from "./LineChart";
 import PieChart from "./PieChart";
 import Table_RecentUsers from "./Table_RecentUsers";
-<<<<<<< HEAD
-=======
 import TodoList from "./Todo_List/TodoList";
->>>>>>> 59cd6b1d501ea447b8aa8474a22563a0879516e7
 
 const Home_Admin = () => {
   return (

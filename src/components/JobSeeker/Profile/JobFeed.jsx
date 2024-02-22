@@ -4,20 +4,27 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import JobFeedCard from "./JobFeedCard";
 
-
 const JobFeed = () => {
-  
-  const user = useSelector((state) => state.jobseeker.data);
-  const jobs = useSelector((state) => state.jobseeker.jobs)
-    ?.filter((job) => job.status[user.id])
-    .sort((a, b) => {
-      const dateA = new Date(a.status[user.id].date);
-      const dateB = new Date(b.status[user.id].date);
+  const applications = useSelector(
+    (state) => state.jobseeker.data.applications
+  );
+  const jobs = useSelector((state) => state.jobseeker.jobs);
 
-      return dateB - dateA;
-    });
+  const [applied, setApplied] = useState([]);
 
-  const [applied, setApplied] = useState(jobs);
+  useEffect(() => {
+    const appliedJobs = jobs
+      .filter((job) => applications.some((app) => app.jobId === job._id))
+      .map((job) => {
+        const application = applications.find((app) => app.jobId === job._id);
+        return {
+          ...job,
+          application: application || null,
+        };
+      });
+
+    setApplied(appliedJobs);
+  }, [applications, jobs]);
 
   const searchHandler = (value) => {
     setApplied((state) => {
@@ -46,7 +53,7 @@ const JobFeed = () => {
             </p>
           </div>
         </div>
-        <div className="rounded-md border-[1px] border-gray-300">
+        <div className="rounded-md border-[1px] border-gray-300 max-h-[70vh] overflow-y-auto ">
           <table className={classes.table}>
             <thead className="bg-blue-200">
               <tr>
@@ -58,10 +65,8 @@ const JobFeed = () => {
               </tr>
             </thead>
             <tbody>
-
-            
-              {applied.map((job, idx , feed) => {
-                const date = new Date(job.status[user?.id].date);
+              {applied.map((job, idx, feed) => {
+                const date = new Date(job?.application?.createdAt);
                 return (
                   <>
                     <JobFeedCard
@@ -69,11 +74,9 @@ const JobFeed = () => {
                       idx={idx}
                       date={date}
                       key={idx}
-                      status={job.status[user?.id].applied}
+                      status={job?.application?.status}
                       feedback={feed}
                     />
-
-
                   </>
                 );
               })}

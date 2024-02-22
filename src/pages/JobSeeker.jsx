@@ -31,13 +31,18 @@ const JobSeeker = () => {
       const uid = decoded.uid;
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/jobseeker/user?uid=" + uid
+          import.meta.env.VITE_SERVER + "/api/jobseeker/user?uid=" + uid
         );
 
         if (res.status == 200) {
+          console.log(res.data.applications);
           dispatch(
             setData({
-              data: { ...res.data.user, uid: res.data.user._id },
+              data: {
+                ...res.data.user,
+                uid: res.data.user._id,
+                applications: res.data.applications,
+              },
               jobs: res.data.jobs,
             })
           );
