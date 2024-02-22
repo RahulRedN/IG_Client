@@ -97,9 +97,9 @@ const Router = createBrowserRouter(
       <Route
         path="/company"
         element={
-          <PrivateRoute role="company">
+          // <PrivateRoute role="company">
             <Company />
-          </PrivateRoute>
+          // </PrivateRoute>
         }
       >
         <Route index element={<Dashboard />} />
