@@ -1,10 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import Pill from "../pill/Pill";
+import Pill from "./pill/Pill";
 import SkillStageModal from "./SkillStageModal";
 import "./MultiSelect.css";
 import mockData from "./MockData";
 
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { toast, Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setSkills } from "../../../../redux/jobseekerReducer";
+
 function MultiSelect({ onClose }) {
+  const uid = useSelector((state) => state.jobseeker.data.uid);
+  const skills = useSelector((state) => state.jobseeker.data.skills);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -13,6 +21,20 @@ function MultiSelect({ onClose }) {
   const [selectedSkillForModal, setSelectedSkillForModal] = useState(null);
 
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let SS = [],
+      SSS = new Set();
+    skills.forEach((str) => {
+      const [id, name, stage] = str.split(";");
+      SS = [...SS, { id, name, stage }];
+      SSS.add(name);
+    });
+
+    setSelectedSkills(SS);
+    setSelectedSkillSet(SSS);
+  }, [skills]);
 
   useEffect(() => {
     const fetchSkills = () => {
@@ -92,10 +114,24 @@ function MultiSelect({ onClose }) {
     }
   };
 
-  const handleSubmit = () => {
-    alert("Skills Submitted");
-    console.log("Selected skills:", selectedSkills);
+  const handleSubmit = async () => {
+    const data = selectedSkills.map(
+      (obj) => obj.id + ";" + obj.name + ";" + obj.stage
+    );
+    try {
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/jobseeker/updateSkills",
+        { uid, skills: data }
+      );
 
+      if (res.status == 200) {
+        toast.success("Skills Updated!");
+        dispatch(setSkills(data));
+      }
+    } catch (error) {
+      toast.error("An error occured!");
+      console.log(error);
+    }
     setSelectedSkills([]);
     setSelectedSkillSet(new Set());
     onClose();
@@ -103,6 +139,7 @@ function MultiSelect({ onClose }) {
 
   return (
     <div className="modal-multi">
+      <Toaster position="top-center" />
       <div className="modal-content-multi">
         <span className="close" onClick={onClose}>
           &times;

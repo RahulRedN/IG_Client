@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import styles from "./css/Login_SignUp.module.css";
 import { useEffect, useState } from "react";
 
@@ -9,19 +9,26 @@ import SignUpForm from "../components/Login/SignUpForm";
 import { useAuth } from "../Firebase/AuthContexts";
 
 import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 
 const Login_SignUp = () => {
-  const user = useSelector((state) => state.jobseeker.data);
-  const company = useSelector((state) => state.company.data);
-
-  const nav = useNavigate();
-  const { signIn } = useAuth();
   const [isSignUp, setSignUp] = useState(false);
+  const token = localStorage.getItem("token");
+  if (token) {
+    const decoded = jwtDecode(token);
 
-  if (user?.uid) {
-    nav("/jobseeker");
-  } else if (company?.uid) {
-    nav("/company");
+    const now = new Date(),
+      exp = new Date(decoded.exp);
+
+    if (exp > now) {
+      localStorage.removeItem("token");
+    } else {
+      return decoded.role == "jobseeker" ? (
+        <Navigate to="/jobseeker" />
+      ) : (
+        <Navigate to="/company" />
+      );
+    }
   }
 
   return (
@@ -35,7 +42,7 @@ const Login_SignUp = () => {
       </Link>
       <div className={styles["forms-container"]}>
         <div className={styles["signIn-singUp"]}>
-          <SignInForm signIn={signIn} />
+          <SignInForm />
           <SignUpForm />
         </div>
       </div>

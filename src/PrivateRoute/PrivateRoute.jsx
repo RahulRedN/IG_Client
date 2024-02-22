@@ -6,16 +6,28 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 
 const PrivateRoute = ({ children, role }) => {
-  if (role == "jobseeker") {
-    const user = useSelector((state) => state.jobseeker.data);
+  const token = localStorage.getItem("token");
 
-    return user?.uid ? children : <Navigate to={"/login"} />;
-  } else if (role == "company") {
-    const user = useSelector((state) => state.company.data);
+  if (!token)
+    return <Navigate to={role == "jobseeker" ? "/login" : "/loginCompany"} />;
 
-    return user?.uid ? children : <Navigate to={"/loginCompany"} />;
+  const decoded = jwtDecode(token);
+
+  const now = new Date(),
+    exp = new Date(decoded.exp);
+
+  if (exp > now) {
+    localStorage.removeItem("token");
+    return <Navigate to={role == "jobseeker" ? "/login" : "/loginCompany"} />;
   }
+
+  return decoded.role == role ? (
+    children
+  ) : (
+    <Navigate to={role == "jobseeker" ? "/login" : "/loginCompany"} />
+  );
 };
 export default PrivateRoute;

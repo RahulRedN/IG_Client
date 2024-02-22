@@ -1,0 +1,98 @@
+.todolistcontainer {
+  max-width: 400px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.inputcontainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.inputcontainer input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  outline: none;
+}
+
+.inputcontainer input[type="text"]:focus {
+  border-color: #6eade1;
+}
+
+.inputcontainer button,
+.savebutton {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.todoitem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.todoitem .editbutton {
+  margin-left: auto;
+}
+
+.todoitem button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+.savebutton {
+  background-color: transparent;
+  border: none;
+  height: 48px;
+  width: 72px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0; 
+  margin-left: 10px;
+  color: #3182ce;
+  border: 1px solid #3182ce;
+  border-radius: 4px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.savebutton:hover {
+  background-color: #3182ce;
+  color: white;
+}
+
+.todoitem span {
+  flex: 1;
+  margin-right: 10px;
+  user-select: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.editinput {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  outline: none;
+}
+
+.editinput:focus {
+  border-color: #6eade1;
+}

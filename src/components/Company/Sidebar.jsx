@@ -19,8 +19,13 @@ import {
 import { useAuth } from "../../Firebase/AuthContexts";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const Item = ({ title, to, icon, selected, setSelected, onClickHandler }) => {
+
+ 
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -46,7 +51,9 @@ const Item = ({ title, to, icon, selected, setSelected, onClickHandler }) => {
 
 const Sidebar = () => {
   const data = useSelector((state) => state.company.data);
-  const { logout } = useAuth();
+
+  const navigate = useNavigate();
+ 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -54,8 +61,10 @@ const Sidebar = () => {
 
   const logoutHandler = async () => {
     try {
-      await logout();
+      const res = await axios.get("http://localhost:8080/api/auth/logout")
+      localStorage.removeItem("token");
       toast.success("Logged out successfully!");
+      navigate("/loginCompany");
     } catch (error) {
       console.error(error);
     }
@@ -65,10 +74,13 @@ const Sidebar = () => {
       sx={{
         "& .pro-sidebar-inner": {
           background: `#fffcfc !important`,
-          boxShadow: "5px 20px 8px #a0a5fa",
+          boxShadow: "3px 4px 5px gray",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
+        },
+        "& .pro-icon-wrapper.active": {
+          backgroundColor: "#60a5fa !important",
         },
         "& .pro-inner-item": {
           padding: " 8px 20px !important",
@@ -76,11 +88,11 @@ const Sidebar = () => {
           color: "black",
         },
         "& .pro-inner-item:hover": {
-          color: "white !important",
-          background : "#868dfb"
+          color: "black !important",
+          background : "#6ee7b7"
         },
         "& .pro-menu-item.active": {
-          background: "#868dfb",
+          background: "#6ee7b7",
         },
       }}
     >

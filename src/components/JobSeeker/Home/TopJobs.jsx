@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
 import Slider from "react-slick";
 
@@ -8,7 +9,12 @@ import Counter from "../../UI/Counter";
 import { useSelector } from "react-redux";
 
 const TopJobs = () => {
-  const jobs = useSelector((state) => state.jobseeker.jobs);
+  const allJobs = useSelector((state) => state.jobseeker.jobs);
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    setJobs(allJobs);
+  }, [allJobs]);
 
   const settings = {
     infinite: true,
@@ -43,7 +49,7 @@ const TopJobs = () => {
                 key={idx}
                 position={job.position}
                 jobDesc={job.jobDesc}
-                jobId={job.id}
+                jobId={job._id}
                 sticker={!job.location}
               />
             ))}

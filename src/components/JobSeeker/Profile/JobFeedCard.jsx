@@ -67,9 +67,9 @@ const JobFeedCard = ({ job, date, idx, status, feed }) => {
   }
 
   const color = (status) => {
-    if (status === "Rejected") {
+    if (status === "rejected") {
       return "bg-red-200 text-red-600 ";
-    } else if (status === "Accepted") {
+    } else if (status === "accepted") {
       return "bg-green-200 text-green-600";
     } else {
       return "bg-yellow-100 text-yellow-500";
@@ -106,12 +106,16 @@ const JobFeedCard = ({ job, date, idx, status, feed }) => {
       <td>{Object.keys(job.status).length}</td>
 
       <td>
-        <span className={`p-2 rounded-2xl ${color(getStatus(status))}`}>
-          {getStatus(status)}
+        <span className={`p-2 rounded-2xl ${color(status)} capitalize`}>
+          {status}
         </span>
 
         <span>
-          <button className="ml-8" onClick={openFeedbackModal}>
+          <button
+            disabled={status != "accepted"}
+            className="ml-8"
+            onClick={openFeedbackModal}
+          >
             <LuPencil />
           </button>
           {feedbackModalIsOpen && (
@@ -188,7 +192,7 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
 
       <h1 className="mt-8 text-lg font-[600]">Qualifications</h1>
       <div className="flex mt-3 gap-3 items-stretch flex-wrap">
-        {job?.skills.split(",").map((role, index) => (
+        {job?.skills.map((role, index) => (
           <RoleCard key={index} role={role} />
         ))}
       </div>

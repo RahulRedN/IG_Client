@@ -29,14 +29,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { setApplied } from "../../../redux/jobseekerReducer";
 import { useNavigate } from "react-router-dom";
 
-const FindJobCard = ({ job, fav, setFavHandler }) => {
+import axios from "axios";
+
+const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
   const [ref, inView] = useInView({ triggerOnce: true });
 
   const currDate = new Date();
-  const postedDate = new Date(job?.postedDate);
+  const postedDate = new Date(job?.createdAt);
 
   const isJustNow = Math.abs(currDate - postedDate) <= 24 * 60 * 60 * 1000;
-  const [isfav, setIsfav] = useState(fav && fav[job.id]);
+  const [isfav, setIsfav] = useState(fav.includes(job._id));
   const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -51,30 +53,40 @@ const FindJobCard = ({ job, fav, setFavHandler }) => {
     };
   }, [modalIsOpen]);
 
-  const favHandler = () => {
-    setIsfav((state) => {
-      if (fav) {
-        const newFav = { ...fav };
-        newFav[job.id] = !state;
-        setFavHandler(newFav);
-      } else {
-        const newFav = {};
-        newFav[job.id] = !state;
-        setFavHandler(newFav);
-      }
-
-      if (!state) {
-        setTimeout(
-          () =>
-            toast("Added to Favourites!", {icon:'❤️'}),
-          750
+  const favHandler = async () => {
+    try {
+      if (!isfav) {
+        const res = await axios.post(
+          import.meta.env.VITE_SERVER +
+            "/api/jobseeker/addFav?uid=" +
+            uid +
+            "&jid=" +
+            job._id
         );
-      } else {
-        setTimeout(() => toast.success("Removed from Favourites!"), 750);
-      }
 
-      return !state;
-    });
+        if (res.status == 200) {
+          toast("Added to Favourites!", { icon: "❤️" });
+          setFavHandler(job._id);
+          setIsfav((state) => !state);
+        }
+      } else {
+        const res = await axios.post(
+          import.meta.env.VITE_SERVER +
+            "/api/jobseeker/removeFav?uid=" +
+            uid +
+            "&jid=" +
+            job._id
+        );
+
+        if (res.status == 200) {
+          toast.success("Removed from Favourites!");
+          setFavHandler(job._id);
+          setIsfav((state) => !state);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const customStyles = {
@@ -157,7 +169,7 @@ const FindJobCard = ({ job, fav, setFavHandler }) => {
         </div>
 
         <div className="mt-5">
-          {job?.location ? (
+          {job?.location != "work-from-home" ? (
             <div className="flex items-start gap-2">
               <MapPin size={18} />
               <p className="text-sm">{job?.location}</p>
@@ -228,7 +240,7 @@ const FindJobCard = ({ job, fav, setFavHandler }) => {
               </div>
             )}
 
-            {job?.skills?.split(",").map((role, index) => (
+            {job?.skills?.map((role, index) => (
               // eslint-disable-next-line react/jsx-key
               <RoleCard key={index} role={role} />
             ))}
@@ -265,50 +277,52 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
   const dispatch = useDispatch();
 
   const applyHandler = async () => {
-    const data = { ...job.status };
-
-    if (data[user.id] == undefined) {
+    if (!isDisabled) {
       try {
-        data[user.id] = {
-          applied: null,
-          date: Date().toLocaleString(),
-          fname: user.fname,
-        };
-        const docRef = doc(collection(db, "jobs"), job.id);
-        await updateDoc(docRef, { status: data });
-        dispatch(setApplied({ data: data, id: job.id }));
-        toast.success("Job Applied!");
-
-        nav("/jobseeker/profile");
+        const res = await axios.post(
+          import.meta.env.VITE_SERVER + "/api/jobseeker/applyJob",
+          { uid: user.uid, jid: job._id }
+        );
+        if (res.status == 200) {
+          dispatch(
+            setApplied({
+              jobId: job._id,
+              uid: user.uid,
+              status: "pending",
+              createdAt: new Date(),
+            })
+          );
+          toast.success("Job Applied!");
+          nav("/jobseeker/profile");
+        }
       } catch (error) {
         console.error(error);
-        toast.error("An error Occured!", { className: "text-red-500" });
+        toast.error("An error Occured : " + error.response?.data?.msg, {
+          className: "text-red-500",
+        });
       }
     } else {
       toast("Already applied to the Job!");
     }
   };
 
-  const isDisabled = job.status[user.id];
+  const isDisabled = user?.applications?.some(
+    (application) => application.jobId === job._id
+  );
 
   const color = (status) => {
-    if (status === "Rejected") {
+    if (status === "rejected") {
       return "bg-red-200 text-red-600 ";
-    } else if (status === "Accepted") {
+    } else if (status === "accepted") {
       return "bg-green-200 text-green-600";
     } else {
       return "bg-yellow-100 text-yellow-500";
     }
   };
 
-  const getStatus = (status) => {
-    if (status == null) {
-      return "Pending";
-    } else if (status) {
-      return "Accepted";
-    } else {
-      return "Rejected";
-    }
+  const getStatus = (jobId) => {
+    const application = user.applications.filter((app) => app.jobId == jobId);
+    return application[0]?.status;
   };
 
   return (
@@ -363,7 +377,7 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
 
       <h1 className="mt-8 text-lg font-[600]">Qualifications</h1>
       <div className="flex mt-3 gap-3 items-stretch flex-wrap">
-        {job?.skills.split(",").map((role, index) => (
+        {job?.skills.map((role, index) => (
           <RoleCard key={index} role={role} />
         ))}
       </div>
@@ -394,14 +408,14 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
       <button
         onClick={applyHandler}
         className={
-          "mt-8 text-center m-auto text-white tracking-wider py-2 px-4 rounded focus:outline-none focus:shadow-outline " +
+          "mt-8 text-center m-auto tracking-wider py-2 px-4 rounded focus:outline-none focus:shadow-outline capitalize " +
           (isDisabled
-            ? color(getStatus(isDisabled.applied))
-            : "bg-blue-600 hover:bg-blue-700")
+            ? color(getStatus(job._id))
+            : "bg-blue-600 hover:bg-blue-700 text-white")
         }
         disabled={isDisabled}
       >
-        {isDisabled ? getStatus(isDisabled.applied) : "Apply"}
+        {isDisabled ? getStatus(job._id) : "Apply"}
       </button>
     </Modal>
   );

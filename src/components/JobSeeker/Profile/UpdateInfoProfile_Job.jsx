@@ -2,22 +2,23 @@ import { motion } from "framer-motion";
 import styles from "./UpdateInfoProfile_Job.module.css";
 
 import upload from "/assets/Upload.gif";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../../../redux/jobseekerReducer";
 
-import { collection, doc, updateDoc } from "firebase/firestore";
-import { db, storage } from "../../../Firebase/config";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const UpdateInfoProfile_Job = () => {
   const userData = useSelector((state) => state.jobseeker.data);
   const dispatch = useDispatch();
 
-  const [data, setDataUser] = useState(userData);
+  const [data, setDataUser] = useState({});
+
+  useEffect(() => {
+    setDataUser(userData);
+  }, [userData]);
 
   const [edit, setEdit] = useState(false);
   const [picEdit, setPicEdit] = useState(false);
@@ -58,17 +59,14 @@ const UpdateInfoProfile_Job = () => {
     }
 
     try {
-      const docRef = doc(collection(db, "users"), data.id);
-
-      await updateDoc(docRef, {
-        fname: data.fname,
-        mobile: data.mobile,
-        address: data.address,
-        skills: data.skills,
-      });
-
-      dispatch(setData({ data: data }));
-      toast.success("Profile Updated!");
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/jobseeker/updateDetails",
+        data
+      );
+      if (res.status == 200) {
+        dispatch(setData({ data: data }));
+        toast.success("Profile Updated!");
+      }
       setEdit((state) => !state);
     } catch (error) {
       console.error(error);
@@ -77,18 +75,19 @@ const UpdateInfoProfile_Job = () => {
   };
 
   const handleChange = async (e) => {
-
     const promise = new Promise(async (resolve, reject) => {
       try {
-        const imageRef = ref(storage, `users/${data.uid}`);
-        const imgRes = await uploadBytes(imageRef, e.target.files[0]);
-        const imageUrl = await getDownloadURL(imgRes.ref);
-        const docRef = doc(collection(db, "users"), data.id);
-
-        await updateDoc(docRef, { img: imageUrl });
-        dispatch(setData({ data: { ...data, img: imageUrl } }));
-        resolve("Updated successfully");
-       
+        const image = new FormData();
+        image.append("image", e.target.files[0]);
+        image.append("uid", data.uid);
+        const res = await axios.post(
+          import.meta.env.VITE_SERVER + "/api/jobseeker/updatePhoto",
+          image
+        );
+        if (res.status == 200) {
+          dispatch(setData({ data: { ...data, img: res.data.img } }));
+          resolve("Updated successfully");
+        }
       } catch (error) {
         reject("An error occured");
         console.error(error);
@@ -106,7 +105,6 @@ const UpdateInfoProfile_Job = () => {
     });
 
     setPicEdit((prev) => !prev);
-
   };
 
   return (
@@ -278,7 +276,7 @@ const UpdateInfoProfile_Job = () => {
                     >
                       Address{edit ? "*" : ""}
                     </label>
-                    <input
+                    <textarea
                       type="text"
                       name="Address"
                       disabled={!edit}
@@ -292,13 +290,13 @@ const UpdateInfoProfile_Job = () => {
                       placeholder="Enter new Address"
                       className={`w-full px-3 py-2 ${
                         edit
-                          ? "border bg-gray-50 rounded-md"
-                          : "bg-gray-100 rounded-lg"
+                          ? "border bg-gray-50 rounded-md  h-[10rem] tracking-wider"
+                          : "bg-gray-200 rounded-lg h-[2.5rem]"
                       } placeholder:text-gray-500 border-gray-600 outline-none text-gray-900  focus:outline-none focus:border-blue-400`}
                     />
                   </div>
                   <div className={`${!edit ? "min-w-[47%]" : "w-full"}`}>
-                    {!edit ? (
+                    {!edit && (
                       <div className="flex flex-col">
                         <label
                           htmlFor="title"
@@ -307,22 +305,17 @@ const UpdateInfoProfile_Job = () => {
                           Skills{edit ? "*" : ""}
                         </label>
                         <div className="mt-2 flex gap-5">
-                          {data?.skills
-                            ?.split(",")
-                            .slice(
-                              0,
-                              Math.min(5, data?.skills?.split(",").length)
-                            )
-                            .map((role, index) => {
-                              return (
-                                <p
-                                  key={index}
-                                  className="text-sm px-2 py-2 bg-gray-100 text-gray-800 rounded"
-                                >
-                                  {role}
-                                </p>
-                              );
-                            })}
+                          {data?.skills?.map((role, index) => {
+                            const [id, name, stage] = role.split(";");
+                            return (
+                              <p
+                                key={index}
+                                className="text-sm px-2 py-2 bg-gray-100 text-gray-800 rounded"
+                              >
+                                {name + " (" + stage + ")"}
+                              </p>
+                            );
+                          })}
                         </div>
 
                         <label
@@ -381,29 +374,6 @@ const UpdateInfoProfile_Job = () => {
                             />
                           </div>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="w-full">
-                        <label className="block text-gray-700 text-sm font-bold mb-2 tracking-wider">
-                          Skills{edit ? "*" : ""}
-                        </label>
-                        <textarea
-                          name="skills"
-                          value={data?.skills}
-                          disabled={!edit}
-                          onChange={(e) =>
-                            setDataUser((state) => ({
-                              ...state,
-                              skills: e.target.value,
-                            }))
-                          }
-                          className={`w-full px-3 py-2 ${
-                            edit
-                              ? "border bg-gray-50 rounded-md"
-                              : "bg-gray-200 rounded-lg"
-                          } placeholder:text-gray-500 border-gray-600 outline-none text-gray-900  focus:outline-none focus:border-blue-400 h-[10rem] tracking-wider`}
-                          placeholder="Enter your new skills"
-                        ></textarea>
                       </div>
                     )}
                   </div>

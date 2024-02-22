@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Dashboard/Header";
-import { DeleteForeverSharp, DeleteSharp } from "@mui/icons-material";
-import { SearchCheck, SearchCode } from "lucide-react";
 
+
+
+import Modal from "react-modal";
 import { useSelector, useDispatch } from "react-redux";
 import { removeJob } from "../../../redux/companyReducer";
 import toast from "react-hot-toast";
 
 import { db } from "../../../Firebase/config";
 import { collection, deleteDoc, doc } from "firebase/firestore";
+import JobCard from "./JobCard";
 
 const PostedJobs = () => {
   const dispatch = useDispatch();
@@ -29,63 +31,102 @@ const PostedJobs = () => {
     }
   };
 
+  //filters
+  // Define state variables for filters and sorting
+const [positionFilter, setPositionFilter] = useState("");
+const [sortBy, setSortBy] = useState("");
+const [sortOrder, setSortOrder] = useState("desc");
+
+// Function to handle filtering by job position
+const handlePositionFilter = (event) => {
+  setPositionFilter(event.target.value);
+};
+
+// Function to handle sorting
+const handleSortBy = (event) => {
+  setSortBy(event.target.value);
+};
+
+// Function to handle changing sort order
+const handleSortOrder = (event) => {
+  setSortOrder(event.target.value);
+};
+
+// Apply filters and sorting to the jobState array
+let filteredJobs = [...jobs];
+if (positionFilter !== "") {
+  filteredJobs = filteredJobs.filter((job) =>
+    job.position.toLowerCase().includes(positionFilter.toLowerCase())
+  );
+}
+
+if (sortBy !== "") {
+  filteredJobs.sort((a, b) => {
+   if(sortBy === "date"){
+        const dateA = new Date(a.postedDate);
+            const dateB = new Date(b.postedDate);
+            return dateB - dateA;
+   }
+   else
+    {if (sortOrder === "asc") {
+      return a[sortBy] - b[sortBy];
+    } else {
+      return b[sortBy] - a[sortBy];
+    }}
+  }
+  );
+}
+  console.log(filteredJobs)
+
   return (
-    <div className="m-[20px]">
+    <div className="m-[20px] overflow-auto">
       <Header
         title="Posted Jobs"
         subtitle="Here are the jobs posted by you on our platform"
       />
+      {/* filters */}
+      <div className="flex justify-start items-center mb-4">
+      <div className="flex items-center">
+        <label className="mr-2 text-black text-base">Filter by Position:</label>
+        <input
+          type="text"
+          value={positionFilter}
+          onChange={handlePositionFilter}
+          className="h-10  border-2 mr-4 border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500"
+          placeholder="Search by Position"
+        />
+      </div>
+      <div className="flex items-center">
+        <label className="mr-2 text-black text-base">Sort By:</label>
+        <select onChange={handleSortBy} value={sortBy} className="border-2 border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:border-blue-500 h-10 w-30 mr-2">
+          <option value="date"  className="text-base">-- Select --</option>
+          <option value="vacancies" className="text-base">Vacancies</option>
+          <option value="salary" className="text-base">Salary</option>
+          <option value="applicants" className="text-base">Applicants</option>
+        </select>
+
+        <select onChange={handleSortOrder} value={sortOrder} className="border-2 border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 h-10 w-30">
+          <option value="desc" className="text-base">Descending</option>
+          <option value="asc" className="text-base">Ascending</option>
+        </select>
+      </div>
+    </div>
       <div className="flex flex-wrap">
-        {jobState
-          ?.sort((a, b) => {
-            const dateA = new Date(a.postedDate);
-            const dateB = new Date(b.postedDate);
-            return dateB - dateA;
-          })
+        {filteredJobs
+          // ?.sort((a, b) => {
+          //   const dateA = new Date(a.postedDate);
+          //   const dateB = new Date(b.postedDate);
+          //   return dateB - dateA;
+          // })
           .map((job, idx) => {
             const date = new Date(job.postedDate);
             return (
-              <div
-                className="rounded-md m-3 bg-white shadow-lg w-[31%]"
-                key={idx}
-              >
-                <div className="px-6 py-4 flex justify-between">
-                  <div className="w-0 flex-1">
-                    <div className="flex justify-between max-h-40 mt-1 text-xs text-gray-500">
-                      <p>Posted on : {date.toDateString("en-IN")}</p>
-                      <button
-                        onClick={() => {
-                          deleteJobHandler(job.id);
-                        }}
-                      >
-                        <DeleteSharp sx={{ color: "red", fontSize: "30px" }} />
-                      </button>
-                    </div>
-                    <p>
-                      <h1 className="text-lg font-semibold py-2 leading-6 text-gray-900">
-                        {job.position}
-                      </h1>
-                    </p>
-                    <div className="relative text-sm max-h-40 w-full overflow-clip">
-                      ₹ {Number(job.salary).toLocaleString("en-IN")}
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-gray-50 z-20 text-sm px-4 py-4 sm:px-6">
-                  <div className="flex justify-between">
-                    <div className="flex  gap-8">
-                      <div className="flex gap-1">
-                        <SearchCode />
-                        <h1 className="text-sm">Applicants : 890</h1>
-                      </div>
-                      <div className="flex gap-1">
-                        <SearchCheck />
-                        <h1>Vacancies : {job.vacancies}</h1>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <JobCard
+                key={job.id}
+                job={job}
+                date={date}
+                deleteJobHandler={deleteJobHandler}
+              />
             );
           })}
       </div>
@@ -94,3 +135,4 @@ const PostedJobs = () => {
 };
 
 export default PostedJobs;
+
