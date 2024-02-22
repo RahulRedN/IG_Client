@@ -19,7 +19,7 @@ const SignInForm = () => {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/auth/loginJobseeker",
+          import.meta.env.VITE_SERVER + "/api/auth/loginJobseeker",
           credentials
         );
         localStorage.setItem("token", res.data.cookie);

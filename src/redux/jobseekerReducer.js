@@ -6,7 +6,7 @@ export const jobseekerReducer = createSlice({
   initialState: {
     data: {},
     jobs: [],
-    applied: []
+    applied: [],
   },
   reducers: {
     setData: (state, action) => {
@@ -15,16 +15,15 @@ export const jobseekerReducer = createSlice({
     setFav: (state, action) => {
       return { ...state, data: { ...state.data, fav: action.payload } };
     },
+    setSkills: (state, action) => {
+      return { ...state, data: { ...state.data, skills: action.payload } };
+    },
     setApplied: (state, action) => {
-      const newStatus = { ...action.payload.data };
-      const newJobs = state.jobs.map((job) => {
-        if (action.payload.id == job.id) {
-          return { ...job, status: newStatus };
-        } else {
-          return job;
-        }
-      });
-      return { ...state, jobs: newJobs };
+      const newApplication = [...state.data.applications, action.payload];
+      return {
+        ...state,
+        data: { ...state.data, applications: newApplication },
+      };
     },
     reset: (state, action) => {
       return { data: {}, jobs: [] };
@@ -32,6 +31,7 @@ export const jobseekerReducer = createSlice({
   },
 });
 
-export const { setData, setFav, setApplied, reset } = jobseekerReducer.actions;
+export const { setData, setFav, setSkills, setApplied, reset } =
+  jobseekerReducer.actions;
 
 export default jobseekerReducer.reducer;

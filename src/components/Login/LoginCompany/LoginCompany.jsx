@@ -7,13 +7,11 @@ import { IoIosWarning, IoMdArrowBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import { useSelector } from "react-redux";
 import ButtonS from "../../UI/Button";
 
 import axios from "axios";
 
 const LoginCompany = () => {
-
   const nav = useNavigate();
 
   const [isClicked, setIsClicked] = useState(true);
@@ -103,7 +101,7 @@ const LoginCompany = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/auth/loginCompany",
+        import.meta.env.VITE_SERVER + "/api/auth/loginCompany",
         login
       );
       console.log(res);
@@ -169,7 +167,7 @@ const LoginCompany = () => {
 
     try {
       const api = axios.create({
-        baseURL: "http://localhost:8080/api/auth",
+        baseURL: import.meta.env.VITE_SERVER + "/api/auth",
         withCredentials: true,
       });
 

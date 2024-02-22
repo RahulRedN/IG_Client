@@ -44,7 +44,7 @@ const TestimonialForm = ({ closeModal }) => {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ ease: "easeInOut", duration: 0.5 }}
-      className="w-full p-8"
+      className="w-[50vw] p-8 h-fit"
     >
       <h1 className="text-4xl font-[600] mb-6 text-center">
         Share your{" "}
@@ -54,71 +54,6 @@ const TestimonialForm = ({ closeModal }) => {
       </h1>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
-        {/* Column 1 */}
-        <div className="mb-4">
-          <label className="font-normal text-gray-500">Full Name</label>
-          <div className="relative flex items-center">
-            <FaUser className="absolute left-3 top-5 fill-gray-700 text-white"  style={{ fontSize: "24px" }}/>
-            <input
-              type="text"
-              id="fullname"
-              name="fullname"
-              placeholder="Enter Your Full Name"
-              value={testimonialData.fullname}
-              onChange={handleChange}
-              className="mt-2 border border-zinc-400 p-3 pl-[2.5rem] w-full rounded-md outline-none placeholder:text-zinc-500"
-            />
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="font-normal text-gray-500">Email</label>
-          <div className="relative flex items-center">
-            <FaEnvelope className="absolute left-3 top-5 fill-gray-700 text-white"  style={{ fontSize: "24px" }} />
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Enter Your Email"
-              value={testimonialData.email}
-              onChange={handleChange}
-              className="mt-2 border border-zinc-400 p-3 pl-[2.5rem] w-full rounded-md outline-none placeholder:text-zinc-500"
-            />
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="font-normal text-gray-500">PHONE</label>
-          <div className="relative flex items-center">
-            <FaPhoneAlt className="absolute left-3 top-5 fill-gray-700 text-white"  style={{ fontSize: "24px" }}/>
-            <input
-              type="text"
-              name="phone"
-              value={testimonialData.phone}
-              onChange={handleChange}
-              placeholder="Enter Number"
-              className="mt-2 border border-zinc-400 p-3 pl-[2.5rem] w-full rounded-md outline-none placeholder:text-zinc-500"
-            />
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="font-normal text-gray-500">
-            Upload Photo (JPEG or PNG)
-          </label>
-          <div className="relative flex items-center">
-            <FaFileImage className="absolute left-3 top-5 fill-gray-700 text-white"  style={{ fontSize: "24px" }}/>
-            <input
-              type="file"
-              id="photo"
-              name="photo"
-              accept="image/jpeg, image/png"
-              onChange={handleFileChange}
-              className="mt-2 border border-zinc-400 p-3 pl-[2.5rem] w-full rounded-md outline-none placeholder:text-zinc-500"
-            />
-          </div>
-        </div>
-
         {/* Column 2 */}
         <div className="mb-4 col-span-2">
           <label className="font-normal text-gray-500">Your Testimonial</label>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import styles from "./NavCardProfile.module.css";
-import MultiSelect from "../MultiSelect/MultiSelect";
+import MultiSelect from "./MultiSelect/MultiSelect";
 
 // eslint-disable-next-line react/prop-types
 const NavCardProfile = ({ Icons, text, link }) => {
