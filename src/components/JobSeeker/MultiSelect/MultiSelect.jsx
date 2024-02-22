@@ -1,10 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-<<<<<<< HEAD:src/MultiSelect/MultiSelect.jsx
-import classes from "../MultiSelect/MultiSelect.module.css";
-import Pill from "../components/pill/Pill";
-=======
 import Pill from "../pill/Pill";
->>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/MultiSelect.jsx
 import SkillStageModal from "./SkillStageModal";
 import "./MultiSelect.css";
 import mockData from "./MockData";
@@ -107,42 +102,6 @@ function MultiSelect({ onClose }) {
   };
 
   return (
-<<<<<<< HEAD:src/MultiSelect/MultiSelect.jsx
-    <div className={classes.skill_search_container}>
-      <h1 className={classes.heading}>Skills</h1>
-      <p className={classes.sub_heading}>Add Skills</p>
-      <div className={classes.skill_search_input}>
-        {selectedSkills.map((skill) => {
-          return (
-            <Pill
-              key={skill.id}
-              text={`${skill.name} (${skill.stage})`}
-              onClick={() => handleRemoveSkill(skill)}
-            />
-          );
-        })}
-        <div>
-          <input
-            ref={inputRef}
-            type="text"
-            className={classes.search_input}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="e.g. React Js"
-            onKeyDown={handleKeyDown}
-          />
-          <ul className={classes.suggestions_list}>
-            {suggestions.map((skill, index) => (
-              <li
-                className={index === activeSuggestion ? "active" : ""}
-                key={skill.id}
-                onClick={() => handleSelectSkill(skill)}
-              >
-                <span>{skill.name}</span>
-              </li>
-            ))}
-          </ul>
-=======
     <div className="modal-multi">
       <div className="modal-content-multi">
         <span className="close" onClick={onClose}>
@@ -190,7 +149,6 @@ function MultiSelect({ onClose }) {
               Submit
             </button>
           </div>
->>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/MultiSelect.jsx
         </div>
       </div>
       {selectedSkillForModal && (
@@ -201,10 +159,6 @@ function MultiSelect({ onClose }) {
           onCloseModal={() => setSelectedSkillForModal(null)}
         />
       )}
-<<<<<<< HEAD:src/MultiSelect/MultiSelect.jsx
-      <button className={classes.multi_submit_btn} onClick={handleSubmit}>Submit</button>
-=======
->>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/MultiSelect.jsx
     </div>
   );
 }

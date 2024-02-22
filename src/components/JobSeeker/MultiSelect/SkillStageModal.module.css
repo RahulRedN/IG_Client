@@ -1,4 +1,4 @@
-.modal-skill {
+.modal_skill {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,11 +11,7 @@
   z-index: 9999;
 }
 
-<<<<<<<< HEAD:src/components/JobSeeker/MultiSelect/SkillStageModal.module.css
-.modal_content {
-========
-.modal-content-skill {
->>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.css
+.modal_content_skill {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -24,67 +20,39 @@
   width: 100%;
 }
 
-<<<<<<<< HEAD:src/components/JobSeeker/MultiSelect/SkillStageModal.module.css
-.modal_content h2 {
-========
-.modal-content-skill h2 {
->>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.css
+.modal_content_skill h2 {
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
 
-<<<<<<<< HEAD:src/components/JobSeeker/MultiSelect/SkillStageModal.module.css
-.modal_content ul {
-========
-.modal-content-skill ul {
->>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.css
+.modal_content_skill ul {
   list-style-type: none;
   padding: 0;
 }
 
-<<<<<<<< HEAD:src/components/JobSeeker/MultiSelect/SkillStageModal.module.css
-.modal_content li {
+.modal_content_skill li {
   margin-bottom: 10px;
 }
 
-.modal_content label {
-========
-.modal-content-skill li {
-  margin-bottom: 10px;
-}
-
-.modal-content-skill label {
->>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.css
+.modal_content_skill label {
   font-size: 1rem;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-<<<<<<<< HEAD:src/components/JobSeeker/MultiSelect/SkillStageModal.module.css
-.modal_content input[type="radio"] {
-========
-.modal-content-skill input[type="radio"] {
->>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.css
+.modal_content_skill input[type="radio"] {
   margin-right: 10px;
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
 
-<<<<<<<< HEAD:src/components/JobSeeker/MultiSelect/SkillStageModal.module.css
-.modal_content input[type="radio"]:hover {
+.modal_content_skill input[type="radio"]:hover {
   transform: scale(1.1);
 }
 
-.modal_content button {
-========
-.modal-content-skill input[type="radio"]:hover {
-  transform: scale(1.1);
-}
-
-.modal-content-skill button {
->>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.css
+.modal_content_skill button {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -94,10 +62,6 @@
   transition: background-color 0.3s ease;
 }
 
-<<<<<<<< HEAD:src/components/JobSeeker/MultiSelect/SkillStageModal.module.css
-.modal_content button:hover {
-========
-.modal-content-skill button:hover {
->>>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.css
+.modal_content_skill button:hover {
   background-color: #0056b3;
 }

@@ -68,11 +68,7 @@ const FeedbackForm = ({ closeModal }) => {
             cols={50}
           />
         </div>
-<<<<<<< HEAD:src/components/FeedBack/FeedbackForm.jsx
         <button className={classes.submit_btn}>Submit Feedback</button>
-=======
-        <button className="submit-feed-btn">Submit Feedback</button>
->>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/FeedBack/FeedbackForm.jsx
       </form>
     </div>
   );

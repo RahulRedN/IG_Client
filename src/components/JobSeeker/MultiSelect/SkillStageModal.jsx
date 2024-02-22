@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import classes from "./SkillStageModal.module.css"
+import "./SkillStageModal.css"
 
 function SkillStageModal({  onSelectStage, onCloseModal }) {
 
@@ -10,13 +10,8 @@ function SkillStageModal({  onSelectStage, onCloseModal }) {
   };
 
   return (
-<<<<<<< HEAD:src/MultiSelect/SkillStageModal.jsx
-    <div className={classes.modal}>
-      <div className={classes.modal_content}>
-=======
     <div className="modal-skill">
       <div className="modal-content-skill">
->>>>>>> 57b3babfce3867e3f62e03a1ef360d6526788d2f:src/components/JobSeeker/MultiSelect/SkillStageModal.jsx
         <h2>How would you rate yourself on this skill?</h2>
         <ul>
           <li>

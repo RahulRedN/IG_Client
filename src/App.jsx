@@ -53,6 +53,7 @@ import Company_User from "./components/Admin/Company_User/Company_User";
 import Pending_Company from "./components/Admin/Pending_Company/Pending_Company";
 import Queries from "./components/Admin/Queries/Queries";
 import Reviews from "./components/Admin/Reviews/Reviews";
+import Teams from "./components/Admin/Teams/Teams";
 
 const Root = () => {
   return <Outlet />;
@@ -117,6 +118,7 @@ const Router = createBrowserRouter(
         <Route path="pendingcompany" element={<Pending_Company />} />
         <Route path="queries" element={<Queries />} />
         <Route path="reviews" element={<Reviews />} />
+        <Route path="team" element={<Teams/>}/>
       </Route>
       <Route path="/test" element={<Admin_Login />} />
     </Route>
