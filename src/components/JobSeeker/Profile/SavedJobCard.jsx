@@ -96,8 +96,7 @@ const SavedJobCard = ({ job }) => {
 
       <div className="flex mt-5 w-[90%] mx-auto gap-3 flex-wrap">
         {job?.skills
-          .split(",")
-          .slice(0, Math.min(4, job?.skills.split(",").length))
+          ?.slice(0, Math.min(4, job?.skills?.length))
           .map((role, index) => (
             <p
               key={index}
@@ -229,7 +228,7 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
 
       <h1 className="mt-8 text-lg font-[600]">Qualifications</h1>
       <div className="flex mt-3 gap-3 items-stretch flex-wrap">
-        {job?.skills.split(",").map((role, index) => (
+        {job?.skills?.map((role, index) => (
           <RoleCard key={index} role={role} />
         ))}
       </div>

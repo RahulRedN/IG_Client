@@ -10,13 +10,45 @@ import Footer_Job from "../components/JobSeeker/Footer_Job";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { setData } from "../redux/jobseekerReducer";
+
 const JobSeeker = () => {
   const { pathname } = useLocation();
   const [navClass, setNavClass] = useState(classes.navbar);
+  const dispatch = useDispatch();
 
   const isLink = (path) => {
     return path === pathname;
   };
+
+  useEffect(() => {
+    const fetch = async () => {
+      const token = localStorage.getItem("token");
+      const decoded = jwtDecode(token);
+      const uid = decoded.uid;
+      try {
+        const res = await axios.get(
+          "http://localhost:8080/api/jobseeker/user?uid=" + uid
+        );
+
+        if (res.status == 200) {
+          dispatch(
+            setData({
+              data: { ...res.data.user, uid: res.data.user._id },
+              jobs: res.data.jobs,
+            })
+          );
+          console.log(res);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetch();
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);

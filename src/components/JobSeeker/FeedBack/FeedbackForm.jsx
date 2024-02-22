@@ -69,7 +69,7 @@ const FeedbackForm = ({ closeModal }) => {
             cols={50}
           />
         </div>
-        <button className="submit-btn">Submit Feedback</button>
+        <button className="submit-feed-btn">Submit Feedback</button>
       </form>
     </div>
   );

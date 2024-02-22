@@ -1,11 +1,17 @@
 /* eslint-disable no-unsafe-optional-chaining */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SavedJobCard from "./SavedJobCard";
 import { useSelector } from "react-redux";
 const SavedJobs = () => {
   const user = useSelector((state) => state.jobseeker);
 
-  const [state, setState] = useState({ fav: user?.data.fav, jobs: user?.jobs });
+  const [state, setState] = useState({ fav: [], jobs: [] });
+
+  useEffect(() => {
+    setState({ fav: user?.data.fav, jobs: user?.jobs });
+  }, [user]);
+
+  console.log(state.jobs);
 
   const scrollLeft = () => {
     var scrollContainer = document.getElementById("scrollContainer");
@@ -29,14 +35,16 @@ const SavedJobs = () => {
           </div>
         </div>
         <div
-        id="scrollContainer"
-        className="mt-5 h-[79vh] p-2 flex flex-col flex-wrap gap-y-10 gap-x-6 overflow-y-auto scrollbar-none">
+          id="scrollContainer"
+          className="mt-5 h-[79vh] p-2 flex flex-col flex-wrap gap-y-10 gap-x-6 overflow-y-auto scrollbar-none"
+        >
           {state.jobs
-            ?.filter((job) => state.fav[job.id])
+            ?.filter((job) => state.fav.includes(job._id))
             .map((jobCard, idx) => (
               <SavedJobCard key={idx} job={jobCard} />
             ))}
-          {(state.jobs?.filter((job) => state.fav[job.id])).length == 0
+          {(state.jobs?.filter((job) => state.fav.includes(job._id))).length ==
+          0
             ? "No jobs found!"
             : ""}
         </div>

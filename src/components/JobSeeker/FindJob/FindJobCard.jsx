@@ -29,14 +29,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { setApplied } from "../../../redux/jobseekerReducer";
 import { useNavigate } from "react-router-dom";
 
-const FindJobCard = ({ job, fav, setFavHandler }) => {
+import axios from "axios";
+
+const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
   const [ref, inView] = useInView({ triggerOnce: true });
 
   const currDate = new Date();
-  const postedDate = new Date(job?.postedDate);
+  const postedDate = new Date(job?.createdAt);
 
   const isJustNow = Math.abs(currDate - postedDate) <= 24 * 60 * 60 * 1000;
-  const [isfav, setIsfav] = useState(fav && fav[job.id]);
+  const [isfav, setIsfav] = useState(fav.includes(job._id));
   const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -51,30 +53,38 @@ const FindJobCard = ({ job, fav, setFavHandler }) => {
     };
   }, [modalIsOpen]);
 
-  const favHandler = () => {
-    setIsfav((state) => {
-      if (fav) {
-        const newFav = { ...fav };
-        newFav[job.id] = !state;
-        setFavHandler(newFav);
-      } else {
-        const newFav = {};
-        newFav[job.id] = !state;
-        setFavHandler(newFav);
-      }
-
-      if (!state) {
-        setTimeout(
-          () =>
-            toast("Added to Favourites!", {icon:'❤️'}),
-          750
+  const favHandler = async () => {
+    try {
+      if (!isfav) {
+        const res = await axios.post(
+          "http://localhost:8080/api/jobseeker/addFav?uid=" +
+            uid +
+            "&jid=" +
+            job._id
         );
-      } else {
-        setTimeout(() => toast.success("Removed from Favourites!"), 750);
-      }
 
-      return !state;
-    });
+        if (res.status == 200) {
+          toast("Added to Favourites!", { icon: "❤️" });
+          setFavHandler(job._id);
+          setIsfav((state) => !state);
+        }
+      } else {
+        const res = await axios.post(
+          "http://localhost:8080/api/jobseeker/removeFav?uid=" +
+            uid +
+            "&jid=" +
+            job._id
+        );
+
+        if (res.status == 200) {
+          toast.success("Removed from Favourites!");
+          setFavHandler(job._id);
+          setIsfav((state) => !state);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const customStyles = {
@@ -157,7 +167,7 @@ const FindJobCard = ({ job, fav, setFavHandler }) => {
         </div>
 
         <div className="mt-5">
-          {job?.location ? (
+          {job?.location != "work-from-home" ? (
             <div className="flex items-start gap-2">
               <MapPin size={18} />
               <p className="text-sm">{job?.location}</p>
@@ -228,7 +238,7 @@ const FindJobCard = ({ job, fav, setFavHandler }) => {
               </div>
             )}
 
-            {job?.skills?.split(",").map((role, index) => (
+            {job?.skills?.map((role, index) => (
               // eslint-disable-next-line react/jsx-key
               <RoleCard key={index} role={role} />
             ))}
@@ -363,7 +373,7 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
 
       <h1 className="mt-8 text-lg font-[600]">Qualifications</h1>
       <div className="flex mt-3 gap-3 items-stretch flex-wrap">
-        {job?.skills.split(",").map((role, index) => (
+        {job?.skills.map((role, index) => (
           <RoleCard key={index} role={role} />
         ))}
       </div>

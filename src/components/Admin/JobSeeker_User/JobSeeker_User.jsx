@@ -26,7 +26,7 @@ const JobSeeker_User = () => {
             <th className="text-left font-thin text-sm py-3 px-2 w-[6%]">
               Age
             </th>
-            <th className="text-left font-thin text-sm py-3 px-2 w-[15%]">
+            <th className="text-left font-thin text-sm py-3 px-2 w-[15%] ">
               Phone Number
             </th>
             <th className="text-left font-thin text-sm py-3 px-2 w-[23%]">

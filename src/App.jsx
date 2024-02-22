@@ -78,7 +78,7 @@ const Router = createBrowserRouter(
       <Route
         path="/jobseeker"
         element={
-          <PrivateRoute role={"jobseeker"}>
+          <PrivateRoute role="jobseeker">
             <JobSeeker />
           </PrivateRoute>
         }
@@ -97,7 +97,7 @@ const Router = createBrowserRouter(
       <Route
         path="/company"
         element={
-          <PrivateRoute role={"company"}>
+          <PrivateRoute role="company">
             <Company />
           </PrivateRoute>
         }

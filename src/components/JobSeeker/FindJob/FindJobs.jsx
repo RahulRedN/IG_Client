@@ -18,30 +18,39 @@ const FindJobs = () => {
   const user = useSelector((state) => state.jobseeker);
 
   const [state, setState] = useState({
-    data: user?.data,
-    jobs: jobId
-      ? user?.jobs.filter((job) => job.id == jobId)
-      : filter
-      ? user?.jobs.filter((job) =>
-          job.position.toLowerCase().includes(filter.toLowerCase())
-        )
-      : user?.jobs,
+    data: {},
+    jobs: [],
   });
+
+  useEffect(() => {
+    setState({
+      data: user?.data,
+      jobs: jobId
+        ? user?.jobs.filter((job) => job._id == jobId)
+        : filter
+        ? user?.jobs.filter((job) =>
+            job.position.toLowerCase().includes(filter.toLowerCase())
+          )
+        : user?.jobs,
+    });
+  }, [user]);
 
   const dispatch = useDispatch();
 
-  const setFavHandler = async (favJobs) => {
-    try {
-      const tempData = { ...state.data, fav: favJobs };
-      const docRef = doc(collection(db, "users"), state.data.id);
-      await updateDoc(docRef, tempData);
-    } catch (error) {
-      console.log(error);
+  const setFavHandler = async (jobId) => {
+    let favJobs = [...state.data.fav];
+
+    // Check if jobId is already in favJobs
+    const index = favJobs.indexOf(jobId);
+
+    if (index !== -1) {
+      favJobs = [...favJobs.slice(0, index), ...favJobs.slice(index + 1)];
+    } else {
+      favJobs = [...favJobs, jobId];
     }
-    
+    console.log(favJobs);
     dispatch(setFav(favJobs));
   };
-
 
   return (
     <div className="bg-gray-50 pb-5 m-0">
@@ -54,6 +63,7 @@ const FindJobs = () => {
               key={idx}
               job={job}
               fav={state.data?.fav}
+              uid={state.data?.uid}
               setFavHandler={setFavHandler}
             />
           ))}

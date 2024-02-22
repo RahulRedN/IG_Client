@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import classes from "./Reg_Form.module.css";
 import Form_Header from "./Form_Header";
 import NextPrevButton from "./NextPrevButton";
@@ -7,17 +8,17 @@ import countryList from "./countryList";
 
 import { motion } from "framer-motion";
 import { useAuth } from "../../Firebase/AuthContexts";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../Firebase/config";
+import { addDoc } from "firebase/firestore";
 
 import toast from "react-hot-toast";
 import { IoIosWarning } from "react-icons/io";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 const Reg_Form = ({ className }) => {
-  const { signUp } = useAuth();
-
   const [val, setVal] = useState(<>&nbsp;</>);
+
+  const nav = useNavigate();
 
   const [backAnimate, setBackAnimate] = useState(true);
   var index = 0;
@@ -44,9 +45,9 @@ const Reg_Form = ({ className }) => {
     i_name: "",
     yoa: "",
     yoc: "",
-    skills: "",
     password1: "",
     password2: "",
+    image: null,
   });
 
   const nextTab = (event) => {
@@ -108,74 +109,41 @@ const Reg_Form = ({ className }) => {
       i_name,
       yoa,
       yoc,
-      skills,
+      image,
     } = Data;
 
+    const newData = new FormData();
+    newData.append("email", email);
+    newData.append("password", password1);
+    newData.append("fname", fname);
+    newData.append("mobile", mobile);
+    newData.append("address", address);
+    newData.append("nationality", nationality);
+    newData.append("dob", dob);
+    newData.append("gender", gender);
+    newData.append("marital", marital);
+    newData.append("qualification", qualification);
+    newData.append("i_name", i_name);
+    newData.append("yoa", yoa);
+    newData.append("yoc", yoc);
+    newData.append("image", image);
+
     try {
-      const res = await signUp(email, password1);
+      const api = axios.create({
+        baseURL: "http://localhost:8080/api/auth",
+        withCredentials: true,
+      });
 
-      const userCollection = collection(db, "users");
+      const res = await api.post("/registerJobseeker", newData);
 
-      const data = {
-        fname,
-        mobile,
-        address,
-        nationality,
-        dob,
-        gender,
-        marital,
-        qualification,
-        i_name,
-        yoa,
-        yoc,
-        skills,
-        email,
-        role: "jobseeker",
-        uid: res.user.uid,
-        fav: {},
-      };
-
-      await addDoc(userCollection, data);
-      toast.success("Success");
+      if (res.status === 201) {
+        localStorage.setItem("token", res.data.cookie);
+        toast.success("Registered successfully!");
+        nav("/jobseeker");
+      }
     } catch (error) {
-      if (error.code == "auth/email-already-in-use") {
+      if (error.response.status === 400) {
         toast("Email is already in use", {
-          icon: <IoIosWarning />,
-          style: {
-            padding: "16px",
-            color: "rgb(245 ,158 ,11)",
-          },
-          iconTheme: {
-            primary: "rgb(245 ,158 ,11)",
-            secondary: "#FFFAEE",
-          },
-        });
-      } else if (error.code == "auth/invalid-email") {
-        toast("Entered email is not valid ", {
-          icon: <IoIosWarning />,
-          style: {
-            padding: "16px",
-            color: "rgb(245 ,158 ,11)",
-          },
-          iconTheme: {
-            primary: "rgb(245 ,158 ,11)",
-            secondary: "#FFFAEE",
-          },
-        });
-      } else if (error.code == "auth/operation-not-allowed") {
-        toast("Operation not allowed", {
-          icon: <IoIosWarning />,
-          style: {
-            padding: "16px",
-            color: "rgb(245 ,158 ,11)",
-          },
-          iconTheme: {
-            primary: "rgb(245 ,158 ,11)",
-            secondary: "#FFFAEE",
-          },
-        });
-      } else if (error.code == "auth/weak-password") {
-        toast("Password is too weak", {
           icon: <IoIosWarning />,
           style: {
             padding: "16px",
@@ -189,7 +157,6 @@ const Reg_Form = ({ className }) => {
       }
       console.error(error);
     }
-
     return;
   };
 
@@ -399,17 +366,17 @@ const Reg_Form = ({ className }) => {
       <hr style={{ border: "1px solid black" }} />
 
       <p className="text-md text-gray-700 leading-tight text-center mt-8 mb-5">
-        Skills
+        Profile Photo
       </p>
 
       <div className="mb-6">
         <input
-          type="text"
-          placeholder="eg: CSS, JS, python, etc"
-          name="skills"
-          id="skills"
-          defaultValue={Data.skills}
-          onChange={(event) => SetData({ ...Data, skills: event.target.value })}
+          type="file"
+          name="image"
+          id="image"
+          onChange={(event) =>
+            SetData({ ...Data, image: event.target.files[0] })
+          }
           className="w-full px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
         />
       </div>
@@ -635,14 +602,6 @@ const Reg_Form = ({ className }) => {
       return false;
     }
     yocRef.classList.remove(classes.invalid);
-
-    if (skills.trim() === "") {
-      setVal("! Please enter your Skills.");
-      skillsRef.classList.add(classes.invalid);
-      skillsRef.focus();
-      return false;
-    }
-    skillsRef.classList.remove(classes.invalid);
 
     setVal(<>&nbsp;</>);
     return true;
