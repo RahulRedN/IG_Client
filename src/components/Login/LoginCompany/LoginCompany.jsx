@@ -160,8 +160,8 @@ const LoginCompany = () => {
 
       const res = await api.post("/registerCompany", data);
       if (res) {
-        const token = Cookies.get("token");
-        console.log(token);
+        localStorage.setItem("token", res.data.cookie);
+        toast.success("Account Registered. Wait for admin to accept Your request!", {duration: 2});
       }
       console.log(res);
     } catch (error) {
