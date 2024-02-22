@@ -5,30 +5,16 @@ import { Checkbox } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { IoIosWarning, IoMdArrowBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../Firebase/AuthContexts";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../../Firebase/config";
 import toast from "react-hot-toast";
 
 import { useSelector } from "react-redux";
 import ButtonS from "../../UI/Button";
 
 import axios from "axios";
-import Cookies from "js-cookie";
 
 const LoginCompany = () => {
-  const { signUp, signIn } = useAuth();
-
-  const user = useSelector((state) => state.jobseeker.data);
-  const company = useSelector((state) => state.company.data);
 
   const nav = useNavigate();
-
-  if (company?.uid) {
-    nav("/company");
-  } else if (user?.uid) {
-    nav("/jobseeker");
-  }
 
   const [isClicked, setIsClicked] = useState(true);
   const [errN, setErrN] = useState(false);
@@ -116,13 +102,42 @@ const LoginCompany = () => {
     }
 
     try {
-      await signIn(login.email, login.password);
-      toast.success("Logged in successfully!");
-      setIsLoading(false);
+      const res = await axios.post(
+        "http://localhost:8080/api/auth/loginCompany",
+        login
+      );
+      console.log(res);
+      localStorage.setItem("token", res.data.cookie);
+      if (res.status === 200) {
+        toast.success("Logged in Successful");
+        nav("/company");
+      }
     } catch (error) {
+      if (error.response.status === 400) {
+        toast("Email is already in use", {
+          icon: <IoIosWarning />,
+          style: {
+            padding: "16px",
+            color: "rgb(245 ,158 ,11)",
+          },
+          iconTheme: {
+            primary: "rgb(245 ,158 ,11)",
+            secondary: "#FFFAEE",
+          },
+        });
+      } else if (error.response.status === 401) {
+        toast(error.response.data.msg, {
+          icon: <IoIosWarning size={25} />,
+          style: {
+            width: "270px",
+            color: "rgb(245 ,158 ,11)",
+          },
+        });
+      }
       setIsLoading(false);
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   const registerHandler = async (e) => {
@@ -159,54 +174,16 @@ const LoginCompany = () => {
       });
 
       const res = await api.post("/registerCompany", data);
-      if (res) {
-        const token = Cookies.get("token");
-        console.log(token);
+
+      if (res.status === 201) {
+        toast.success("Registered successfully! Await admin approval!");
       }
-      console.log(res);
     } catch (error) {
-      setIsLoadingR(false);
-      if (error.code == "auth/email-already-in-use") {
+      if (error.response.status === 400) {
         toast("Email is already in use", {
           icon: <IoIosWarning />,
           style: {
-            padding: "16px",
-            color: "rgb(245 ,158 ,11)",
-          },
-          iconTheme: {
-            primary: "rgb(245 ,158 ,11)",
-            secondary: "#FFFAEE",
-          },
-        });
-      } else if (error.code == "auth/invalid-email") {
-        toast("Entered email is not valid ", {
-          icon: <IoIosWarning />,
-          style: {
-            padding: "16px",
-            color: "rgb(245 ,158 ,11)",
-          },
-          iconTheme: {
-            primary: "rgb(245 ,158 ,11)",
-            secondary: "#FFFAEE",
-          },
-        });
-      } else if (error.code == "auth/operation-not-allowed") {
-        toast("Operation not allowed", {
-          icon: <IoIosWarning />,
-          style: {
-            padding: "16px",
-            color: "rgb(245 ,158 ,11)",
-          },
-          iconTheme: {
-            primary: "rgb(245 ,158 ,11)",
-            secondary: "#FFFAEE",
-          },
-        });
-      } else if (error.code == "auth/weak-password") {
-        toast("Password is too weak", {
-          icon: <IoIosWarning />,
-          style: {
-            padding: "16px",
+            padding: "20px",
             color: "rgb(245 ,158 ,11)",
           },
           iconTheme: {
@@ -216,20 +193,10 @@ const LoginCompany = () => {
         });
       }
       console.error(error);
+    } finally {
+      setIsLoadingR(false);
     }
-    setIsLoadingR(false);
   };
-
-  useEffect(() => {
-    const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
-    const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
-
-    if (tokenCookie) {
-      const token = tokenCookie.split("=")[1];
-      console.log("Token:", token);
-      // Now you can use the token as needed.
-    }
-  }, []);
 
   return (
     <div className="login-company">

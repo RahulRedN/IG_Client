@@ -43,7 +43,7 @@ const TopJobs = () => {
                 key={idx}
                 position={job.position}
                 jobDesc={job.jobDesc}
-                jobId={job.id}
+                jobId={job._id}
                 sticker={!job.location}
               />
             ))}
