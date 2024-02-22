@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Bookmark } from "lucide-react";
 import photo from "../../../../public/images/tutoring.jpeg";
 import { MdDelete } from "react-icons/md";

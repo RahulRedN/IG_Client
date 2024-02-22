@@ -2,16 +2,20 @@
 /* eslint-disable react/prop-types */
 
 import { useState, useEffect } from "react";
-import "../Testimonial/Styles/Testimonialstyles.css";
+import classes from "../Testimonial/Styles/Testimonialstyles.module.css";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 const TestCard = ({ heading, quote, imageSrc, altText, name }) => {
   return (
-    <div className="testimonial-card visible">
-      <img src={heading} className="testimonial-card-heading-img" />
-      <p className="testimonial-card-quote">{quote}</p>
-      <img className="testimonial-card-image" src={imageSrc} alt={altText} />
-      <p className="testimonial-card-name">{name}</p>
+    <div className={classes.testimonial_card + " " + classes.visible}>
+      <img src={heading} className={classes.testimonial_card_heading_img} />
+      <p className={classes.testimonial_card_quote}>{quote}</p>
+      <img
+        className={classes.testimonial_card_image}
+        src={imageSrc}
+        alt={altText}
+      />
+      <p className={classes.testimonial_card_name}>{name}</p>
     </div>
   );
 };
@@ -21,7 +25,7 @@ const TestimonialCard = ({ testimonials }) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      handleNext(); 
+      handleNext();
     }, 5000); // Adjust the interval as needed (e.g., 5000 milliseconds = 5 seconds)
 
     return () => clearInterval(intervalId);
@@ -34,13 +38,15 @@ const TestimonialCard = ({ testimonials }) => {
   };
 
   return (
-    <div className="testimonial-slider">
+    <div className={classes.testimonial_slider}>
       {testimonials.map((testimonial, index) => (
         <div
           key={index}
-          className={`testimonial-card ${
-            index === currentIndex ? "visible" : "hidden"
-          }`}
+          className={
+            classes.testimonial_card +
+            " " +
+            (index === currentIndex ? classes.visible : classes.hidden)
+          }
         >
           <TestCard
             heading={testimonial.heading}

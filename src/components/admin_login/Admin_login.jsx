@@ -2,37 +2,38 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import Admin_login_form from "./Admin_login_form";
-import "./admin_login.css";
+import classes from './admin_login.module.css'
 
 function Admin_Login() {
   return (
-    <div id="one">
-      <div className="left-container">
+    <div className={classes.one}>
+      <div className={classes.left_container}>
         {/* <p className="heading">ADMIN LOGIN PAGE</p> */}
         <img
-          src="public\assets\admin-animate.svg"
+          src="public\assets\admin-animate-BLUE.svg"
           alt=""
           style={{ width: "30rem" }}
+          className={classes.svg}
         />
       </div>
-      <div className="right-container">
-        <div className="login-card">
-          <div className="logo-title">
-            <img
+      <div className={classes.right_container}>
+        <div className={classes.login_card}>
+          <div className={classes.logo_title}>
+            {/* <img
               draggable={false}
               src="public\images\IG_logo_Dark.png"
               className="logo-title-image"
-            />
-            <p className="title">
-              Welcome, <span className="company-title">ADMIN</span>!
+            /> */}
+            <p className={classes.title}>
+              Welcome, <span className="company_title">ADMIN</span>!
             </p>
           </div>
-          <div className="login-info">
-            <p className="admin-quote">
+          <div className={classes.login_info}>
+            <p className={classes.admin_quote}>
               "A great opera house isn't run by a director, but by a great
               administrator."
             </p>
-            <p className="login-info-subtitle">
+            <p className={classes.login_info_subtitle}>
               Please sign-in to your account
             </p>
 

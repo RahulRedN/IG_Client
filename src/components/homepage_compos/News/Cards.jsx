@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import toast  from "react-hot-toast";
+import classes from "./Styles/Ques.module.css";
+
 
 const Cards = () => {
   const [newsData, setNewsData] = useState([]);
@@ -29,7 +31,7 @@ const Cards = () => {
   }, []); 
 
   return (
-    <div className="cards-cont">
+    <div className={classes.cards_cont}>
       {newsData.map((data) => (
         <Card key={data.id} {...data} />
       ))}
@@ -63,13 +65,13 @@ const Card = ({ urlToImage, url, title, description }) => {
       initial={{ x: 100, opacity: 0 }}
       animate={inView ? { x: 0, opacity: 1 } : "hidden"}
       transition={{ ease: "easeInOut", duration: 0.9, delay: 0.0 }}
-      className="card-cont"
+      className={classes.card_cont}
     >
       <img src={urlToImage} alt="" />
-      <h1 className="que">{title}</h1>
-      <p className="ans">{description}</p>
+      <h1 className={classes.que}>{title}</h1>
+      <p className={classes.ans}>{description}</p>
     
-      <button className="btn-learn" onClick={openUrlInNewTab}>
+      <button className={classes.btn_learn} onClick={openUrlInNewTab}>
         Learn More
       </button>
 

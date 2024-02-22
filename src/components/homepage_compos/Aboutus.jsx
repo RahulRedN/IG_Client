@@ -1,4 +1,4 @@
-import "../../Styles/AboutUs.css";
+import classes from "../../Styles/AboutUs.module.css";
 // import { Link } from "react-router-dom";
 // import QuesCards from "../AboutUs/TeamCard/QuesCards";
 import AboutUsTop from "../AboutUs/AboutSections/AboutUsTop";
@@ -10,11 +10,11 @@ import ImageHeader from "../JobSeeker/ImageHeader";
 
 const AboutUs = () => {
   return (
-    <div className="aboutus-page">
+    <div className={classes.aboutus_page}>
       <ImageHeader src = {"aboutus"}/>
 
       <AboutUsTop />
-      <div className="top2-top3">
+      <div className={classes.top2_top3}>
         <AboutUsTop2 />
         <AboutUsTop3 />
       </div>

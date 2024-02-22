@@ -1,4 +1,4 @@
-import "../AboutSections/Styles/AboutUsTop3.css";
+import classes from "../AboutSections/Styles/AboutUsTop3.module.css";
 import { HeartHandshake, Globe2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -14,18 +14,18 @@ const AboutUsTop3 = () => {
       id: 1,
       text: "People Hired",
       count: 687,
-      icon: <Globe2 className="Globe2" />,
+      icon: <Globe2 className={classes.Globe2} />,
     },
     {
       id: 2,
       text: "Satisfied Company",
       count: 672,
-      icon: <HeartHandshake className="Globe2" />,
+      icon: <HeartHandshake className={classes.Globe2} />,
     },
   ];
 
   return (
-    <div className="AboutUsTop3">
+    <div className={classes.AboutUsTop3}>
       {data.map((item, index) => {
         return (
           <motion.div
@@ -42,18 +42,20 @@ const AboutUsTop3 = () => {
             transition={{
               ease: "easeInOut",
               duration: 0.9,
-              delay: index === 0 ? 0.2 : 0.5, 
+              delay: index === 0 ? 0.2 : 0.5,
             }}
-            className="peoples"
+            className={classes.peoples}
           >
             {item.icon}
-            <h6><Counter from={0} to={item.count} duration={2}/>+</h6>
+            <h6>
+              <Counter from={0} to={item.count} duration={2} />+
+            </h6>
             <p>{item.text}</p>
           </motion.div>
         );
       })}
 
-      <div className="provides">
+      <div className={classes.provides}>
         <h3>We Provide Awesome Service</h3>
       </div>
     </div>

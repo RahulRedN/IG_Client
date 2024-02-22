@@ -1,6 +1,5 @@
-
 import TestimonialCard from "./TestimonialCard";
-import "../Testimonial/Styles/Testimonialstyles.css";
+import classes from "../Testimonial/Styles/Testimonialstyles.module.css";
 import team1 from "../Testimonial/Resources/team-1.jpg";
 import team2 from "../Testimonial/Resources/team-2.jpg";
 import team3 from "../Testimonial/Resources/team-3.jpg";
@@ -39,8 +38,8 @@ const Testimonial = () => {
   ];
 
   return (
-    <div className="testimonial-container">
-      <div className="testimonial-top">
+    <div className={classes.testimonial_container}>
+      <div className={classes.testimonial_top}>
         <h1> What They Say ?</h1>
         <p>
           Vestibulum sit amet odio dui. Integer eleifend nibh massa, nec
@@ -48,7 +47,7 @@ const Testimonial = () => {
           eleifend interdum arcu tempor ac.
         </p>
       </div>
-      <div className="testimonial-bottom">
+      <div className={classes.testimonial_bottom}>
         <motion.div
           initial={{ x: 100, y: 0, opacity: 0 }}
           animate={{ x: 0, y: 0, opacity: 1 }}

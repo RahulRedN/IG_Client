@@ -7,7 +7,7 @@ body {
   margin: 0;
 }
 
-#one {
+.one {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -16,7 +16,7 @@ body {
   background: linear-gradient(-70deg, #4cb4e8 55%,#fff 45%);
 }
 
-.left-container {
+.left_container {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@ body {
   align-items: center;
 }
 
-.right-container {
+.right_container {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -42,15 +42,15 @@ body {
   color: #fff;
 }
 
-.input-field,
-.form-submit {
+.input_field,
+.form_submit {
   display: flex;
   flex-direction: column;
 }
 
 label {
   font-family: "Poppins", sans-serif;
-  padding-left: 0.2rem;
+  padding-left: 0.3rem;
   font-size: 0.8rem;
   font-weight: bolder;
   color: rgb(160, 160, 160);
@@ -61,88 +61,87 @@ label {
   font-family: system-ui, Ubuntu,'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.input-field input {
+.input_field input {
   padding: 0.5rem;
-  border-radius: 7px;
+  padding-left: 0.8rem;
+  border-radius: 15px;
   outline: none;
-  border: 2px solid lightgray;
+  border: 2px solid rgb(164, 162, 162);
 }
 
-.input-field input:hover {
-  background-color: rgb(242, 241, 241);
-}
 
-.input-field input:focus {
+.input_field input:focus {
   border: 2px solid black;
+  outline: none;
+  border: 2px solid rgb(122, 121, 121);
+  background-color: rgb(228, 227, 227);
 }
 
-.form-submit button {
+.form_submit button {
   padding: 0.6rem;
-  border-radius: 7px;
+  border-radius: 10px;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0px 16px 48px 0px rgba(0, 0, 0, 0.176);
   background-color: #0194ff;
   color: white;
-  font-weight: lighter;
-  font-size: 0.9rem;
+  font-weight: normal;
+  font-size: 1rem;
 }
 
-.form-submit button:hover {
-  background-color: #00A9FF;
+.form_submit button:hover {
+  background-color: #0583c3;
 }
 
-.admin-login-form {
+.admin_login_form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   min-width: 400px;
 }
 
-.login-card {
+.login_card {
   background-color: white;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-  width: 30rem;
-  display: flex;
-  flex-direction: column;
-  padding-top: 1.5rem;
-  padding-bottom: 4rem;
-  padding-left: 2rem;
+  border-radius: 13px;
+  box-shadow: 0px 12px 28px 0px rgba(0, 0, 0, 0.2), 0px 2px 4px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(255, 255, 255, 0.05) inset;  flex-direction: column;
+  padding-top: 2.5rem;
+  padding-left: 3rem;
   padding-right: 3rem;
+  padding-bottom: 4rem;
+  width: 35rem;
 }
 
-.logo-title {
+.logo_title {
   display: flex;
   align-items: center;
 }
 
-.logo-title .title {
+.logo_title .title {
   font-family: "Mukta", sans-serif;
   font-size: 1.7rem;
   font-weight: bolder;
   color: black;
 }
 
-.login-info {
+.login_info {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.login-info-title {
+.login_info_title {
   font-family: "Mukta", sans-serif;
   margin: 0px;
   font-size: 20px;
 }
 
-.company-title {
+.company_title {
   text-transform: uppercase;
   color: #2286eb;
 }
 
-.login-info-subtitle {
+.login_info_subtitle {
   margin: 0px;
   font-family: "Open Sans", sans-serif;
   font-size: 1.1rem;
@@ -150,20 +149,20 @@ label {
   margin-top: 3px;
 }
 
-.logo-title-image {
+.logo_title_image {
   padding: 0;
   margin: 0;
   width: 3.5rem;
 }
 
 
-.admin-quote {
+.admin_quote {
   margin-top: 15px;
   font-family: 'Rubik', sans-serif;
 }
 
 @media only screen and (max-width: 1200px) {
-  .left-container {
+  .left_container {
   display: none;
   }
   }
