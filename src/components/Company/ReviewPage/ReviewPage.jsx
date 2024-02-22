@@ -1,13 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "../PendingList/PendingList.module.css";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { MdOutlineStar } from "react-icons/md";
 import { IoMdStarOutline } from "react-icons/io";
 import { Box } from "@mui/material";
+import { useSelector } from "react-redux";
 const ReviewPage = () => {
   const [filterType, setFilterType] = useState("All"); // State for filter type
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
-  const reviews = [
+  const applications = useSelector((state) => state.company.applications);
+  const jobs = useSelector((state) => state.company.jobs);
+  const users = useSelector((state) => state.company.users);
+
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const accepted = applications
+      .filter((app) => app.status == "accepted" && app.review?.reviewed)
+      .map((app) => {
+        const jobDetails = jobs.find((job) => job._id === app.jobId);
+        const userDetails = users.find((user) => user._id === app.userId);
+
+        return {
+          feedback: app.review.feedback,
+          rating: app.review.rating,
+          userName: userDetails.fname,
+          type: app.review.type,
+          role: jobDetails.position,
+        };
+      });
+    setReviews(accepted);
+  }, [applications]);
+
+  const reviews23 = [
     {
       feedback:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ullam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ullam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ullam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ullam.",
@@ -79,11 +104,10 @@ const ReviewPage = () => {
     },
   ];
   return (
-    <div className="max-h-full w-auto absolute right-0 overflow-auto ml-10" >
+    <div className="max-h-full w-auto absolute right-0 overflow-auto ml-10">
       <div className={classes.container}>
         <h2>Reviews</h2>
         <div className="flex items-baseline w-[100%]">
-          
           {/* type-based filter */}
           <div className="filter-section">
             <select
@@ -127,23 +151,23 @@ const ReviewPage = () => {
                   .includes(searchQuery.toLowerCase()) ||
                   review.role.toLowerCase().includes(searchQuery.toLowerCase()))
             )
-            
+
             // card
             .map((review, index) => (
-              
               <div
                 key={index}
                 className="flex border-[1px] h-50 rounded-lg shadow-lg m-1"
                 data-tooltip-id={`review-card-${index}`}
               >
-                  <ReactTooltip
-                    id={`review-card-${index}`}
-                    place="bottom"
-                    variant="dark">
-                     <h1>Gives info Timestamps</h1>
-                     Joined On : <br />
-                     Ended on :
-                  </ReactTooltip>
+                <ReactTooltip
+                  id={`review-card-${index}`}
+                  place="bottom"
+                  variant="dark"
+                >
+                  <h1>Gives info Timestamps</h1>
+                  Joined On : <br />
+                  Ended on :
+                </ReactTooltip>
                 <div className="flex items-left justify-center">
                   <span className="inline-flex justify-around items-baseline text-center [writing-mode:vertical-lr] rotate-180 bg-slate-200  border-[1px] rounded-sm text-xl py-6 px-2">
                     {review.type}
@@ -155,9 +179,11 @@ const ReviewPage = () => {
                   <div className="flex justify-between p-2 items-center bg-slate-200">
                     <div
                       className={`bg-${
-                        review.type === "Compliment"? "green": 
-                        review.type === "Suggestion"? "blue"
-                        :"red"
+                        review.type === "Compliment"
+                          ? "green"
+                          : review.type === "Suggestion"
+                          ? "blue"
+                          : "red"
                       }-500 rounded-[50%] h-[1rem] w-[1rem]`}
                     ></div>
                     <div className="flex">
@@ -186,11 +212,8 @@ const ReviewPage = () => {
                   </div>
                   <p className="p-2 text-base ">{review.feedback}</p>
                 </div>
-                
               </div>
-            )
-            )
-            }
+            ))}
         </div>
       </div>
     </div>

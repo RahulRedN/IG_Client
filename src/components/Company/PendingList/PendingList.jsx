@@ -4,11 +4,9 @@ import Skillbox from "./Skillbox";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { db } from "../../../Firebase/config";
-import { doc, collection, getDoc, updateDoc } from "firebase/firestore";
-import { setStatus } from "../../../redux/companyReducer";
-
 import toast from "react-hot-toast";
+import axios from "axios";
+import { setStatus } from "../../../redux/companyReducer";
 import { Box } from "@mui/material";
 
 const PendingList = ({ status }) => {
@@ -35,7 +33,41 @@ const PendingList = ({ status }) => {
       });
 
     setPending(pendingApplications);
-  }, [applications]);
+  }, [applications, jobs]);
+
+  console.log(pending);
+
+  const acceptHandler = async (appId, jobId) => {
+    try {
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/company/updateJobRequest",
+        { appId: appId, action: "accept" }
+      );
+      if (res.status == 200) {
+        toast.success("User Accepted!");
+        dispatch(setStatus({ appId, jobId, action: "accepted" }));
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occured : " + error.response.data.msg);
+    }
+  };
+
+  const rejectHandler = async (appId, jobId) => {
+    try {
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/company/updateJobRequest",
+        { appId: appId, action: "reject" }
+      );
+      if (res.status == 200) {
+        toast.success("User Rejected!");
+        dispatch(setStatus({ appId, jobId, action: "rejected" }));
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occured : " + error.response.data.msg);
+    }
+  };
 
   return (
     <Box className="max-h-full" id="PendingList">
@@ -58,7 +90,7 @@ const PendingList = ({ status }) => {
                 return (
                   <tr
                     className="border-gray-200 hover:bg-gray-100 text-center text-[2rem]"
-                    key={idx}
+                    key={pend._id}
                   >
                     <td>{pend.userDetails.fname}</td>
                     <td className="border-gray-200 hover:bg-gray-100">
@@ -89,7 +121,7 @@ const PendingList = ({ status }) => {
                             "pr-2 pl-2 pt-1.5 pb-1.5 rounded-md text-white bg-emerald-300  border-emerald-300 hover:bg-white hover:cursor-pointer hover:text-emerald-800 hover:border-emerald-800 hover:border-[1px]"
                           }
                           onClick={() => {
-                            acceptHandler(pend.jobId, pend.id, pend.status);
+                            acceptHandler(pend._id, pend.jobId);
                           }}
                         >
                           Accept
@@ -99,7 +131,7 @@ const PendingList = ({ status }) => {
                             "pr-2 pl-2 pt-1.5 pb-1.5 rounded-md text-white bg-red-400 hover:bg-white hover:cursor-pointer hover:text-red-800 hover: bg-white-800 hover:border-red-800 hover:border-[1px]"
                           }
                           onClick={() => {
-                            rejectHandler(pend.jobId, pend.id, pend.status);
+                            rejectHandler(pend._id, pend.jobId);
                           }}
                         >
                           Reject

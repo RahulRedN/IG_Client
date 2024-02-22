@@ -119,7 +119,7 @@ if (sortBy !== "") {
           //   return dateB - dateA;
           // })
           .map((job, idx) => {
-            const date = new Date(job.postedDate);
+            const date = new Date(job.createdAt);
             return (
               <JobCard
                 key={job.id}

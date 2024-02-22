@@ -103,7 +103,7 @@ const JobCard = ({job,date,deleteJobHandler}) => {
                     <div className="flex  gap-8">
                       <div className="flex gap-1">
                         <SearchCode />
-                        <h1 className="text-sm">Applicants : 890</h1>
+                <h1 className="text-sm">Total Positions: {job.totalPositions }</h1>
                       </div>
                       <div className="flex gap-1">
                         <SearchCheck />

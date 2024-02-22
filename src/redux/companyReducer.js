@@ -14,27 +14,39 @@ export const companyReducer = createSlice({
       return { ...state, ...action.payload };
     },
     removeJob: (state, action) => {
-      const newJobs = state.jobs.filter((job) => job.id != action.payload);
+      const newJobs = state.jobs.filter((job) => job._id != action.payload);
       return { ...state, jobs: newJobs };
     },
     addJob: (state, action) => {
       return { ...state, jobs: [...state.jobs, action.payload] };
     },
     setStatus: (state, action) => {
+      console.log(action.payload);
       const newJobs = state.jobs.map((job) => {
-        if (job.id == action.payload.jobId) {
-          console.log(action.payload.status);
+        if (job._id == action.payload.jobId) {
           return {
             ...job,
-            status: action.payload.status,
-            vacancies: action.payload.vacancies,
+            vacancies: job.vacancies - 1,
           };
         } else {
           return job;
         }
       });
 
-      return { ...state, jobs: newJobs };
+      const newApplications = state.applications.map((app) => {
+        if (app._id == action.payload.appId) {
+          console.log(app);
+          return {
+            ...app,
+            status: action.payload.action,
+            createdAt: new Date(),
+          };
+        } else {
+          return app;
+        }
+      });
+
+      return { ...state, jobs: newJobs, applications: newApplications };
     },
     resetCompany: (state, action) => {
       return { data: {}, jobs: [] };
