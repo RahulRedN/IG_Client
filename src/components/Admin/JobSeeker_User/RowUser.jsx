@@ -14,17 +14,20 @@ import {
 } from "@chakra-ui/react";
 import { toast } from "react-hot-toast";
 
-const RowUser = ({jobseeker,idx}) => {
+const RowUser = ({ jobseeker, idx }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
 
   return (
     <tr className="border-b border-gray-200 h-[3.75rem]">
-      <td className="pl-3">{idx+1}</td>
+      <td className="pl-3">{idx + 1}</td>
 
       <td className="pl-2">
         <div className="flex items-center gap-x-2">
-          <img src={img} className="h-9 w-9 rounded-full object-cover" />
+          <img
+            src={jobseeker.img}
+            className="h-9 w-9 rounded-full object-cover"
+          />
           {/* jobseeker. */}
           <div className="flex items-center justify-center gap-x-1">
             <h1 className="text-sm font-light">{jobseeker.fname}</h1>
@@ -52,7 +55,11 @@ const RowUser = ({jobseeker,idx}) => {
       </td>
 
       <td className="pl-2">
-        <h1 className="text-sm">{jobseeker.joinedDate}</h1>
+        <h1 className="text-sm"> {new Date(jobseeker.createdAt).toDateString("en-US", {
+          day: "2-digit",
+          month: "long",
+          year: "2-digit", // Use '2-digit' to display the year in a two-digit format (e.g., 24 instead of 2024)
+        })}</h1>
       </td>
 
       <td>
