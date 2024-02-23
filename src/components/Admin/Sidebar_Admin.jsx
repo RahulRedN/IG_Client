@@ -4,9 +4,28 @@ import { RiQuestionnaireLine } from "react-icons/ri";
 import { IoIosPeople } from "react-icons/io";
 import { VscSignOut } from "react-icons/vsc";
 import styles from "./Sidebar_Admin.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Sidebar_Admin = () => {
+  const nav = useNavigate();
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.get(
+        import.meta.env.VITE_SERVER + "/api/auth/logout"
+      );
+
+      if (res.status == 200) {
+        localStorage.removeItem("token");
+        toast.success("Logout Successful!");
+        nav("/admin/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="fixed w-52 top-0 h-full">
       <div className="flex items-center justify-center h-20">
@@ -153,7 +172,7 @@ const Sidebar_Admin = () => {
           </NavLink>
         </>
         <div className="mt-24">
-          <NavLink
+          {/* <NavLink
             to="team"
             style={({ isActive }) =>
               isActive
@@ -173,12 +192,13 @@ const Sidebar_Admin = () => {
               className={"text-inherit"}
             />
             <h1 className={"text-sm text-inherit"}>Team</h1>
-          </NavLink>
+          </NavLink> */}
 
           <button
             className={
               "mt-3 flex items-center gap-x-2 text-gray-500 w-full ml-2 pl-3 mr-3 px-2 py-3 rounded-md hover:bg-rose-100 hover:text-rose-500 transition ease-in-out duration-300"
             }
+            onClick={logoutHandler}
           >
             <VscSignOut size={20} className={"text-inherit"} />
             <h1 className={"text-sm text-inherit"}>LogOut</h1>

@@ -20,7 +20,7 @@ const PostedJobs = () => {
     try {
       const res = await axios.post(
         import.meta.env.VITE_SERVER + "/api/company/deleteJob",
-        { jobId, uid }
+        { jobId: jobId, uid }
       );
       if (res.status == 200) {
         dispatch(removeJob(jobId));

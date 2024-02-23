@@ -12,7 +12,9 @@ const Dropdown = () => {
   const nav = useNavigate();
   const logoutHandler = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/auth/logout");
+      const res = await axios.get(
+        import.meta.env.VITE_SERVER + "/api/auth/logout"
+      );
       if (res.status == 200) {
         toast.success("Logged out successfully!");
         localStorage.removeItem("token");

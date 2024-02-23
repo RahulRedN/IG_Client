@@ -108,7 +108,16 @@ const Router = createBrowserRouter(
         <Route path="reviews" element={<ReviewPage />} />
       </Route>
 
-      <Route path="/admin" element={<Admin />}>
+      <Route path="/admin/login" element={<Admin_Login />} />
+
+      <Route
+        path="/admin"
+        element={
+          <PrivateRoute role={"admin"}>
+            <Admin />
+          </PrivateRoute>
+        }
+      >
         <Route path="home" element={<Home_Admin />} />
         <Route path="jobseekers" element={<JobSeeker_User />} />
         <Route path="companys" element={<Company_User />} />
@@ -117,7 +126,6 @@ const Router = createBrowserRouter(
         <Route path="reviews" element={<Reviews />} />
         <Route path="team" element={<Teams />} />
       </Route>
-      <Route path="/test" element={<Admin_Login />} />
     </Route>
   )
 );

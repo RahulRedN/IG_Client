@@ -14,9 +14,35 @@ import {
 } from "@chakra-ui/react";
 import { toast } from "react-hot-toast";
 
-const Company_RowUser = ({idx,name,email,status}) => {
+import axios from "axios";
+
+const Company_RowUser = ({
+  idx,
+  name,
+  email,
+  status,
+  createdAt,
+  fetchDet,
+  uid,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
+
+  const deleteHandler = async () => {
+    try {
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/admin/deleteCompany",
+        { uid: uid }
+      );
+      if (res.status == 200) {
+        toast.success("Company Deleted!");
+        fetchDet();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    onClose();
+  };
 
   return (
     <tr className="border-b border-gray-200 h-[3.75rem]">
@@ -38,25 +64,29 @@ const Company_RowUser = ({idx,name,email,status}) => {
       </td>
 
       <td className="pl-5">
-        <h1 className="text-sm">12000</h1>
+        <h1 className="text-sm">4</h1>
       </td>
-
-
 
       <td className="pl-5">
-        <h1 className="text-sm">26976</h1>
+        <h1 className="text-sm">5</h1>
       </td>
 
-      
-
       <td className="pl-2">
-        <div className={`${status === "rejected" ? "bg-rose-100 text-rose-500 border-rose-500" :"bg-emerald-100 text-emerald-500 border-emerald-500"} rounded-lg py-1  px-2 w-fit border capitalize`}>
+        <div
+          className={`${
+            status === "rejected"
+              ? "bg-rose-100 text-rose-500 border-rose-500"
+              : "bg-emerald-100 text-emerald-500 border-emerald-500"
+          } rounded-lg py-1  px-2 w-fit border capitalize`}
+        >
           <h1 className="text-sm">{status}</h1>
         </div>
       </td>
 
       <td className="pl-5">
-        <h1 className="text-sm text-gray-500">12/12/12</h1>
+        <h1 className="text-sm text-gray-500">
+          {new Date(createdAt).toLocaleDateString()}
+        </h1>
       </td>
 
       <td>
@@ -79,22 +109,13 @@ const Company_RowUser = ({idx,name,email,status}) => {
             <AlertDialogHeader>Delete Company User?</AlertDialogHeader>
             <AlertDialogCloseButton />
             <AlertDialogBody>
-              Are you sure you want to delete the user? You cannot undo
-              this.
+              Are you sure you want to delete the user? You cannot undo this.
             </AlertDialogBody>
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
                 No
               </Button>
-              <Button
-                colorScheme="red"
-                ml={3}
-                onClick={() => {
-                  console.log("Deleted");
-                  onClose();
-                  toast.success("User Deleted Successfully!");
-                }}
-              >
+              <Button colorScheme="red" ml={3} onClick={deleteHandler}>
                 Yes
               </Button>
             </AlertDialogFooter>

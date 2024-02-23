@@ -27,6 +27,7 @@ const ReviewPage = () => {
           userName: userDetails.fname,
           type: app.review.type,
           role: jobDetails.position,
+          createdAt: jobDetails.createdAt,
         };
       });
     setReviews(accepted);
@@ -104,7 +105,10 @@ const ReviewPage = () => {
     },
   ];
   return (
-    <div className="max-h-full w-[82.5vw] absolute right-0 overflow-auto" id="PendingList">
+    <div
+      className="max-h-full w-[82.5vw] absolute right-0 overflow-auto"
+      id="PendingList"
+    >
       <div className={classes.container}>
         <h2>Reviews</h2>
         <div className="flex items-baseline w-[100%]">
@@ -159,14 +163,15 @@ const ReviewPage = () => {
                 className="flex border-[1px] h-50 rounded-lg shadow-lg m-1"
                 data-tooltip-id={`review-card-${index}`}
               >
+                {console.log(review)}
                 <ReactTooltip
                   id={`review-card-${index}`}
                   place="bottom"
                   variant="dark"
                 >
                   <h1>Gives info Timestamps</h1>
-                  Joined On : <br />
-                  Ended on :
+                  Joined On : {new Date(review.createdAt).toLocaleString()}
+                  <br />
                 </ReactTooltip>
                 <div className="flex items-left justify-center">
                   <span className="inline-flex justify-around items-baseline text-center [writing-mode:vertical-lr] rotate-180 bg-slate-200  border-[1px] rounded-sm text-xl py-6 px-2">

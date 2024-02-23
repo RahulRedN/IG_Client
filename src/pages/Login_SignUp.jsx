@@ -23,6 +23,10 @@ const Login_SignUp = () => {
     if (exp > now) {
       localStorage.removeItem("token");
     } else {
+      if (decoded.role == "Admin") {
+        return <Navigate to={"/admin/home"} />;
+      }
+
       return decoded.role == "jobseeker" ? (
         <Navigate to="/jobseeker" />
       ) : (

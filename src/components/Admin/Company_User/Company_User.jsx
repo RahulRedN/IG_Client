@@ -8,19 +8,19 @@ import axios from "axios";
 const Company_User = () => {
   const [Company, setCompany] = useState([]);
 
-  useEffect(() => {
-    const fetchCompany = async () => {
-      try {
-        const res = await axios.get(
-          import.meta.env.VITE_SERVER + "/api/admin/getallcompanies"
-        );
+  const fetchCompany = async () => {
+    try {
+      const res = await axios.get(
+        import.meta.env.VITE_SERVER + "/api/admin/getallcompanies"
+      );
 
-        console.log(res);
-        setCompany(res.data.companies);
-      } catch (error) {
-        console.error("Error fetching job seekers:", error);
-      }
-    };
+      console.log(res);
+      setCompany(res.data.companies);
+    } catch (error) {
+      console.error("Error fetching job seekers:", error);
+    }
+  };
+  useEffect(() => {
     fetchCompany();
   }, []);
 
@@ -72,6 +72,9 @@ const Company_User = () => {
                 name={company.name}
                 email={company.email}
                 status={company.status}
+                createdAt={company.createdAt}
+                fetchDet={fetchCompany}
+                uid={company._id}
               />
             );
           })}

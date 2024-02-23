@@ -2,22 +2,55 @@
 import React from "react";
 import classes from "./admin_login.module.css";
 import { useState } from "react";
-
+import toast from "react-hot-toast";
+import axios from "axios";
+import { IoIosWarning } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 function Admin_login_form() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const nav = useNavigate();
 
   const submitHandler = async () => {
     var email = document.getElementById("email");
     var pass = document.getElementById("password");
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-    if (email.value === "" || !emailRegex.test(email) || pass.value === "") {
+    if (email.value === "" || pass.value === "") {
       email.style = "border: 2px solid red";
       pass.style = "border: 2px solid red";
+      return;
     } else {
       email.style = "border: 2px solid lightgray";
       pass.style = "border: 2px solid lightgray";
+    }
+
+    try {
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/auth/loginAdmin",
+        { email: email.value, password: pass.value }
+      );
+      localStorage.setItem("token", res.data.cookie);
+
+      if (res.status === 200) {
+        toast.success("Logged in Successful");
+        nav("/admin/home");
+      }
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        toast(error.response.data.msg, {
+          icon: <IoIosWarning />,
+          style: {
+            padding: "16px",
+            color: "rgb(245 ,158 ,11)",
+          },
+          iconTheme: {
+            primary: "rgb(245 ,158 ,11)",
+            secondary: "#FFFAEE",
+          },
+        });
+      }
+      console.log(error);
     }
   };
 
