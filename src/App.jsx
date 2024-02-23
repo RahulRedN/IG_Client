@@ -95,9 +95,9 @@ const Router = createBrowserRouter(
       <Route
         path="/company"
         element={
-          // <PrivateRoute role="company">
+          <PrivateRoute role="company">
             <Company />
-          // </PrivateRoute>
+          </PrivateRoute>
         }
       >
         <Route index element={<Dashboard />} />
@@ -115,7 +115,7 @@ const Router = createBrowserRouter(
         <Route path="pendingcompany" element={<Pending_Company />} />
         <Route path="queries" element={<Queries />} />
         <Route path="reviews" element={<Reviews />} />
-        <Route path="team" element={<Teams/>}/>
+        <Route path="team" element={<Teams />} />
       </Route>
       <Route path="/test" element={<Admin_Login />} />
     </Route>

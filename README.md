@@ -1,8 +1,9 @@
-# React + Vite
+#InspiringGo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1.There will be two repo's INSPIRINGO-MERN and IG_SERVER
+2.Unzip both the repo's and give command "npm i" to install the neccesary packages
+3.Run both the front-end and backend with command npm start
 
-Currently, two official plugins are available:
+Open the following link
+http://localhost:5173/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
