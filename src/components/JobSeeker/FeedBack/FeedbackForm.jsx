@@ -4,8 +4,14 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import Radios from "./radios";
 
 import StarRating from "./StarRating/StarRating";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useSelector, useDispatch } from "react-redux";
+import { setReview } from "../../../redux/jobseekerReducer";
 
-const FeedbackForm = ({ closeModal }) => {
+const FeedbackForm = ({ closeModal, appId }) => {
+  const dispatch = useDispatch();
+  const uid = useSelector((state) => state.jobseeker.data.uid);
   const [userFeedback, setUserFeedback] = useState("");
   const [rating, setRating] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -30,20 +36,36 @@ const FeedbackForm = ({ closeModal }) => {
     closeModal();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    closeModal();
-
-    alert(
-      "Feedback submitted: Rating - " +
-        rating +
-        ", Category - " +
-        selectedCategory +
-        ", Feedback - " +
-        userFeedback
-    );
+    try {
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/jobseeker/postReview",
+        {
+          uid,
+          aid: appId,
+          rating,
+          type: selectedCategory,
+          feedback: userFeedback,
+        }
+      );
+      if (res.status == 200) {
+        dispatch(
+          setReview({
+            appId,
+            rating,
+            type: selectedCategory,
+            feedback: userFeedback,
+            reviewed: true,
+          })
+        );
+        toast.success("Feedback Submited");
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-  
 
   return (
     <div>

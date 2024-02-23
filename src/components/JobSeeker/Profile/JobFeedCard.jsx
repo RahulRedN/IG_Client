@@ -8,7 +8,7 @@ import { LuPencil } from "react-icons/lu";
 import RoleCard from "../FindJob/RoleCard";
 import FeedbackForm from "../FeedBack/FeedbackForm";
 
-const JobFeedCard = ({ job, date, idx, status, feed }) => {
+const JobFeedCard = ({ job, date, idx, status, applicants }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [feedbackModalIsOpen, setFeedbackModalIsOpen] = useState(false);
 
@@ -103,7 +103,7 @@ const JobFeedCard = ({ job, date, idx, status, feed }) => {
         </span>
       </td>
       <td>{date.toLocaleDateString("en-US", options)}</td>
-      <td>{Object.keys(job.status).length}</td>
+      <td>{applicants}</td>
 
       <td>
         <span className={`p-2 rounded-2xl ${color(status)} capitalize`}>
@@ -112,7 +112,10 @@ const JobFeedCard = ({ job, date, idx, status, feed }) => {
 
         <span>
           <button
-            disabled={status != "accepted"}
+            disabled={
+              status != "accepted" ||
+              (status == "accepted" && job?.application?.review?.reviewed)
+            }
             className="ml-8"
             onClick={openFeedbackModal}
           >
@@ -120,6 +123,7 @@ const JobFeedCard = ({ job, date, idx, status, feed }) => {
           </button>
           {feedbackModalIsOpen && (
             <FeedbackModals
+              appId={job?.application?._id}
               closeModal={closeFeedbackModal}
               stylesfeedback={stylesfeedback}
             />
@@ -250,7 +254,7 @@ const stylesfeedback = {
   },
 };
 
-const FeedbackModals = ({ closeModal, stylesfeedback }) => {
+const FeedbackModals = ({ closeModal, stylesfeedback, appId }) => {
   return (
     <Modal
       isOpen={true}
@@ -258,7 +262,7 @@ const FeedbackModals = ({ closeModal, stylesfeedback }) => {
       contentLabel="Example Modal"
       style={stylesfeedback}
     >
-      <FeedbackForm closeModal={closeModal} />
+      <FeedbackForm closeModal={closeModal} appId={appId} />
     </Modal>
   );
 };

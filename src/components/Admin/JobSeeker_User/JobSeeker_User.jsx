@@ -3,73 +3,104 @@ import RowUser from "./RowUser";
 import { RiGraduationCapFill } from "react-icons/ri";
 
 import img from "../../../../public/images/mentors.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const JobSeeker_User = () => {
-  const JobSeekers = [
-    {
-      fname: "Pavan kumar",
-      gender: "Male",
-      joinedDate: "1920/10/19",
-      age: "12",
-      mobile: "+91 73373 26976",
-      email: "jppavan2003@gmail.com",
-      img: { img },
-    },
-    {
-      fname: "Sonish",
-      gender: "Male",
-      joinedDate: "2005/09/08",
-      age: "24",
-      mobile: "+91 23974 23897",
-      email: "sk@gmail.com",
-      img: { img },
-    },
-    {
-      fname: "Modi",
-      gender: "Male",
-      joinedDate: "1947/10/20",
-      age: "69",
-      mobile: "+91 30498 34890",
-      email: "modiPM@gmail.com",
-      img: { img },
-    },
-    {
-      fname: "Modi",
-      gender: "Male",
-      joinedDate: "1947/10/20",
-      age: "69",
-      mobile: "+91 30498 34890",
-      email: "modiPM@gmail.com",
-      img: { img },
-    },
-    {
-      fname: "Modi",
-      gender: "Male",
-      joinedDate: "1930/10/20",
-      age: "69",
-      mobile: "+91 30498 34890",
-      email: "modiPM@gmail.com",
-      img: { img },
-    },
-    {
-      fname: "Modi",
-      gender: "Male",
-      joinedDate: "1947/10/20",
-      age: "69",
-      mobile: "+91 30498 34890",
-      email: "modiPM@gmail.com",
-      img: { img },
-    },
-    {
-      fname: "Modi",
-      gender: "Male",
-      joinedDate: "1947/10/20",
-      age: "69",
-      mobile: "+91 30498 34890",
-      email: "modiPM@gmail.com",
-      img: { img },
-    },
-  ];
+  // const JobSeekers = [
+
+  //   {
+  //     fname: "Pavan kumar",
+  //     gender: "Male",
+  //     joinedDate: "1920/10/19",
+  //     age: "12",
+  //     mobile: "+91 73373 26976",
+  //     email: "jppavan2003@gmail.com",
+  //     img: { img },
+  //   },
+  //   {
+  //     fname: "Sonish",
+  //     gender: "Male",
+  //     joinedDate: "2005/09/08",
+  //     age: "24",
+  //     mobile: "+91 23974 23897",
+  //     email: "sk@gmail.com",
+  //     img: { img },
+  //   },
+  //   {
+  //     fname: "Modi",
+  //     gender: "Male",
+  //     joinedDate: "1947/10/20",
+  //     age: "69",
+  //     mobile: "+91 30498 34890",
+  //     email: "modiPM@gmail.com",
+  //     img: { img },
+  //   },
+  //   {
+  //     fname: "Modi",
+  //     gender: "Male",
+  //     joinedDate: "1947/10/20",
+  //     age: "69",
+  //     mobile: "+91 30498 34890",
+  //     email: "modiPM@gmail.com",
+  //     img: { img },
+  //   },
+  //   {
+  //     fname: "Modi",
+  //     gender: "Male",
+  //     joinedDate: "1930/10/20",
+  //     age: "69",
+  //     mobile: "+91 30498 34890",
+  //     email: "modiPM@gmail.com",
+  //     img: { img },
+  //   },
+  //   {
+  //     fname: "Modi",
+  //     gender: "Male",
+  //     joinedDate: "1947/10/20",
+  //     age: "69",
+  //     mobile: "+91 30498 34890",
+  //     email: "modiPM@gmail.com",
+  //     img: { img },
+  //   },
+  //   {
+  //     fname: "Modi",
+  //     gender: "Male",
+  //     joinedDate: "1947/10/20",
+  //     age: "69",
+  //     mobile: "+91 30498 34890",
+  //     email: "modiPM@gmail.com",
+  //     img: { img },
+  //   },
+  // ];
+
+  const [JobSeekers, setJobSeekers] = useState([]);
+
+  useEffect(() => {
+    const fetchJobSeekers = async () => {
+      try {
+        const res = await axios.get(
+          import.meta.env.VITE_SERVER + "/api/admin/getalljobseekers"
+        );
+
+        console.log(res);
+
+        if (Array.isArray(res.data)) {
+          console.log(res.data);
+          setJobSeekers(res.data);
+        } else {
+          console.error("Received data is not an array:", res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching job seekers:", error);
+      }
+    };
+
+    fetchJobSeekers();
+  }, []);
+
+  console.log(JobSeekers);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [sortByJoinedDate, setSortByJoinedDate] = useState("descending");
 
@@ -123,25 +154,25 @@ const JobSeeker_User = () => {
 
           {/* Select Box for Sorting */}
           <div>
-          <label className="mr-2 text-black text-base">Joining Date</label>
-          <select
-            value={sortByJoinedDate}
-            onChange={handleSortByJoinedDateChange}
-            className="border-2 border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:border-blue-500 h-10 w-30 mr-2"
-          >
-            <option value="ascending" className="text-base">
-              Ascending
-            </option>
-            <option value="descending" className="text-base">
-              Descending
-            </option>
-          </select>
+            <label className="mr-2 text-black text-base">Joining Date</label>
+            <select
+              value={sortByJoinedDate}
+              onChange={handleSortByJoinedDateChange}
+              className="border-2 border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 h-10 w-30 mr-4"
+            >
+              <option value="ascending" className="text-lg h-10">
+                Ascending
+              </option>
+              <option value="descending" className="text-base">
+                Descending
+              </option>
+            </select>
           </div>
         </div>
       </div>
 
       {/* Search Input */}
-      <table className="w-[99%] mt-4 bg-white">
+      <table className="w-[99%] mt-8 bg-white">
         <thead className="bg-zinc-100 h-12">
           <tr>
             <th className="text-left font-light text-base py-3 px-2 w-[6%]">
@@ -172,8 +203,8 @@ const JobSeeker_User = () => {
           {/* <RowUser />
           <RowUser />
           <RowUser /> */}
-          {filteredSortedJobSeekers.map((jobseeker, idx) => (
-            <RowUser jobseeker={jobseeker} idx={idx} />
+          {filteredSortedJobSeekers?.map((jobseeker, idx) => (
+            <RowUser jobseeker={jobseeker} key={idx} idx={idx} />
           ))}
         </tbody>
       </table>

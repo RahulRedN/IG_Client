@@ -64,7 +64,7 @@ const PendingRowUser = ({ idx, name, email, status }) => {
 
   return (
     <tr className="border-b border-gray-200 h-[3.75rem]">
-      <td className="pl-3">{idx}</td>
+      <td className="pl-6">{idx}</td>
 
       <td className="pl-2">
         <div className="flex items-center gap-x-2">
@@ -79,6 +79,10 @@ const PendingRowUser = ({ idx, name, email, status }) => {
 
       <td className="pl-3">
         <h1 className="text-sm">{email}</h1>
+      </td>
+
+      <td className="pl-3">
+        <h1 className="text-sm">23rd June , 2023</h1>
       </td>
 
       <td className="pl-2">

@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import JobFeedCard from "./JobFeedCard";
 
+import axios from "axios";
+
 const JobFeed = () => {
   const applications = useSelector(
     (state) => state.jobseeker.data.applications
@@ -11,6 +13,26 @@ const JobFeed = () => {
   const jobs = useSelector((state) => state.jobseeker.jobs);
 
   const [applied, setApplied] = useState([]);
+
+  const [applStatus, setApplStatus] = useState([]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const jobIds = applications.map((app) => app.jobId);
+      try {
+        const res = await axios.post(
+          import.meta.env.VITE_SERVER + "/api/jobseeker/noofapplications",
+          { jid: jobIds }
+        );
+        if (res.status == 200) {
+          setApplStatus(res.data.applications);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetch();
+  }, [applications]);
 
   useEffect(() => {
     const appliedJobs = jobs
@@ -68,16 +90,17 @@ const JobFeed = () => {
               {applied.map((job, idx, feed) => {
                 const date = new Date(job?.application?.createdAt);
                 return (
-                  <>
-                    <JobFeedCard
-                      job={job}
-                      idx={idx}
-                      date={date}
-                      key={idx}
-                      status={job?.application?.status}
-                      feedback={feed}
-                    />
-                  </>
+                  <JobFeedCard
+                    job={job}
+                    idx={idx}
+                    date={date}
+                    key={idx}
+                    status={job?.application?.status}
+                    feedback={feed}
+                    applicants={
+                      applStatus?.length != 0 && applStatus[idx].count
+                    }
+                  />
                 );
               })}
               {applied.length == 0 && (
