@@ -5,15 +5,33 @@ import { useEffect, useState } from "react";
 import { Checkbox } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { IoIosWarning, IoMdArrowBack } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import ButtonS from "../../UI/Button";
 
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const LoginCompany = () => {
   const nav = useNavigate();
+  const token = localStorage.getItem("token");
+  if (token) {
+    const decoded = jwtDecode(token);
+
+    const now = new Date(),
+      exp = new Date(decoded.exp);
+
+    if (exp > now) {
+      localStorage.removeItem("token");
+    } else {
+      return decoded.role == "jobseeker" ? (
+        <Navigate to="/jobseeker" />
+      ) : (
+        <Navigate to="/company" />
+      );
+    }
+  }
 
   const [isClicked, setIsClicked] = useState(true);
   const [errN, setErrN] = useState(false);

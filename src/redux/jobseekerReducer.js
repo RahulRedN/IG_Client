@@ -34,7 +34,7 @@ export const jobseekerReducer = createSlice({
       });
       return {
         ...state,
-        data: { ...state.data, applications: newApplication },
+        data: { ...state.data, applications: newApplication  },
       };
     },
     reset: (state, action) => {

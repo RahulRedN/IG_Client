@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaUser, FaEnvelope, FaFileImage, FaPhoneAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
+
+import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
 const TestimonialForm = ({ closeModal }) => {
+  const uid = useSelector((state) => state.jobseeker.data.uid);
   const [testimonialData, setTestimonialData] = useState({
-    fullname: "",
-    email: "",
-    phone: "",
     testimonial: "",
-    agree: "",
-    photo: null,
   });
 
   const handleChange = (event) => {
@@ -20,23 +20,23 @@ const TestimonialForm = ({ closeModal }) => {
     });
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-
-    if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
-      setTestimonialData({
-        ...testimonialData,
-        photo: file,
-      });
-    } else {
-      alert("Please select a valid JPEG or PNG image file.");
-    }
-  };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Testimonial data submitted: ", testimonialData);
-    closeModal();
+    const data = { message: testimonialData.testimonial, uid: uid };
+    try {
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/jobseeker/testimonial",
+        data
+      );
+
+      if (res.status == 200) {
+        toast.success("Testimonial Added!");
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+      toast("An error occured, Please try again");
+    }
   };
 
   return (

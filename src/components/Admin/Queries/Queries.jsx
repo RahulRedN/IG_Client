@@ -11,7 +11,7 @@ function Queries() {
       subject: "Something related",
       phone: "9990009998",
       message:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi dolorem       accusamus sed et ducimus eaque ipsa expedita sapiente error vero aut       aspernatur officia voluptatum quis, recusandae dolores, dolorum       praesentium. uiwebgv WEIBF eioqwubf WEYIOFB wg weg weg weg wg we gwegwe       wgrweg wefgaerg awrgawrg.",
+        "I applied for a job a week ago, but I haven't received any updates on my application status. Can you provide information on how I can check the status, or is there a way to follow up with employers through the platform?",
     },
     {
       name: "Pavan Kumar",
@@ -19,7 +19,7 @@ function Queries() {
       subject: "Something unrrelated",
       phone: "9012345678",
       message:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi dolorem       accusamus sed et ducimus eaque ipsa expedita sapiente error vero aut       aspernatur officia voluptatum quis, recusandae dolores, dolorum       praesentium. uiwebgv WEIBF eioqwubf WEYIOFB wg weg weg weg wg we gwegwe       wgrweg wefgaerg awrgawrg.",
+        "I've completed my profile, but I'm not getting as many job views as I expected. How can I improve my profile visibility to attract more employers?",
     },
     {
       name: "Rahul Reddy",
@@ -27,7 +27,7 @@ function Queries() {
       subject: "Something wanted",
       phone: "8989899898",
       message:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi dolorem       accusamus sed et ducimus eaque ipsa expedita sapiente error vero aut       aspernatur officia voluptatum quis, recusandae dolores, dolorum       praesentium. uiwebgv WEIBF eioqwubf WEYIOFB wg weg weg weg wg we gwegwe       wgrweg wefgaerg awrgawrg.",
+        "I set up job alerts, but I'm receiving notifications for positions that don't match my preferences. How can I refine my job alerts to get more accurate and relevant job suggestions?",
     },
     {
       name: "Sonish Korada",
@@ -35,7 +35,7 @@ function Queries() {
       subject: "Something unwanted",
       phone: "8009809878",
       message:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi dolorem       accusamus sed et ducimus eaque ipsa expedita sapiente error vero aut       aspernatur officia voluptatum quis, recusandae dolores, dolorum       praesentium. uiwebgv WEIBF eioqwubf WEYIOFB wg weg weg weg wg we gwegwe       wgrweg wefgaerg awrgawrg.",
+        "I'm having trouble uploading my resume and other documents. Is there a specific format or size requirement, or is there an alternative way to submit application materials?",
     },
     {
       name: "Khadar Basha",
@@ -43,7 +43,7 @@ function Queries() {
       subject: "Something / everything",
       phone: "7889877678",
       message:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi dolorem       accusamus sed et ducimus eaque ipsa expedita sapiente error vero aut       aspernatur officia voluptatum quis, recusandae dolores, dolorum       praesentium. uiwebgv WEIBF eioqwubf WEYIOFB wg weg weg weg wg we gwegwe       wgrweg wefgaerg awrgawrg.",
+        "I forgot my password and am having difficulty resetting it. Can you guide me on how to reset my password or recover my account access?",
     },
   ];
 

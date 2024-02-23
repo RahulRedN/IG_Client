@@ -122,8 +122,8 @@ const JobSeeker_User = () => {
       jobseeker.email.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }).sort((a, b) => {
-    const joinedDateA = new Date(a.joinedDate);
-    const joinedDateB = new Date(b.joinedDate);
+    const joinedDateA = new Date(a.createdAt);
+    const joinedDateB = new Date(b.createdAt);
 
     if (sortByJoinedDate === "ascending") {
       return joinedDateA - joinedDateB;
