@@ -15,7 +15,7 @@ import {
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-const RowUser = ({ jobseeker, idx }) => {
+const RowUser = ({ jobseeker, idx, fetchJobSeekers }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
 
@@ -30,10 +30,18 @@ const RowUser = ({ jobseeker, idx }) => {
 
   const deleteHandler = async () => {
     try {
-      const res = await axios.post(import.meta.env.VITE_SERVER + "/api/admin");
-    } catch (error) {}
+      const res = await axios.post(
+        import.meta.env.VITE_SERVER + "/api/admin/deleteUser",
+        { uid: jobseeker._id }
+      );
+      if (res.status == 200) {
+        toast.success("User Deleted!");
+        fetchJobSeekers();
+      }
+    } catch (error) {
+      console.log(error);
+    }
     onClose();
-    toast.success("User Deleted Successfully!");
   };
 
   return (

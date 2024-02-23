@@ -76,26 +76,25 @@ const JobSeeker_User = () => {
 
   const [JobSeekers, setJobSeekers] = useState([]);
 
-  useEffect(() => {
-    const fetchJobSeekers = async () => {
-      try {
-        const res = await axios.get(
-          import.meta.env.VITE_SERVER + "/api/admin/getalljobseekers"
-        );
+  const fetchJobSeekers = async () => {
+    try {
+      const res = await axios.get(
+        import.meta.env.VITE_SERVER + "/api/admin/getalljobseekers"
+      );
 
-        console.log(res);
+      console.log(res);
 
-        if (Array.isArray(res.data)) {
-          console.log(res.data);
-          setJobSeekers(res.data);
-        } else {
-          console.error("Received data is not an array:", res.data);
-        }
-      } catch (error) {
-        console.error("Error fetching job seekers:", error);
+      if (Array.isArray(res.data)) {
+        console.log(res.data);
+        setJobSeekers(res.data);
+      } else {
+        console.error("Received data is not an array:", res.data);
       }
-    };
-
+    } catch (error) {
+      console.error("Error fetching job seekers:", error);
+    }
+  };
+  useEffect(() => {
     fetchJobSeekers();
   }, []);
 
@@ -204,7 +203,12 @@ const JobSeeker_User = () => {
           <RowUser />
           <RowUser /> */}
           {filteredSortedJobSeekers?.map((jobseeker, idx) => (
-            <RowUser jobseeker={jobseeker} key={idx} idx={idx} />
+            <RowUser
+              fetchJobSeekers={fetchJobSeekers}
+              jobseeker={jobseeker}
+              key={idx}
+              idx={idx}
+            />
           ))}
         </tbody>
       </table>
