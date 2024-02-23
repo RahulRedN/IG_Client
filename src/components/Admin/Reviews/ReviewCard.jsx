@@ -4,8 +4,7 @@ import photo from "../../../../public/images/tutoring.jpeg";
 import { MdDelete } from "react-icons/md";
 import { useState } from "react";
 
-const ReviewCard = ({ review }) => {
-
+const ReviewCard = ({ review, toggleFavorite }) => {
   return (
     <div className="bg-white shadow-md flex gap-x-3 w-[40vw] py-3 pr-3 pl-2 rounded-md min-h-48">
       <div className="flex items-center justify-center border-r px-2">
@@ -17,6 +16,7 @@ const ReviewCard = ({ review }) => {
           } `}
           onClick={() => {
             // should be added to server
+            toggleFavorite(review.name);
           }}
           strokeWidth={1}
           size={30}

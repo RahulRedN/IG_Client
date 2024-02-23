@@ -70,6 +70,8 @@ const Pending_Company = () => {
                 name={company.name}
                 email={company.email}
                 status={company.status}
+                uid={company._id}
+                fetchPending={fetchPending}
               />
             );
           })}

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import Admin_login_form from "./Admin_login_form";
-import classes from './admin_login.module.css'
+import classes from "./admin_login.module.css";
 
 function Admin_Login() {
   return (
@@ -10,7 +10,7 @@ function Admin_Login() {
       <div className={classes.left_container}>
         {/* <p className="heading">ADMIN LOGIN PAGE</p> */}
         <img
-          src="public\assets\admin-animate-BLUE.svg"
+          src="/assets/admin-animate.svg"
           alt=""
           style={{ width: "30rem" }}
           className={classes.svg}

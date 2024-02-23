@@ -15,6 +15,7 @@ const PrivateRoute = ({ children, role }) => {
     return <Navigate to={role == "jobseeker" ? "/login" : "/loginCompany"} />;
 
   const decoded = jwtDecode(token);
+  console.log(decoded.role);
 
   const now = new Date(),
     exp = new Date(decoded.exp);
@@ -22,6 +23,14 @@ const PrivateRoute = ({ children, role }) => {
   if (exp > now) {
     localStorage.removeItem("token");
     return <Navigate to={role == "jobseeker" ? "/login" : "/loginCompany"} />;
+  }
+
+  if (decoded.role == "Admin" && role == "admin") {
+    return children;
+  } else if (decoded.role == "Admin" && role != "admin") {
+    return <Navigate to={"/admin/home"} />;
+  } else if (role == "Admin") {
+    return <Navigate to={"/"} />;
   }
 
   return decoded.role == role ? (

@@ -15,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { toast } from "react-hot-toast";
 
+import axios from "axios";
+
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, action }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -43,7 +45,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, action }) => {
   );
 };
 
-const PendingRowUser = ({ idx, name, email, status }) => {
+const PendingRowUser = ({ idx, name, email, status, uid, fetchPending }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
   const [action, setAction] = useState("");
@@ -53,11 +55,33 @@ const PendingRowUser = ({ idx, name, email, status }) => {
     onOpen();
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (action === "accept") {
-      toast.success("Company Accepted");
+      try {
+        const res = await axios.post(
+          import.meta.env.VITE_SERVER + "/api/admin/updateCompany",
+          { uid: uid, status: "accepted" }
+        );
+        if (res.status == 200) {
+          toast.success("Company Accepted");
+          fetchPending();
+        }
+      } catch (error) {
+        console.error(error);
+      }
     } else {
-      toast.error("Company Rejected");
+      try {
+        const res = await axios.post(
+          import.meta.env.VITE_SERVER + "/api/admin/updateCompany",
+          { uid: uid, status: "rejected" }
+        );
+        if (res.status == 200) {
+          toast.error("Company Rejected");
+          fetchPending();
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
     onClose();
   };
@@ -105,7 +129,12 @@ const PendingRowUser = ({ idx, name, email, status }) => {
           >
             <CheckIcon color={"#4ade80"} />
           </div>
-          <ConfirmationModal isOpen={isOpen} onClose={onClose} onConfirm={handleConfirm} action={action}/>
+          <ConfirmationModal
+            isOpen={isOpen}
+            onClose={onClose}
+            onConfirm={handleConfirm}
+            action={action}
+          />
         </div>
       </td>
     </tr>
