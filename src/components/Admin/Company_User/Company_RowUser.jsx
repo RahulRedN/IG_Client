@@ -37,13 +37,13 @@ const Company_RowUser = ({idx,name,email,status}) => {
         <h1 className="text-sm">{email}</h1>
       </td>
 
-      <td className="pl-3">
+      <td className="pl-5">
         <h1 className="text-sm">12000</h1>
       </td>
 
 
 
-      <td className="pl-2">
+      <td className="pl-5">
         <h1 className="text-sm">26976</h1>
       </td>
 
@@ -55,7 +55,7 @@ const Company_RowUser = ({idx,name,email,status}) => {
         </div>
       </td>
 
-      <td className="pl-2">
+      <td className="pl-5">
         <h1 className="text-sm text-gray-500">12/12/12</h1>
       </td>
 

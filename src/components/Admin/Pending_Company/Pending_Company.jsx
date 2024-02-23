@@ -41,14 +41,17 @@ const Pending_Company = () => {
       <table className="w-[99%] mt-4 bg-white">
         <thead className="bg-zinc-100 h-12">
           <tr>
-            <th className="text-left font-light text-base py-3 px-2 w-[10%]">
+            <th className="text-left font-light text-base py-3 px-6 w-[9%]">
               #
             </th>
-            <th className="text-left font-light text-sm py-3 px-2 w-[20%]">
+            <th className="text-left font-light text-sm py-3 px-2 w-[14%]">
               Company Name
             </th>
             <th className="text-left font-thin text-sm py-3 px-2 w-[15%]">
               Email
+            </th>
+            <th className="text-left font-thin text-sm py-3 px-2 w-[12%]">
+              Posted On
             </th>
             <th className="text-left font-thin text-sm py-3 px-2 w-[12%]">
               Status
