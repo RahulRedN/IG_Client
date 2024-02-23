@@ -55,7 +55,7 @@ const Company_User = () => {
             <th className="text-left font-light text-sm py-3 px-2 w-[16%]">
               Name
             </th>
-            <th className="text-left font-thin text-sm py-3 px-2 w-[16%]">
+            <th className="text-left font-thin text-sm py-3 px-2 w-[18%]">
               Email
             </th>
             <th className="text-left font-thin text-sm py-3 px-2 w-[14%]">

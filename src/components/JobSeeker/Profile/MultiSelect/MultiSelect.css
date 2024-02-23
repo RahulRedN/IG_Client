@@ -28,7 +28,7 @@
 .close {
   color: #aaa;
   float: right;
-  margin-right:10px ;
+  margin-right: 10px;
   font-size: 48px;
   font-weight: 200;
 }
@@ -44,7 +44,7 @@
   display: inline-block;
   padding: 10px 20px;
   font-size: 12px;
-  margin:10px 310px 10px 0px ;
+  margin: 10px 310px 10px 0px;
   font-weight: bold;
   width: 100px;
   text-align: center;
@@ -76,7 +76,6 @@
   margin-bottom: 5px;
   /* margin-left: -600px; */
 }
-
 
 .selected-skills {
   display: flex;
@@ -156,7 +155,7 @@
   list-style-type: none;
   padding: 0;
   margin-left: 0;
- 
+
   border: 1px solid #ccc;
   border-top: none;
   border-radius: 0 0 5px 5px;
@@ -169,8 +168,6 @@
   cursor: pointer;
 }
 
-
-
 .suggestions-list {
   max-height: 200px;
   overflow-y: auto;
@@ -179,9 +176,8 @@
   margin: 0;
   z-index: 1;
   border: 1px solid #ccc;
-  
+
   border-radius: 5px;
-  
 }
 
 .suggestions-list li {

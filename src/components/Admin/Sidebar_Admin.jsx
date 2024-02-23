@@ -158,9 +158,9 @@ const Sidebar_Admin = () => {
             style={({ isActive }) =>
               isActive
                 ? {
-                    background: "rgb(239 246 255)",
+                    background: "rgb(254 243 199)",
                     borderRadius: 5,
-                    color: "rgb(59 130 246)",
+                    color: "rgb(245 158 11)",
                   }
                 : {}
             }
