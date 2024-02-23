@@ -1,34 +1,33 @@
 /* eslint-disable no-unused-vars */
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Explore_Admin from "../../UI/Explore_Admin";
 import PendingRowUser from "./PendingRowUser";
 import { RiGraduationCapFill } from "react-icons/ri";
 
-const Pending_Company = () => {
-  const PCompany = [
-    {
-      name: "Facebook",
-      email: "facebook@gmail.com",
-      status: "pending",
-    },
-    {
-      name: "Google",
-      email: "google@gmail.com",
-      status: "pending",
-    },
-    {
-      name: "Youtube",
-      email: "youtube@gmail.com",
-      status: "pending",
-    },
-    {
-      name: "InspiringGO",
-      email: "topcompany@gmail.com",
-      status: "pending",
-    },
-  ];
+import axios from "axios";
 
-  const [idx,setIdx] = useState(0);
+const Pending_Company = () => {
+  const [PCompany, setPcompany] = useState([]);
+
+  const fetchPending = async () => {
+    try {
+      const res = await axios.get(
+        import.meta.env.VITE_SERVER + "/api/admin/pendingCompanies"
+      );
+
+      if (res.status == 200) {
+        setPcompany(res.data.companies);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPending();
+  }, []);
+
+  const [idx, setIdx] = useState(0);
 
   return (
     <div className="p-3 h-full">
@@ -57,14 +56,22 @@ const Pending_Company = () => {
               Status
             </th>
 
-            <th className="text-left font-thin text-sm py-3 pl-8 pr-4 w-[10%]">Action</th>
+            <th className="text-left font-thin text-sm py-3 pl-8 pr-4 w-[10%]">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
-          {PCompany.map((company,idx)=>{
+          {PCompany.map((company, idx) => {
             return (
-              <PendingRowUser key={idx+1} idx={idx+1} name={company.name} email={company.email} status={company.status}/>
-            )
+              <PendingRowUser
+                key={idx + 1}
+                idx={idx + 1}
+                name={company.name}
+                email={company.email}
+                status={company.status}
+              />
+            );
           })}
         </tbody>
       </table>
