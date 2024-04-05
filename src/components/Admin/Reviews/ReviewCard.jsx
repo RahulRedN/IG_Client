@@ -28,7 +28,7 @@ const ReviewCard = ({ review, toggleFavorite }) => {
           <div className="flex gap-x-3 items-center">
             <div className="rounded-full bg-red-300 w-fit">
               <img
-                src={photo} //should be a profilepic of user , will be coming in response
+                src={review.imageurl} //should be a profilepic of user , will be coming in response
                 className="h-10 w-10 object-cover rounded-full"
               />
             </div>
@@ -38,8 +38,8 @@ const ReviewCard = ({ review, toggleFavorite }) => {
             </h1>
           </div>
           <div className="flex items-center gap-x-1 text-red-500 hover:text-gray-600 hover:cursor-pointer">
-            <MdDelete size={22} className="text-inherit" />
-            <h1 className="text-lg text-inherit">Delete</h1>
+            {/* <MdDelete size={22} className="text-inherit" />
+            <h1 className="text-lg text-inherit">Delete</h1> */}
           </div>
         </div>
 
