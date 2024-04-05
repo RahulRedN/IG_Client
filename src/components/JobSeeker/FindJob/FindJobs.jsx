@@ -5,8 +5,6 @@ import Filters from "./Filters";
 
 import { setFav } from "../../../redux/jobseekerReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { collection, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../Firebase/config";
 import { useSearchParams } from "react-router-dom";
 import NoJob from "./NoJob";
 

@@ -126,6 +126,8 @@ const Router = createBrowserRouter(
         <Route path="reviews" element={<Reviews />} />
         <Route path="team" element={<Teams />} />
       </Route>
+
+      <Route path="*" element={<div>Not Found</div>} />
     </Route>
   )
 );
