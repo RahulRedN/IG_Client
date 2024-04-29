@@ -64,11 +64,7 @@ const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
           {
             headers: {
               "Content-Type": "application/json",
-<<<<<<< HEAD
-              "Authorization": "Bearer " + localStorage.getItem("token")
-=======
               Authorization: "Bearer " + localStorage.getItem("token"),
->>>>>>> 434c3b0acc27fd1aeee0cc54df16303a14841915
             },
           }
         );
