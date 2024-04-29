@@ -333,10 +333,12 @@ const UpdateInfoProfile_Job = () => {
                           })}
                           <div className="hover:underline hover:cursor-pointer hover:border-blue-200">
                             <a
-                            className="flex gap-x-1 items-center " 
-                            href={"https://www.google.com/"} target="__blank">
-                            <p>Resume</p>
-                              <ArrowRight size={20}/>
+                              className="flex gap-x-1 items-center "
+                              href={data?.resume}
+                              target="__blank"
+                            >
+                              <p>Resume</p>
+                              <ArrowRight size={20} />
                             </a>
                           </div>
                         </div>
