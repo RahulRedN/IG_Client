@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { IoIosWarning } from "react-icons/io";
 import axios from "axios";
-import { Upload } from "lucide-react";
+import { Check, Ticket, Upload } from "lucide-react";
 
 // eslint-disable-next-line react/prop-types
 const Reg_Form = ({ className }) => {
@@ -435,11 +435,11 @@ const Reg_Form = ({ className }) => {
       </div>
       <div className="mb-10 flex flex-col justify-center items-center">
         <label
-          className="flex items-center justify-center w-full px-10 py-3 gap-x-3 text-gray-500 border border-gray-200 cursor-pointer"
+          className={`${!!Data.resume && "bg-emerald-100"} flex items-center justify-center w-full px-10 py-3 gap-x-3 text-gray-500 border border-gray-200 cursor-pointer`}
           htmlFor="resume"
         >
-          <Upload size={22} />
-          <p className="text-base">Upload Resume</p>
+         { !!Data.resume ? <Check className="text-green-500" /> : <Upload size={22} />}
+          <p className={`${!!Data.resume && "text-green-500"} text-base`}>{!!Data.resume ? "Uploaded" :"Upload"} Resume</p>
         </label>
         <input
           id="resume"
@@ -449,6 +449,7 @@ const Reg_Form = ({ className }) => {
             SetData({ ...Data, resume: e.target.files[0] });
           }}
           className="hidden"
+          required
         />
       </div>
     </motion.div>,

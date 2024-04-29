@@ -59,6 +59,10 @@ const UpdateInfoProfile_Job = () => {
       return;
     }
 
+    if (!data.resume){
+      data.resume = userData.resume;
+    }
+
     try {
       const res = await axios.post(
         import.meta.env.VITE_SERVER + "/api/jobseeker/updateDetails",
@@ -122,6 +126,7 @@ const UpdateInfoProfile_Job = () => {
 
   return (
     <>
+      {console.log(data?.resume)}
       <div
         id="update"
         className="flex flex-col h-screen gap-y-6 max-w-[90%] mx-auto"
@@ -407,11 +412,20 @@ const UpdateInfoProfile_Job = () => {
                   <div className="-mt-5 mb-10 flex flex-col">
                     <p className="text-lg mb-2">Resume*</p>
                     <label
-                      className="flex items-center justify-center w-fit py-4 pl-4 pr-5 gap-x-3 text-gray-500 border-2 border-gray-300 cursor-pointer rounded-xl hover:bg-gray-100"
+                      className={
+                        (!data?.resume || typeof data?.resume === "string"
+                          ? "border-gray-300 hover:bg-gray-100"
+                          : "border-green-500 text-green-500 bg-green-100 ") +
+                        " flex items-center justify-center w-fit py-4 pl-4 pr-5 gap-x-3 text-gray-500 border-2 cursor-pointer rounded-xl"
+                      }
                       htmlFor="resume"
                     >
                       <Upload size={20} />
-                      <p className="text-base font-light">Update</p>
+                      <p className="text-base font-light">
+                        {!data?.resume || typeof data?.resume === "string"
+                          ? "Upload"
+                          : "Uploaded"}
+                      </p>
                     </label>
                     <input
                       id="resume"
