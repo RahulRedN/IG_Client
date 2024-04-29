@@ -12,7 +12,13 @@ const Pending_Company = () => {
   const fetchPending = async () => {
     try {
       const res = await axios.get(
-        import.meta.env.VITE_SERVER + "/api/admin/pendingCompanies"
+        import.meta.env.VITE_SERVER + "/api/admin/pendingCompanies",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
 
       if (res.status == 200) {

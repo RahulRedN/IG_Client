@@ -47,6 +47,12 @@ const FeedbackForm = ({ closeModal, appId }) => {
           rating,
           type: selectedCategory,
           feedback: userFeedback,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
         }
       );
       if (res.status == 200) {

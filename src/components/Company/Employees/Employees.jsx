@@ -10,9 +10,6 @@ import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { db } from "../../../Firebase/config";
-import { doc, collection, getDoc } from "firebase/firestore";
-
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

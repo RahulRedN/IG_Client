@@ -28,7 +28,13 @@ function Admin_login_form() {
     try {
       const res = await axios.post(
         import.meta.env.VITE_SERVER + "/api/auth/loginAdmin",
-        { email: email.value, password: pass.value }
+        { email: email.value, password: pass.value },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       localStorage.setItem("token", res.data.cookie);
 

@@ -9,7 +9,13 @@ const Reviews = () => {
   const fetchPending = async () => {
     try {
       const res = await axios.get(
-        import.meta.env.VITE_SERVER + "/api/admin/getAllTestimonials"
+        import.meta.env.VITE_SERVER + "/api/admin/getAllTestimonials",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
 
       if (res.status == 200) {

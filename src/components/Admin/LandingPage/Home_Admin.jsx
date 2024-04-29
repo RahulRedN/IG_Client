@@ -13,7 +13,13 @@ const Home_Admin = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          import.meta.env.VITE_SERVER + "/api/admin/homestats"
+          import.meta.env.VITE_SERVER + "/api/admin/homestats",
+          {
+            headers: {
+              "content-type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
         console.log(res.data);
         setDatastats(res.data);

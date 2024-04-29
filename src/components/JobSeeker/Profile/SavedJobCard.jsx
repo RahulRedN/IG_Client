@@ -13,8 +13,7 @@ import RoleCard from "../FindJob/RoleCard";
 import { setApplied } from "../../../redux/jobseekerReducer";
 
 import toast from "react-hot-toast";
-import { collection, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../Firebase/config";
+import axios from "axios";
 
 const SavedJobCard = ({ job }) => {
   const truncateString = (str, maxLength) => {
@@ -136,7 +135,13 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
       try {
         const res = await axios.post(
           import.meta.env.VITE_SERVER + "/api/jobseeker/applyJob",
-          { uid: user.uid, jid: job._id }
+          { uid: user.uid, jid: job._id },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
         if (res.status == 200) {
           dispatch(

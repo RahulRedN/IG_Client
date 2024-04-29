@@ -158,7 +158,13 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
     try {
       const res = await axios.post(
         import.meta.env.VITE_SERVER + "/api/company/updateJob",
-        newData
+        newData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       if (res.status == 200) {
         dispatch(updateJob(newData));

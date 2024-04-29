@@ -11,7 +11,13 @@ const Company_User = () => {
   const fetchCompany = async () => {
     try {
       const res = await axios.get(
-        import.meta.env.VITE_SERVER + "/api/admin/getallcompanies"
+        import.meta.env.VITE_SERVER + "/api/admin/getallcompanies",
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
 
       console.log(res);

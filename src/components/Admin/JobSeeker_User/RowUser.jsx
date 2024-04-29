@@ -30,9 +30,15 @@ const RowUser = ({ jobseeker, idx, fetchJobSeekers }) => {
 
   const deleteHandler = async () => {
     try {
-      const res = await axios.post(
+      const res = await axios.delete(
         import.meta.env.VITE_SERVER + "/api/admin/deleteUser",
-        { uid: jobseeker._id }
+        { uid: jobseeker._id },
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       if (res.status == 200) {
         toast.success("User Deleted!");

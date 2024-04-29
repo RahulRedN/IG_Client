@@ -5,8 +5,6 @@ import Filters from "./Filters";
 
 import { setFav } from "../../../redux/jobseekerReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { collection, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../Firebase/config";
 import { useSearchParams } from "react-router-dom";
 import NoJob from "./NoJob";
 
@@ -26,12 +24,14 @@ const FindJobs = () => {
     setState({
       data: user?.data,
       jobs: jobId
-        ? user?.jobs.filter((job) => job._id == jobId)
+        ? user?.jobs.filter((job) => job._id == jobId && job.vacancies != 0)
         : filter
         ? user?.jobs.filter((job) =>
-            job.position.toLowerCase().includes(filter.toLowerCase())
+            job.position
+              .toLowerCase()
+              .includes(filter.toLowerCase() && job.vacancies != 0)
           )
-        : user?.jobs,
+        : user?.jobs.filter((job) => job.vacancies != 0),
     });
   }, [user]);
 

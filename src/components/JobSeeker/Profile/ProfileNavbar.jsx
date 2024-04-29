@@ -2,7 +2,6 @@ import classes from "./ProfileNavbar.module.css";
 
 import { FaBell, FaSearch } from "react-icons/fa";
 import { IoMail, IoPerson } from "react-icons/io5";
-import { useAuth } from "../../../Firebase/AuthContexts";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 

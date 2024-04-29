@@ -1,3 +1,18 @@
+/**
+ * The `LoginCompany` component is responsible for rendering the login and registration forms for company users.
+ * It handles user input validation, login and registration functionality, and navigation to the appropriate pages based on the user's role.
+ *
+ * The component uses various UI components from the Chakra UI library, as well as the `framer-motion` library for animations.
+ * It also utilizes the `axios` library for making HTTP requests to the server for login and registration.
+ *
+ * The component manages the state of the login and registration forms, as well as various error states. It also handles loading states for the login and registration processes.
+ *
+ * The component renders either the login form or the registration form based on the value of the `isClicked` state. It also includes a link to the home page and a checkbox for "Remember me" functionality.
+ *
+ * The `loginHandler` function is responsible for handling the login process, including validating the input fields, making the login request to the server, and navigating to the appropriate page based on the user's role.
+ *
+ * The `registerHandler` function is responsible for handling the registration process, including validating the input fields, making the registration request to the server, and displaying a success message.
+ */
 /* eslint-disable no-unused-vars */
 import logincompany from "./Resources/logincompany.jpg";
 import classes from "../LoginCompany/Styles/LoginCompany.module.css";
