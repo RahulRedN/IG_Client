@@ -12,7 +12,17 @@ const PrivateRoute = ({ children, role }) => {
   const token = localStorage.getItem("token");
 
   if (!token)
-    return <Navigate to={role == "jobseeker" ? "/login" : "/loginCompany"} />;
+    return (
+      <Navigate
+        to={
+          role == "jobseeker"
+            ? "/login"
+            : role == "admin"
+            ? "/admin/login"
+            : "/loginCompany"
+        }
+      />
+    );
 
   const decoded = jwtDecode(token);
   console.log(decoded.role);

@@ -79,7 +79,13 @@ const JobSeeker_User = () => {
   const fetchJobSeekers = async () => {
     try {
       const res = await axios.get(
-        import.meta.env.VITE_SERVER + "/api/admin/getalljobseekers"
+        import.meta.env.VITE_SERVER + "/api/admin/getalljobseekers",
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
 
       console.log(res);

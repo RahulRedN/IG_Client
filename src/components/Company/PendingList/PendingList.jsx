@@ -39,9 +39,15 @@ const PendingList = ({ status }) => {
 
   const acceptHandler = async (appId, jobId) => {
     try {
-      const res = await axios.post(
+      const res = await axios.put(
         import.meta.env.VITE_SERVER + "/api/company/updateJobRequest",
-        { appId: appId, action: "accept" }
+        { appId: appId, action: "accept" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       if (res.status == 200) {
         toast.success("User Accepted!");
@@ -55,9 +61,15 @@ const PendingList = ({ status }) => {
 
   const rejectHandler = async (appId, jobId) => {
     try {
-      const res = await axios.post(
+      const res = await axios.put(
         import.meta.env.VITE_SERVER + "/api/company/updateJobRequest",
-        { appId: appId, action: "reject" }
+        { appId: appId, action: "reject" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       if (res.status == 200) {
         toast.success("User Rejected!");

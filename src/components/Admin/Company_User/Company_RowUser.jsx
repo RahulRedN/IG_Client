@@ -30,9 +30,15 @@ const Company_RowUser = ({
 
   const deleteHandler = async () => {
     try {
-      const res = await axios.post(
+      const res = await axios.delete(
         import.meta.env.VITE_SERVER + "/api/admin/deleteCompany",
-        { uid: uid }
+        { uid: uid },
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       if (res.status == 200) {
         toast.success("Company Deleted!");

@@ -24,12 +24,14 @@ const FindJobs = () => {
     setState({
       data: user?.data,
       jobs: jobId
-        ? user?.jobs.filter((job) => job._id == jobId)
+        ? user?.jobs.filter((job) => job._id == jobId && job.vacancies != 0)
         : filter
         ? user?.jobs.filter((job) =>
-            job.position.toLowerCase().includes(filter.toLowerCase())
+            job.position
+              .toLowerCase()
+              .includes(filter.toLowerCase() && job.vacancies != 0)
           )
-        : user?.jobs,
+        : user?.jobs.filter((job) => job.vacancies != 0),
     });
   }, [user]);
 

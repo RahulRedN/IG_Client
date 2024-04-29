@@ -62,7 +62,13 @@ const UpdateInfoProfile_Job = () => {
     try {
       const res = await axios.post(
         import.meta.env.VITE_SERVER + "/api/jobseeker/updateDetails",
-        data
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       if (res.status == 200) {
         dispatch(setData({ data: data }));
@@ -83,7 +89,13 @@ const UpdateInfoProfile_Job = () => {
         image.append("uid", data.uid);
         const res = await axios.post(
           import.meta.env.VITE_SERVER + "/api/jobseeker/updatePhoto",
-          image
+          image,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
         if (res.status == 200) {
           dispatch(setData({ data: { ...data, img: res.data.img } }));

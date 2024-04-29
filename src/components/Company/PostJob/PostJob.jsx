@@ -114,7 +114,13 @@ const PostJob = () => {
       };
       const res = await axios.post(
         import.meta.env.VITE_SERVER + "/api/company/postJob",
-        jobData
+        jobData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       if (res.status == 200) {
         dispatch(

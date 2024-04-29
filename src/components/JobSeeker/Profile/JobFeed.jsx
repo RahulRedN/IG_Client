@@ -22,7 +22,13 @@ const JobFeed = () => {
       try {
         const res = await axios.post(
           import.meta.env.VITE_SERVER + "/api/jobseeker/noofapplications",
-          { jid: jobIds }
+          { jid: jobIds },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
         if (res.status == 200) {
           setApplStatus(res.data.applications);

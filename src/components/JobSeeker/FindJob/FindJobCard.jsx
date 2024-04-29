@@ -23,8 +23,6 @@ import RoleCard from "./RoleCard";
 import { IoCloseCircle } from "react-icons/io5";
 import toast from "react-hot-toast";
 
-import { collection, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../Firebase/config";
 import { useDispatch, useSelector } from "react-redux";
 import { setApplied } from "../../../redux/jobseekerReducer";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +64,11 @@ const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
           {
             headers: {
               "Content-Type": "application/json",
+<<<<<<< HEAD
               "Authorization": "Bearer " + localStorage.getItem("token")
+=======
+              Authorization: "Bearer " + localStorage.getItem("token"),
+>>>>>>> 434c3b0acc27fd1aeee0cc54df16303a14841915
             },
           }
         );
@@ -92,7 +94,14 @@ const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
             "/api/jobseeker/removeFav?uid=" +
             uid +
             "&jid=" +
-            job._id
+            job._id,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
 
         if (res.status == 200) {
@@ -102,6 +111,7 @@ const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
         }
       }
     } catch (error) {
+      toast.error("Something went wrong!");
       console.log(error);
     }
   };
@@ -298,7 +308,13 @@ const Modals = ({ modalIsOpen, closeModal, customStyles, job }) => {
       try {
         const res = await axios.post(
           import.meta.env.VITE_SERVER + "/api/jobseeker/applyJob",
-          { uid: user.uid, jid: job._id }
+          { uid: user.uid, jid: job._id },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
         if (res.status == 200) {
           dispatch(

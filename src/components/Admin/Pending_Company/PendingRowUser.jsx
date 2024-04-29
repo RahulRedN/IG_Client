@@ -58,9 +58,15 @@ const PendingRowUser = ({ idx, name, email, status, uid, fetchPending }) => {
   const handleConfirm = async () => {
     if (action === "accept") {
       try {
-        const res = await axios.post(
+        const res = await axios.put(
           import.meta.env.VITE_SERVER + "/api/admin/updateCompany",
-          { uid: uid, status: "accepted" }
+          { uid: uid, status: "accepted" },
+          {
+            headers: {
+              "content-type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
         if (res.status == 200) {
           toast.success("Company Accepted");
@@ -71,9 +77,15 @@ const PendingRowUser = ({ idx, name, email, status, uid, fetchPending }) => {
       }
     } else {
       try {
-        const res = await axios.post(
+        const res = await axios.put(
           import.meta.env.VITE_SERVER + "/api/admin/updateCompany",
-          { uid: uid, status: "rejected" }
+          { uid: uid, status: "rejected" },
+          {
+            headers: {
+              "content-type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
         );
         if (res.status == 200) {
           toast.error("Company Rejected");

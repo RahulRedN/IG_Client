@@ -22,11 +22,20 @@ const TestimonialForm = ({ closeModal }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = { message: testimonialData.testimonial, uid: uid };
+    const data = {
+      message: testimonialData.testimonial,
+      uid: uid,
+    };
     try {
       const res = await axios.post(
         import.meta.env.VITE_SERVER + "/api/jobseeker/testimonial",
-        data
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
 
       if (res.status == 200) {

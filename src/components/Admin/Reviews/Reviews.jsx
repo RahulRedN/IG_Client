@@ -1,46 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 
-const Reviews = () => {
-  // const mockReviews =
+import axios from "axios";
 
-  const [mockReviews, setMockReviews] = useState([
-    {
-      name: "mockPavan",
-      ts: "2024/08/08",
-      fav: "true",
-      reviewContent:
-        "The job seeking platform lacked some advanced features, and the response time from employers was a bit slow. However, the job matching algorithm was fairly accurate, providing relevant job suggestions based on my profile.",
-    },
-    {
-      name: "mockJoe",
-      ts: "2024/12/08",
-      fav: "false",
-      reviewContent:
-        "I found the job seeking website to be user-friendly with a clean interface, making it easy to navigate and apply for positions. The search filters were effective, and I appreciated the timely job alerts.",
-    },
-  ]);
+const Reviews = () => {
+  const [Reviews, setReviews] = useState([]);
+
+  const fetchPending = async () => {
+    try {
+      const res = await axios.get(
+        import.meta.env.VITE_SERVER + "/api/admin/getAllTestimonials",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+
+      if (res.status == 200) {
+        setReviews(res.data.testimonials);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPending();
+  }, []);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("desc");
   const [showFavorites, setShowFavorites] = useState("all");
 
   // Filtered and sorted reviews based on search query, timestamp, and favorite status
-  const filteredReviews = mockReviews
-    .filter((review) => {
-      return review.name.toLowerCase().includes(searchQuery.toLowerCase());
-    })
+  const filteredReviews = Reviews.filter((review) => {
+    return review.name.toLowerCase().includes(searchQuery.toLowerCase());
+  })
     .filter((review) => {
       if (showFavorites === "favorites") {
-        return review.fav == "true";
+        return review.fav == true;
       } else if (showFavorites === "notFavorites") {
-        return review.fav == "false";
+        return review.fav == false;
       } else {
         return review; // Show all reviews
       }
     })
     .sort((a, b) => {
-      const tsA = new Date(a.ts);
-      const tsB = new Date(b.ts);
+      const tsA = new Date(a.createdAt);
+      const tsB = new Date(b.createdAt);
 
       if (sortBy === "desc") {
         return tsB - tsA;
@@ -51,17 +60,18 @@ const Reviews = () => {
 
   const toggleFavorite = (name) => {
     // Find the index of the review with the given name
-    const index = mockReviews.findIndex((review) => review.name === name);
+    const index = Reviews.findIndex((review) => review.name === name);
     if (index !== -1) {
       // Create a copy of the mockReviews array
-      const updatedReviews = [...mockReviews];
+      const updatedReviews = [...Reviews];
       // Toggle the favorite status of the review at the given index
       updatedReviews[index] = {
         ...updatedReviews[index],
-        fav: updatedReviews[index].fav === "true" ? "false" : "true",
+        fav: updatedReviews[index].fav ? false : true,
       };
+      console.log(updatedReviews);
       // Update the state with the modified reviews array
-      setMockReviews(updatedReviews);
+      setReviews(updatedReviews);
     }
   };
 

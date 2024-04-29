@@ -18,9 +18,15 @@ const PostedJobs = () => {
 
   const deleteJobHandler = async (jobId) => {
     try {
-      const res = await axios.post(
+      const res = await axios.delete(
         import.meta.env.VITE_SERVER + "/api/company/deleteJob",
-        { jobId: jobId, uid }
+        { jobId: jobId, uid },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
       );
       if (res.status == 200) {
         dispatch(removeJob(jobId));

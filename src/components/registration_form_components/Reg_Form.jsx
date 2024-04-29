@@ -7,8 +7,6 @@ import NextPrevButton from "./NextPrevButton";
 import countryList from "./countryList";
 
 import { motion } from "framer-motion";
-import { useAuth } from "../../Firebase/AuthContexts";
-import { addDoc } from "firebase/firestore";
 
 import toast from "react-hot-toast";
 import { IoIosWarning } from "react-icons/io";

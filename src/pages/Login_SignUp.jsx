@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 import SignInForm from "../components/Login/SignInForm";
 import SignUpForm from "../components/Login/SignUpForm";
-import { useAuth } from "../Firebase/AuthContexts";
 
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";

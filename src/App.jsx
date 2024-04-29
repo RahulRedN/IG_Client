@@ -10,8 +10,6 @@ import {
 
 import { Toaster } from "react-hot-toast";
 
-import { AuthContexts } from "./Firebase/AuthContexts";
-
 import Home from "./pages/Home";
 import HomePage from "./components/homepage_compos/HomePage";
 import ContactUs_Home from "./components/homepage_compos/ContactUs_Home/ContactUs_Home";
@@ -134,12 +132,10 @@ const Router = createBrowserRouter(
 
 function App() {
   return (
-    <AuthContexts>
-      <ChakraProvider>
-        <Toaster />
-        <RouterProvider router={Router} />
-      </ChakraProvider>
-    </AuthContexts>
+    <ChakraProvider>
+      <Toaster />
+      <RouterProvider router={Router} />
+    </ChakraProvider>
   );
 }
 
