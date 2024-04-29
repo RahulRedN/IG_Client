@@ -13,6 +13,7 @@ import { addDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { IoIosWarning } from "react-icons/io";
 import axios from "axios";
+import { Upload } from "lucide-react";
 
 // eslint-disable-next-line react/prop-types
 const Reg_Form = ({ className }) => {
@@ -48,6 +49,7 @@ const Reg_Form = ({ className }) => {
     password1: "",
     password2: "",
     image: null,
+    resume: null,
   });
 
   const nextTab = (event) => {
@@ -110,6 +112,7 @@ const Reg_Form = ({ className }) => {
       yoa,
       yoc,
       image,
+      resume,
     } = Data;
 
     const newData = new FormData();
@@ -127,6 +130,7 @@ const Reg_Form = ({ className }) => {
     newData.append("yoa", yoa);
     newData.append("yoc", yoc);
     newData.append("image", image);
+    newData.append("resume", resume);
 
     try {
       const api = axios.create({
@@ -429,6 +433,24 @@ const Reg_Form = ({ className }) => {
             SetData({ ...Data, password2: event.target.value })
           }
           className="w-full text-lg px-4 py-3 rounded-md text-gray-700 font-medium border-solid border-2 border-gray-200"
+        />
+      </div>
+      <div className="mb-10 flex flex-col justify-center items-center">
+        <label
+          className="flex items-center justify-center w-full px-10 py-3 gap-x-3 text-gray-500 border border-gray-200 cursor-pointer"
+          htmlFor="resume"
+        >
+          <Upload size={22} />
+          <p className="text-base">Upload Resume</p>
+        </label>
+        <input
+          id="resume"
+          name="resume"
+          type="file"
+          onChange={(e) => {
+            SetData({ ...Data, resume: e.target.files[0] });
+          }}
+          className="hidden"
         />
       </div>
     </motion.div>,

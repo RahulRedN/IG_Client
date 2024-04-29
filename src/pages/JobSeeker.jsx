@@ -31,7 +31,13 @@ const JobSeeker = () => {
       const uid = decoded.uid;
       try {
         const res = await axios.get(
-          import.meta.env.VITE_SERVER + "/api/jobseeker/user?uid=" + uid
+          import.meta.env.VITE_SERVER + "/api/jobseeker/user?uid=" + uid,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+          }
         );
 
         if (res.status == 200) {

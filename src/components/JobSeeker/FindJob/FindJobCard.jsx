@@ -61,8 +61,25 @@ const FindJobCard = ({ job, fav, uid, setFavHandler }) => {
             "/api/jobseeker/addFav?uid=" +
             uid +
             "&jid=" +
-            job._id
+            job._id,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+          }
         );
+
+        // const res = await axios.post(import.meta.env.VITE_SERVER + "/api/jobseeker/addFav", {
+        //   uid: uid,
+        //   jid: job._id
+        // }, {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     "A"
+        //   }
+        // });
 
         if (res.status == 200) {
           toast("Added to Favourites!", { icon: "❤️" });

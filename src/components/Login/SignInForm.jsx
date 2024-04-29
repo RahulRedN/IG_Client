@@ -22,6 +22,7 @@ const SignInForm = () => {
           import.meta.env.VITE_SERVER + "/api/auth/loginJobseeker",
           credentials
         );
+        console.log(res.cookie);
         localStorage.setItem("token", res.data.cookie);
         if (res.status === 200) {
           toast.success("Logged in Successful");

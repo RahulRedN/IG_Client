@@ -459,3 +459,23 @@
     left: 50%;
   }
 }
+
+/* input[type="file"]:hover {
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  border: none;
+  padding: 15px 10px;
+  border-radius: 0.2em;
+  background-color: #a29bfe;
+  transition: 1s;
+  color: #ffffff;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #6c5ce7;
+  cursor: pointer;
+} */
+
+

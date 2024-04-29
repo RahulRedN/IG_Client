@@ -9,6 +9,7 @@ import { setData } from "../../../redux/jobseekerReducer";
 
 import toast from "react-hot-toast";
 import axios from "axios";
+import { ArrowLeft, ArrowRight, Upload } from "lucide-react";
 
 const UpdateInfoProfile_Job = () => {
   const userData = useSelector((state) => state.jobseeker.data);
@@ -214,32 +215,34 @@ const UpdateInfoProfile_Job = () => {
                   </div>
 
                   {!edit && (
-                    <div className="min-w-[47%]">
-                      <label
-                        htmlFor="title"
-                        className="block text-gray-700 text-sm font-bold mb-1 tracking-wider"
-                      >
-                        Email{edit ? "*" : ""}
-                      </label>
-                      <input
-                        type="email"
-                        name="Email"
-                        disabled={!edit}
-                        value={data?.email}
-                        onChange={(e) =>
-                          setDataUser((state) => ({
-                            ...state,
-                            email: e.target.value,
-                          }))
-                        }
-                        placeholder="Enter new Email"
-                        className={`w-full px-3 py-2 ${
-                          edit
-                            ? "border bg-gray-50 rounded-md"
-                            : "bg-gray-100 rounded-lg"
-                        } placeholder:text-gray-500 border-gray-600 outline-none text-gray-900  focus:outline-none focus:border-blue-400`}
-                      />
-                    </div>
+                    <>
+                      <div className="min-w-[47%]">
+                        <label
+                          htmlFor="title"
+                          className="block text-gray-700 text-sm font-bold mb-1 tracking-wider"
+                        >
+                          Email{edit ? "*" : ""}
+                        </label>
+                        <input
+                          type="email"
+                          name="Email"
+                          disabled={!edit}
+                          value={data?.email}
+                          onChange={(e) =>
+                            setDataUser((state) => ({
+                              ...state,
+                              email: e.target.value,
+                            }))
+                          }
+                          placeholder="Enter new Email"
+                          className={`w-full px-3 py-2 ${
+                            edit
+                              ? "border bg-gray-50 rounded-md"
+                              : "bg-gray-100 rounded-lg"
+                          } placeholder:text-gray-500 border-gray-600 outline-none text-gray-900  focus:outline-none focus:border-blue-400`}
+                        />
+                      </div>
+                    </>
                   )}
 
                   <div className="min-w-[47%]">
@@ -304,7 +307,7 @@ const UpdateInfoProfile_Job = () => {
                         >
                           Skills{edit ? "*" : ""}
                         </label>
-                        <div className="mt-2 flex gap-5">
+                        <div className="mt-2 flex gap-5 items-center">
                           {data?.skills?.map((role, index) => {
                             const [id, name, stage] = role.split(";");
                             return (
@@ -316,6 +319,14 @@ const UpdateInfoProfile_Job = () => {
                               </p>
                             );
                           })}
+                          <div className="hover:underline hover:cursor-pointer hover:border-blue-200">
+                            <a
+                            className="flex gap-x-1 items-center " 
+                            href={"https://www.google.com/"} target="__blank">
+                            <p>Resume</p>
+                              <ArrowRight size={20}/>
+                            </a>
+                          </div>
                         </div>
 
                         <label
@@ -378,6 +389,31 @@ const UpdateInfoProfile_Job = () => {
                     )}
                   </div>
                 </div>
+                {edit && (
+                  <div className="-mt-5 mb-10 flex flex-col">
+                    <p className="text-lg mb-2">Resume*</p>
+                    <label
+                      className="flex items-center justify-center w-fit py-4 pl-4 pr-5 gap-x-3 text-gray-500 border-2 border-gray-300 cursor-pointer rounded-xl hover:bg-gray-100"
+                      htmlFor="resume"
+                    >
+                      <Upload size={20} />
+                      <p className="text-base font-light">Update</p>
+                    </label>
+                    <input
+                      id="resume"
+                      name="resume"
+                      type="file"
+                      onChange={(e) =>
+                        setDataUser((state) => ({
+                          ...state,
+                          resume: e.target.files[0],
+                        }))
+                      }
+                      className="hidden"
+                    />
+                  </div>
+                )}
+
                 {edit ? (
                   <div className="flex gap-3">
                     <motion.button
