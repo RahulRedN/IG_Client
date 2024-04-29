@@ -103,6 +103,13 @@ const ReviewPage = () => {
       type: "Suggestion",
       role: "ML Enginner",
     },
+    {
+      feedback:"Simple and so much helpful",
+      rating: 3,
+      userName: "Sonish",
+      type: "Feedback",
+      role: "Web Developer",
+    }
   ];
   return (
     <div
