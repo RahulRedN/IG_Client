@@ -1,7 +1,7 @@
 import classes from "../FeedBack/css/FeedbackForm.module.css";
 import { useState } from "react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import Radios from "./radios";
+import Radios from "./Radios.jsx";
 
 import StarRating from "./StarRating/StarRating";
 import axios from "axios";
