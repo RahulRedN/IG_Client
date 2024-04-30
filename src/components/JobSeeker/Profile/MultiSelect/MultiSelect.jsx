@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Pill from "./pill/Pill";
 import SkillStageModal from "./SkillStageModal";
 import "./MultiSelect.css";
-import mockData from "./MockData";
+import mockData from "./mockData.js";
 
 import axios from "axios";
 import { useSelector } from "react-redux";
