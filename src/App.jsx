@@ -20,7 +20,7 @@ import JobSeeker from "./pages/JobSeeker";
 import ContactUs from "./components/JobSeeker/ContactUs/ContactUs_jobseeker";
 import JLanding from "./components/JobSeeker/Home/JobLanding";
 
-import Admin_Login from "./components/admin_login/Admin_Login";
+import Admin_Login from "./components/admin_login/Admin_login.jsx";
 
 import Company from "./pages/Company";
 import Login_SignUp from "./pages/Login_SignUp";
