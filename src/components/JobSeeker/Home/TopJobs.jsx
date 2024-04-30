@@ -44,15 +44,18 @@ const TopJobs = () => {
           flexDirection={"row"}
         >
           <Slider {...settings}>
-            {jobs?.slice(0, Math.min(7, jobs.length)).map((job, idx) => (
-              <TopJobCard
-                key={idx}
-                position={job.position}
-                jobDesc={job.jobDesc}
-                jobId={job._id}
-                sticker={!job.location}
-              />
-            ))}
+            {jobs
+              ?.filter((job) => job.vacancies != 0)
+              .slice(0, Math.min(7, jobs.length))
+              .map((job, idx) => (
+                <TopJobCard
+                  key={idx}
+                  position={job.position}
+                  jobDesc={job.jobDesc}
+                  jobId={job._id}
+                  sticker={!job.location}
+                />
+              ))}
           </Slider>
         </Box>
       </div>

@@ -59,23 +59,31 @@ const UpdateInfoProfile_Job = () => {
       return;
     }
 
-    if (!data.resume){
+    if (!data.resume) {
       data.resume = userData.resume;
     }
+
+    const daata = new FormData();
+    daata.append("fname", data.fname);
+    daata.append("mobile", data.mobile);
+    daata.append("address", data.address);
+    daata.append("uid", data.uid);
+    daata.append("resume", data.resume);
 
     try {
       const res = await axios.post(
         import.meta.env.VITE_SERVER + "/api/jobseeker/updateDetails",
-        data,
+        daata,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }
       );
       if (res.status == 200) {
-        dispatch(setData({ data: data }));
+        console.log(data, res.data.path);
+        const newData = { ...data, resume: res.data.path };
+        dispatch(setData({ data: newData }));
         toast.success("Profile Updated!");
       }
       setEdit((state) => !state);
@@ -96,7 +104,6 @@ const UpdateInfoProfile_Job = () => {
           image,
           {
             headers: {
-              "Content-Type": "application/json",
               Authorization: "Bearer " + localStorage.getItem("token"),
             },
           }
@@ -126,7 +133,6 @@ const UpdateInfoProfile_Job = () => {
 
   return (
     <>
-      {console.log(data?.resume)}
       <div
         id="update"
         className="flex flex-col h-screen gap-y-6 max-w-[90%] mx-auto"
