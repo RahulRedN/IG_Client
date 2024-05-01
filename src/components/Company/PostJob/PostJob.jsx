@@ -124,7 +124,7 @@ const PostJob = () => {
       );
       if (res.status == 200) {
         dispatch(
-          addJob({ ...jobData, id: res.data._id, createdAt: new Date() })
+          addJob({ ...jobData, _id: res.data.jobId, createdAt: new Date() })
         );
         toast.success("Job Posted!");
         nav("/company/postedjobs");
