@@ -21,8 +21,137 @@ const Home_Admin = () => {
             },
           }
         );
-        console.log(res.data);
-        setDatastats(res.data);
+        if (res.status == 200) {
+          const currentDate = new Date();
+          const USR = [res.data.users.length];
+          const CCR = [
+            res.data.companies.filter((comp) => comp.status == "accepted")
+              .length,
+          ];
+          const ICR = [
+            res.data.companies.filter((comp) => comp.status == "pending")
+              .length,
+          ];
+          const RCR = [res.data.reviews.length];
+
+          const prevMonthuserData = res.data.users.filter((item) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate.getMonth() === currentDate.getMonth() - 1 &&
+              createdAtDate.getFullYear() === currentDate.getFullYear()
+            );
+          }).length;
+
+          // Filter data for the current month
+          const currentMonthuserData = res.data.users.filter((item) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate.getMonth() === currentDate.getMonth() &&
+              createdAtDate.getFullYear() === currentDate.getFullYear()
+            );
+          }).length;
+
+          const prevMonthIncomingcompanieData = res.data.companies.filter(
+            (item) => {
+              const createdAtDate = new Date(item.createdAt);
+              return (
+                createdAtDate.getMonth() === currentDate.getMonth() - 1 &&
+                createdAtDate.getFullYear() === currentDate.getFullYear() &&
+                item.status == "pending"
+              );
+            }
+          ).length;
+
+          // Filter data for the current month
+          const currentMonthIncomingcompanieData = res.data.companies.filter(
+            (item) => {
+              const createdAtDate = new Date(item.createdAt);
+              return (
+                createdAtDate.getMonth() === currentDate.getMonth() &&
+                createdAtDate.getFullYear() === currentDate.getFullYear() &&
+                item.status == "pending"
+              );
+            }
+          ).length;
+
+          const prevMonthCurrentcompanieData = res.data.companies.filter(
+            (item) => {
+              const createdAtDate = new Date(item.createdAt);
+              return (
+                createdAtDate.getMonth() === currentDate.getMonth() - 1 &&
+                createdAtDate.getFullYear() === currentDate.getFullYear() &&
+                item.status == "accepted"
+              );
+            }
+          ).length;
+
+          // Filter data for the current month
+          const currentMonthCurrentcompanieData = res.data.companies.filter(
+            (item) => {
+              const createdAtDate = new Date(item.createdAt);
+              return (
+                createdAtDate.getMonth() === currentDate.getMonth() &&
+                createdAtDate.getFullYear() === currentDate.getFullYear() &&
+                item.status == "accepted"
+              );
+            }
+          ).length;
+
+          const prevMonthreviewData = res.data.reviews.filter((item) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate.getMonth() === currentDate.getMonth() - 1 &&
+              createdAtDate.getFullYear() === currentDate.getFullYear()
+            );
+          }).length;
+
+          // Filter data for the current month
+          const currentMonthreviewData = res.data.reviews.filter((item) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate.getMonth() === currentDate.getMonth() &&
+              createdAtDate.getFullYear() === currentDate.getFullYear()
+            );
+          });
+
+          const calculatePercentageChange = (current, previous) => {
+            if (previous === 0) return current === 0 ? 0 : 100;
+            return ((current - previous) / previous) * 100;
+          };
+
+          USR.push(
+            calculatePercentageChange(currentMonthuserData, prevMonthuserData)
+          );
+          CCR.push(
+            calculatePercentageChange(
+              currentMonthCurrentcompanieData,
+              prevMonthCurrentcompanieData
+            )
+          );
+          ICR.push(
+            calculatePercentageChange(
+              currentMonthIncomingcompanieData,
+              prevMonthIncomingcompanieData
+            )
+          );
+          RCR.push(
+            calculatePercentageChange(
+              currentMonthreviewData,
+              prevMonthreviewData
+            )
+          );
+
+          setDatastats({
+            recentusers: res.data.recentusers,
+            recentcompanies: res.data.recentcompanies,
+            USR,
+            CCR,
+            ICR,
+            RCR,
+            users: res.data.users,
+            companies: res.data.companies,
+          });
+        }
       } catch (error) {
         console.log(error);
       }
@@ -44,13 +173,18 @@ const Home_Admin = () => {
           <h1 className="text-center pt-3 text-lg font-bold">
             Current State of Monthly Users
           </h1>
-          <LineChart />
+          {datastats && (
+            <LineChart
+              users={datastats?.users}
+              companies={datastats?.companies}
+            />
+          )}
         </div>
         <div className="mt-4 flex-[2] bg-white">
           <h1 className="pt-6 text-center text-lg font-bold">
             Accepted/Rejected Requests (Company s)
           </h1>
-          <PieChart />
+          <PieChart companies={datastats?.companies} />
         </div>
       </div>
       <div className="mt-8 flex gap-x-8">
@@ -70,7 +204,7 @@ const Home_Admin = () => {
       <div className="mt-8 flex justify-between">
         <p>
           Copyright <span className="text-lg text-black">©</span> InspiringGo
-          2023
+          2024
         </p>
       </div>
     </div>

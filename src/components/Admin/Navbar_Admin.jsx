@@ -8,10 +8,30 @@ import {
   Button,
 } from "@chakra-ui/react";
 import photo from "../../../public/images/IG_logo_Dark.png";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 const Navbar_Admin = () => {
+  const nav = useNavigate();
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.get(
+        import.meta.env.VITE_SERVER + "/api/auth/logout"
+      );
+
+      if (res.status == 200) {
+        localStorage.removeItem("token");
+        toast.success("Logout Successful!");
+        nav("/admin/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="h-13">
+      <Toaster position="top-center" />
       <div className="flex justify-between items-center h-full px-2">
         <div className="relative flex items-center ">
           <Search
@@ -25,12 +45,6 @@ const Navbar_Admin = () => {
           />
         </div>
         <div className="flex items-center p-3 gap-x-4">
-          <div className="relative">
-            <p className="absolute bg-amber-500 text-xs rounded-full h-3.5 w-3.5 text-center left-3 bottom-4">
-              5
-            </p>
-            <BellRing />
-          </div>
           <Menu>
             <MenuButton as={Button} colorScheme="white">
               <div className="bg-gray-200 hover:bg-gray-300 rounded-lg p-5 flex items-center justify-center">
@@ -39,9 +53,11 @@ const Navbar_Admin = () => {
             </MenuButton>
             <MenuList minWidth={160}>
               <MenuGroup title="Welcome Admin!" fontSize={13}>
-                <MenuItem>Team</MenuItem>
-                <MenuItem _hover={{ bg: "red.100", textColor: "red.500" }}>
-                  LogOut{" "}
+                <MenuItem
+                  _hover={{ bg: "red.100", textColor: "red.500" }}
+                  onClick={logoutHandler}
+                >
+                  LogOut
                 </MenuItem>
               </MenuGroup>
             </MenuList>

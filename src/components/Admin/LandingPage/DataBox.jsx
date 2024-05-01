@@ -37,8 +37,6 @@ const DataBox = ({ title, UpDown, num, No }) => {
     ],
   ]);
 
-  console.log(colors?.get(title), title);
-
   if (typeof colors === "object" && colors !== null) {
     color = colors?.get(`${title}`)?.color;
     Icon = colors?.get(`${title}`)?.Icon;
