@@ -30,12 +30,6 @@ const OurServices = () => {
         "We ensure that the details provided to Jobseekers about the jobs/internships is eligible.we provide details along with stipend that will be provided and perks.",
       img: "/assets/service/mentor_female_male_discuss.svg",
     },
-    {
-      title: "Mentor Support",
-      content:
-        "We have a Mentor team that can provide users with access to experienced professionals who can offer personalized guidance, suggestions inorder to achieve their goals.",
-      img: "/assets/service/discussion_mentor_team_animation.svg",
-    },
   ];
   return (
     <section className="flex flex-col justify-center bg-gray-50 min-h-[95vh]">

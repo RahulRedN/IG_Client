@@ -22,13 +22,6 @@ export default function CaptionCarousel() {
       buttonname: "Become Company Ally",
       link: "/loginCompany",
     },
-    {
-      title: "Mentor Team",
-      text: "As a mentor with our team, you will have the opportunity to guide and support the students. With your help, we can make our service more reachable. Join as mentor and make a difference in the lives of students.",
-      image: "images/mentors.jpg",
-      buttonname: "Apply Here",
-      link: "/contactUs",
-    },
   ];
 
   return (
