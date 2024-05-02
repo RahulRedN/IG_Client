@@ -4,42 +4,38 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  const state = useSelector((state) => state.company);
+  console.log(state);
   // Corrected data import
-  const data = [
-    {
-      Applicants: 123,
-      position: "SDE",
-    },
-    {
-      position: "ML eng",
-      Applicants: 12,
-    }, 
-    {
-      position: "DAnalyst",
-      Applicants: 23,
-    }, 
-    {
-      position: "WebDev",
-      Applicants: 13,
-    }, 
-    {
-      position: "DevOps",
-      Applicants: 167,
-    }, 
-    {
-      position: "Mentor",
-      Applicants: 1,
-    }, 
-    {
-      position: "SDET",
-      Applicants: 13,
-    },
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Filter jobs where application is accepted
+    const acceptedJobs = state?.jobs.filter((job) =>
+      state?.applications.some(
+        (app) => app.jobId === job._id && app.status === "accepted"
+      )
+    );
+
+    // Count number of applicants for each job
+    const jobData = acceptedJobs.map((job) => ({
+      position: job.position,
+      Applicants: state?.applications.filter(
+        (app) => app.jobId === job._id && app.status === "accepted"
+      ).length,
+    }));
+
+    // Sort data in descending order based on number of applicants
+    const sortedData = jobData.sort((b, a) => b.Applicants - a.Applicants);
+
+    setData(sortedData);
+  }, [state]);
 
   return (
     <ResponsiveBar
@@ -75,7 +71,7 @@ const BarChart = ({ isDashboard = false }) => {
       }}
       keys={["Applicants"]}
       indexBy="position"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      margin={{ top: 50, right: 130, bottom: 50, left: 130 }}
       padding={0.3}
       layout="horizontal"
       groupMode="grouped"

@@ -4,9 +4,59 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
-import { mockBarData as data } from "../Data/mockData";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const BarChart = ({ isDashboard = false }) => {
+  const state = useSelector((state) => state.company.applications);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    // Initialize monthly data with zeros for each month
+    const monthlyData = Object.fromEntries(
+      monthNames.map((monthName) => [
+        monthName,
+        {
+          month: monthName,
+          Accepted: 0,
+          AcceptedColor: "hsl(229, 70%, 50%)",
+          Rejected: 0,
+          RejectedColor: "hsl(296, 70%, 50%)",
+        },
+      ])
+    );
+
+    // Update counts based on application data
+    state.forEach((application) => {
+      const month = parseInt(application.createdAt.split("-")[1], 10) - 1; // Subtract 1 to match array index
+      const monthName = monthNames[month];
+
+      if (application.status === "accepted") {
+        monthlyData[monthName].Accepted++;
+      } else if (application.status === "rejected") {
+        monthlyData[monthName].Rejected++;
+      }
+    });
+
+    const monthlyDataArray = Object.values(monthlyData);
+    setData(monthlyDataArray);
+  }, [state]);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -43,7 +93,7 @@ const BarChart = ({ isDashboard = false }) => {
         },
       }}
       keys={["Accepted", "Rejected"]}
-      indexBy="country"
+      indexBy="month"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.1}
       groupMode="grouped"

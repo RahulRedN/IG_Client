@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { setStatus } from "../../../redux/companyReducer";
 import { Box } from "@mui/material";
+import { FiFileText } from "react-icons/fi";
 
 const PendingList = ({ status }) => {
   const dispatch = useDispatch();
@@ -24,7 +25,6 @@ const PendingList = ({ status }) => {
       .map((app) => {
         const jobDetails = jobs.find((job) => job._id === app.jobId);
         const userDetails = users.find((user) => user._id === app.userId);
-
         return {
           ...app,
           jobDetails: jobDetails || null,
@@ -34,8 +34,6 @@ const PendingList = ({ status }) => {
 
     setPending(pendingApplications);
   }, [applications, jobs]);
-
-  console.log(pending);
 
   const acceptHandler = async (appId, jobId) => {
     try {
@@ -123,6 +121,13 @@ const PendingList = ({ status }) => {
                               />
                             );
                           })}
+                        <a
+                          href={pend?.userDetails?.resume}
+                          target="_blank"
+                          className="flex items-center"
+                        >
+                          <FiFileText size={20} />
+                        </a>
                       </div>
                     </td>
 

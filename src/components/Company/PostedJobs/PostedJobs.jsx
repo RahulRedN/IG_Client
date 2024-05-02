@@ -20,11 +20,14 @@ const PostedJobs = () => {
     try {
       const res = await axios.delete(
         import.meta.env.VITE_SERVER + "/api/company/deleteJob",
-        { jobId: jobId, uid },
         {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          data: {
+            uid,
+            jobId,
           },
         }
       );

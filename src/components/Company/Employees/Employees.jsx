@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
 
 import { Box } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../theme";
-import { mockDataContacts } from "../Data/mockData";
 import Header from "../Dashboard/Header";
 import { useTheme } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Contacts = () => {
   const theme = useTheme();
