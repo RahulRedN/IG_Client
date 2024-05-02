@@ -1,33 +1,23 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from ".././theme";
 import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "./Header";
-import LineChart from "./LineChart";
 import BarChart from "./BarChart";
 import StatBox from "./StatBox";
-import ProgressCircle from "./ProgressCircle";
 import PieChart from "./PieChart";
 import BarChart_TopJobs from "./BarChart_TopJobs";
-import {
-  Money,
-  MoneyOff,
-  MoneyOffCsredSharp,
-  MoneySharp,
-  NotInterested,
-  NotInterestedTwoTone,
-  Verified,
-} from "@mui/icons-material";
+import { NotInterestedTwoTone, Verified } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const state = useSelector((state) => state.company);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
   return (
     <div className="overflow-auto">
       <Box padding="20px">
@@ -192,16 +182,25 @@ const Dashboard = () => {
             </Typography>
             <PieChart
               accept={
-                state?.applications?.filter((job) => job.status == "accepted")
-                  .length
+                state?.applications?.filter(
+                  (app) =>
+                    app.status == "accepted" &&
+                    new Date(app.createdAt).getMonth() + 1 === currentMonth
+                ).length
               }
               reject={
-                state?.applications?.filter((job) => job.status == "rejected")
-                  .length
+                state?.applications?.filter(
+                  (app) =>
+                    app.status == "rejected" &&
+                    new Date(app.createdAt).getMonth() + 1 === currentMonth
+                ).length
               }
               pending={
-                state?.applications?.filter((job) => job.status == "pending")
-                  ?.length
+                state?.applications?.filter(
+                  (app) =>
+                    app.status == "pending" &&
+                    new Date(app.createdAt).getMonth() + 1 === currentMonth
+                )?.length
               }
             />
           </Box>

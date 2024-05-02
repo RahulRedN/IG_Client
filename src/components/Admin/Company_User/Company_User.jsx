@@ -7,6 +7,8 @@ import axios from "axios";
 
 const Company_User = () => {
   const [Company, setCompany] = useState([]);
+  const [jobsPosted, setJobsPosted] = useState(0);
+  const [employees, setEmployees] = useState(0);
 
   const fetchCompany = async () => {
     try {
@@ -20,8 +22,10 @@ const Company_User = () => {
         }
       );
 
-      console.log(res);
+      console.log(res.data);
       setCompany(res.data.companies);
+      setEmployees(res.data.employees);
+      setJobsPosted(res.data.jobsPosted);
     } catch (error) {
       console.error("Error fetching job seekers:", error);
     }
@@ -29,8 +33,6 @@ const Company_User = () => {
   useEffect(() => {
     fetchCompany();
   }, []);
-
-  const [idx, setIdx] = useState(0);
 
   return (
     <div className="p-3 h-full">
@@ -71,6 +73,7 @@ const Company_User = () => {
         </thead>
         <tbody>
           {Company.map((company, idx) => {
+            
             return (
               <Company_RowUser
                 key={idx + 1}
@@ -81,9 +84,13 @@ const Company_User = () => {
                 createdAt={company.createdAt}
                 fetchDet={fetchCompany}
                 uid={company._id}
+                employees={employees[idx]}
+                jobsPosted={jobsPosted[idx]}
               />
             );
           })}
+
+
         </tbody>
       </table>
     </div>

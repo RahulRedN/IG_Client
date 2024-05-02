@@ -24,6 +24,8 @@ const Company_RowUser = ({
   createdAt,
   fetchDet,
   uid,
+  employees,
+  jobsPosted,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
@@ -70,11 +72,11 @@ const Company_RowUser = ({
       </td>
 
       <td className="pl-5">
-        <h1 className="text-sm">4</h1>
+        <h1 className="text-sm">{employees}</h1>
       </td>
 
       <td className="pl-5">
-        <h1 className="text-sm">5</h1>
+        <h1 className="text-sm">{jobsPosted}</h1>
       </td>
 
       <td className="pl-2">

@@ -11,22 +11,16 @@ import {
   PendingActions,
   PostAdd,
   LogoutSharp,
-  SettingsApplications,
-  DocumentScanner,
   DocumentScannerSharp,
   ReviewsOutlined,
 } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Item = ({ title, to, icon, selected, setSelected, onClickHandler }) => {
-
- 
-
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   return (
     // title="Post a Job"
     //           to="postjob"
@@ -35,10 +29,12 @@ const Item = ({ title, to, icon, selected, setSelected, onClickHandler }) => {
     //           setSelected={setSelected}
     <MenuItem
       active={selected == title}
-      style={{
-        // margin: "7px 0 7px 0",
-        // padding : "5px"
-      }}
+      style={
+        {
+          // margin: "7px 0 7px 0",
+          // padding : "5px"
+        }
+      }
       onClick={() => setSelected(title)}
       icon={icon}
     >
@@ -52,7 +48,7 @@ const Sidebar = () => {
   const data = useSelector((state) => state.company.data);
 
   const navigate = useNavigate();
- 
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -60,10 +56,14 @@ const Sidebar = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/auth/logout")
-      localStorage.removeItem("token");
-      toast.success("Logged out successfully!");
-      navigate("/loginCompany");
+      const res = await axios.get(
+        import.meta.env.VITE_SERVER + "/api/auth/logout"
+      );
+      if (res.status == 200) {
+        toast.success("Logged out successfully!");
+        localStorage.removeItem("token");
+        navigate("/loginCompany");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -83,12 +83,12 @@ const Sidebar = () => {
         },
         "& .pro-inner-item": {
           padding: " 8px 20px !important",
-          margin : "10px 0 10px 0",
+          margin: "10px 0 10px 0",
           color: "black",
         },
         "& .pro-inner-item:hover": {
           color: "black !important",
-          background : "#6ee7b7"
+          background: "#6ee7b7",
         },
         "& .pro-menu-item.active": {
           background: "#6ee7b7",
@@ -109,7 +109,7 @@ const Sidebar = () => {
               <MenuOutlinedIcon />
             </IconButton>
             )} */}
-            
+
             <MenuOutlinedIcon />
           </IconButton>
 
@@ -172,14 +172,14 @@ const Sidebar = () => {
             <Item
               title="Posted Jobs"
               to="postedjobs" //private route chks session is actv or not
-              icon={<DocumentScannerSharp/>}
+              icon={<DocumentScannerSharp />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Reviews"
               to="reviews" //private route chks session is actv or not
-              icon={<ReviewsOutlined/>}
+              icon={<ReviewsOutlined />}
               selected={selected}
               setSelected={setSelected}
             />
