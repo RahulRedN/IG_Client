@@ -58,9 +58,9 @@ const Reviews = () => {
       }
     });
 
-  const toggleFavorite = (name) => {
+  const toggleFavorite = (id) => {
     // Find the index of the review with the given name
-    const index = Reviews.findIndex((review) => review.name === name);
+    const index = Reviews.findIndex((review) => review._id === id);
     if (index !== -1) {
       // Create a copy of the mockReviews array
       const updatedReviews = [...Reviews];

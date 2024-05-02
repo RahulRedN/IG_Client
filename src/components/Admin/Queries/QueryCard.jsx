@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
+import React from "react";
+import axios from "axios";
 import classes from "./Queries.module.css";
 
-function QueryCard({ name, email, subject, phone, message }) {
+function QueryCard({ name, email, subject, phone, message, id, setQueries }) {
   const palette = [
     "#ef4444",
     "#f97316",
@@ -24,6 +24,30 @@ function QueryCard({ name, email, subject, phone, message }) {
     return palette[x];
   };
 
+  const handleIgnore = async () => {
+    console.log(id);
+    try {
+      const res = await axios.delete(
+        import.meta.env.VITE_SERVER + "/api/home/ignoreQuery",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          data: {
+            id,
+          },
+        }
+      );
+      if (res.status == 200) {
+        setQueries((state) => state.filter((que) => que._id != id));
+      }
+      console.log("Query ignored successfully");
+    } catch (error) {
+      console.error("Error ignoring query:", error);
+    }
+  };
+
   return (
     <div className={classes.contact_feedback_card}>
       <div className={classes.contact_header}>
@@ -36,7 +60,6 @@ function QueryCard({ name, email, subject, phone, message }) {
         <div className={classes.contact_header_info}>
           <p className={classes.contact_name}>{name}</p>
           <p className={classes.contact_email}>{email}</p>
-
           <p className={classes.contact_subject}>
             <span className={classes.subject_span}>Sub: </span>
             {subject}
@@ -49,14 +72,9 @@ function QueryCard({ name, email, subject, phone, message }) {
         <button
           type="button"
           className={classes.ignore_button + " " + classes.btn}
+          onClick={handleIgnore}
         >
           Ignore
-        </button>
-        <button
-          type="button"
-          className={classes.respond_button + " " + classes.btn}
-        >
-          Respond
         </button>
       </div>
     </div>
