@@ -1,11 +1,12 @@
+import React, { useState } from "react";
+import axios from "axios";
 import { Mail } from "lucide-react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdDriveFileRenameOutline, MdSubject } from "react-icons/md";
 import ContactCard from "./ContactCard";
 import { motion } from "framer-motion";
-
 import ImageHeader from "../../JobSeeker/ImageHeader";
-import { useState } from "react";
+import toast from "react-hot-toast";
 
 const details = ["Phone", "Email", "Address", "Physical address"];
 
@@ -18,9 +19,30 @@ const ContactUs_Home = () => {
     message: "",
   });
 
-  const SubmitHandler = (e) => {
+ 
+  const SubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("Submitted", contact);
+    try {
+      const res = await axios.post(import.meta.env.VITE_SERVER +"/api/home/postQuery", contact);
+      console.log("Response status:", res.status);
+      // Check if status is 201 (created)
+      if (res.status === 201) {
+        console.log("Query posted successfully");
+        toast.success("Query Sent Succesfully!"); 
+        // Clear the form after successful submission
+        setContact({
+          name: "",
+          email: "",
+          subject: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        console.error("Error posting query: Unexpected status code");
+      }
+    } catch (error) {
+      console.error("Error posting query:", error);
+    }
   };
 
   const handleChange = (e) => {

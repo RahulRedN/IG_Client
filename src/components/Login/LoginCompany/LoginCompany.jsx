@@ -210,6 +210,7 @@ const LoginCompany = () => {
 
       if (res.status === 201) {
         toast.success("Registered successfully! Await admin approval!");
+        nav("/loginCompany");
       }
     } catch (error) {
       if (error.response.status === 400) {

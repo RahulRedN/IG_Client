@@ -1,10 +1,27 @@
 /* eslint-disable react/prop-types */
 import { Bookmark } from "lucide-react";
-import photo from "../../../../public/images/tutoring.jpeg";
-import { MdDelete } from "react-icons/md";
-import { useState } from "react";
+import axios from "axios";
 
 const ReviewCard = ({ review, toggleFavorite }) => {
+  const handleToggleFavorite = async (id) => {
+    try {
+      const res = await axios.put(
+        import.meta.env.VITE_SERVER +'/api/admin/updateFavoriteTestimonial',
+        { tid: id, isFavorite: !review.fav},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        } 
+      );
+      console.log(res.data); // Log the response for debugging
+      toggleFavorite(id); // Update the UI state after successful API call
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+      // Handle error (e.g., show error message to the user)
+    }
+  };
   return (
     <div className="bg-white shadow-md flex gap-x-3 w-[40vw] py-3 pr-3 pl-2 rounded-md min-h-48">
       <div className="flex items-center justify-center border-r px-2">
@@ -16,7 +33,7 @@ const ReviewCard = ({ review, toggleFavorite }) => {
           } `}
           onClick={() => {
             // should be added to server
-            toggleFavorite(review.name);
+            handleToggleFavorite(review._id);
           }}
           strokeWidth={1}
           size={30}
